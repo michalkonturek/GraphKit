@@ -1,0 +1,25 @@
+# Xcode Dirt
+build/*
+*.mode1
+*.mode1v3
+*.mode2v3
+*~
+*.perspective
+*.perspectivev3
+*.pbxuser
+## *.xcworkspace
+*.xcuserdatad
+xcuserdata
+
+# Xcode 5 dirt
+*.xccheckout
+
+
+# Xcode Dirt - temp nibs and swap files
+*~.nib
+*.swp
+
+
+# OSX Dirt
+.DS_Store
+## profile
