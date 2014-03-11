@@ -18,5 +18,5 @@ Source code of this project is available under the standard MIT license. Please 
 [LICENSE]:https://github.com/michalkonturek/MKCharts/blob/master/LICENSE
 
 
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/michalkonturek/mkcharts/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+<!--
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/michalkonturek/mkcharts/trend.png)](https://bitdeli.com/free "Bitdeli Badge")-->
