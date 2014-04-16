@@ -27,8 +27,12 @@
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)onButtonApply:(id)sender {
+- (IBAction)onButtonAdd:(id)sender {
     self.bar.percentage += 0.2;
+}
+
+- (IBAction)onButtonMinus:(id)sender {
+    self.bar.percentage -= 0.2;
 }
 
 - (IBAction)onButtonClear:(id)sender {

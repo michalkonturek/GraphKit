@@ -22,28 +22,38 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="Rhj-c9-bzJ" customClass="GKBar">
-                    <rect key="frame" x="135" y="91" width="50" height="175"/>
+                    <rect key="frame" x="135" y="91" width="20" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.25882352939999997" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2yi-HY-UQj">
-                    <rect key="frame" x="105" y="327" width="40" height="30"/>
+                    <rect key="frame" x="114" y="327" width="40" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Apply">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="onButtonApply:" destination="-1" eventType="touchUpInside" id="Eis-Ra-h9E"/>
+                        <action selector="onButtonAdd:" destination="-1" eventType="touchUpInside" id="Ldu-Jm-19Y"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kee-iI-L3g">
-                    <rect key="frame" x="182" y="327" width="37" height="30"/>
+                    <rect key="frame" x="142" y="357" width="37" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Clear">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onButtonClear:" destination="-1" eventType="touchUpInside" id="kw1-6h-TPL"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VfP-cs-UQb">
+                    <rect key="frame" x="164" y="327" width="42" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Minus">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onButtonMinus:" destination="-1" eventType="touchUpInside" id="1MK-nY-Muf"/>
                     </connections>
                 </button>
             </subviews>

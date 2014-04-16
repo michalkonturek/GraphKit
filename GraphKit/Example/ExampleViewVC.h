@@ -14,7 +14,8 @@
 
 @property (nonatomic, weak) IBOutlet GKBar *bar;
 
-- (IBAction)onButtonApply:(id)sender;
+- (IBAction)onButtonAdd:(id)sender;
+- (IBAction)onButtonMinus:(id)sender;
 
 - (IBAction)onButtonClear:(id)sender;
 
