@@ -19,7 +19,6 @@
 		84654C2F18FE8EE300160F11 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84654C1718FE8EE300160F11 /* UIKit.framework */; };
 		84654C3718FE8EE300160F11 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84654C3518FE8EE300160F11 /* InfoPlist.strings */; };
 		84654C3918FE8EE300160F11 /* GraphKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C3818FE8EE300160F11 /* GraphKitTests.m */; };
-		84654C4818FE8F0600160F11 /* GraphKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C4718FE8F0600160F11 /* GraphKit.m */; };
 		84654C4C18FE909A00160F11 /* GKBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C4B18FE909A00160F11 /* GKBar.m */; };
 		84654C5118FE934800160F11 /* ExampleViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C4F18FE934800160F11 /* ExampleViewVC.m */; };
 		84654C5218FE934800160F11 /* ExampleViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84654C5018FE934800160F11 /* ExampleViewVC.xib */; };
@@ -53,7 +52,6 @@
 		84654C3618FE8EE300160F11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84654C3818FE8EE300160F11 /* GraphKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphKitTests.m; sourceTree = "<group>"; };
 		84654C4618FE8F0600160F11 /* GraphKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphKit.h; sourceTree = "<group>"; };
-		84654C4718FE8F0600160F11 /* GraphKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphKit.m; sourceTree = "<group>"; };
 		84654C4A18FE909A00160F11 /* GKBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKBar.h; sourceTree = "<group>"; };
 		84654C4B18FE909A00160F11 /* GKBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKBar.m; sourceTree = "<group>"; };
 		84654C4E18FE934800160F11 /* ExampleViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleViewVC.h; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 			children = (
 				84654C4918FE907500160F11 /* BarGraph */,
 				84654C4618FE8F0600160F11 /* GraphKit.h */,
-				84654C4718FE8F0600160F11 /* GraphKit.m */,
 			);
 			name = Source;
 			path = ../../Source;
@@ -287,7 +284,6 @@
 				84654C4C18FE909A00160F11 /* GKBar.m in Sources */,
 				84654C2018FE8EE300160F11 /* main.m in Sources */,
 				84654C5118FE934800160F11 /* ExampleViewVC.m in Sources */,
-				84654C4818FE8F0600160F11 /* GraphKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

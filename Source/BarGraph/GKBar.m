@@ -61,8 +61,6 @@
     if (_percentage > value) layer.strokeColor = [self.backgroundColor CGColor];
     
     [self.layer addSublayer:layer];
-//    layer.path = path.CGPath;
-    layer.strokeEnd = 1.0;
     
     if (self.animated) {
         id animation = [self _animationWithKeyPath:@"strokeEnd"];
@@ -83,10 +81,11 @@
 - (CAShapeLayer *)_layerWithPath:(UIBezierPath *)path {
     CAShapeLayer *item = [CAShapeLayer layer];
     item.fillColor = [[UIColor blackColor] CGColor];
-    item.strokeColor = [self.foregroundColor CGColor];
     item.lineCap = kCALineCapButt;
     item.lineWidth = self.frame.size.width;
     item.path = path.CGPath;
+    item.strokeColor = [self.foregroundColor CGColor];
+    item.strokeEnd = 1.0;
     return item;
 }
 

@@ -6,8 +6,4 @@
 //  Copyright (c) 2014 Michal Konturek. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-@interface GraphKit : NSObject
-
-@end
+#import "GKBar.h"
