@@ -15,6 +15,8 @@
 
 @property (nonatomic, assign) CGFloat percentage;
 @property (nonatomic, strong) UIColor *foregroundColor;
+
+@property (nonatomic, assign) CFTimeInterval animationDuration;
 @property (nonatomic, assign) BOOL animated;
 
 - (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated;

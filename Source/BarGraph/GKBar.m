@@ -45,6 +45,7 @@
     self.foregroundColor = [UIColor redColor];
     _percentage = 0;
     _animated = YES;
+    _animationDuration = 0.8;
 }
 
 - (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated {
@@ -100,7 +101,7 @@
 
 - (CABasicAnimation *)_animationWithKeyPath:(NSString *)keyPath {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    animation.duration = 0.8;
+    animation.duration = self.animationDuration;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     animation.fromValue = @(0);
     animation.toValue = @(1);
