@@ -1,9 +1,9 @@
 
 Pod::Spec.new do |s|
-  s.name         = "MKCharts"
-  s.version      = "0.0.1"
+  s.name         = "GraphKit"
+  s.version      = "0.1.0"
   s.summary      = "A lightweight charting library for iOS."
-  s.homepage     = "https://github.com/michalkonturek/MKCharts"
+  s.homepage     = "https://github.com/michalkonturek/GraphKit"
   s.license      = 'MIT'
 
   s.author       = { 
@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '7.0'
 
   s.source       = { 
-    :git => "https://github.com/michalkonturek/MKCharts.git", 
-    :tag => "0.0.1" 
+    :git => "https://github.com/michalkonturek/GraphKit.git", 
+    :tag => "0.1.0" 
   }
 
   s.source_files = 'Source/**/*.{h,m}'
