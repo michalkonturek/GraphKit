@@ -10,6 +10,9 @@
 
 @interface GKBar : UIView
 
++ (instancetype)create;
++ (instancetype)createWithFrame:(CGRect)frame;
+
 @property (nonatomic, assign) CGFloat percentage;
 @property (nonatomic, strong) UIColor *foregroundColor;
 @property (nonatomic, assign) BOOL animated;

@@ -12,6 +12,15 @@
 
 @implementation GKBar
 
++ (instancetype)create {
+    CGRect defaultRect = CGRectMake(0, 0, 25, 100);
+    return [self createWithFrame:defaultRect];
+}
+
++ (instancetype)createWithFrame:(CGRect)frame {
+    return [[self alloc] initWithFrame:frame];
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {

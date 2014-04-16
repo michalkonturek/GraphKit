@@ -10,4 +10,8 @@
 
 @interface BarGraphView : UIView
 
+@property (nonatomic, assign) id dataSource;
+
+//+ (instancetype)createWithValue
+
 @end

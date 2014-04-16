@@ -22,7 +22,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="Rhj-c9-bzJ" customClass="GKBar">
-                    <rect key="frame" x="135" y="91" width="20" height="100"/>
+                    <rect key="frame" x="135" y="91" width="25" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.25882352939999997" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
