@@ -16,11 +16,10 @@
 
 @implementation ExampleViewVC
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
-//    self.bar.percentage = 0.4;
+    self.bar.percentage = 0.4;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,15 +27,20 @@
 }
 
 - (IBAction)onButtonAdd:(id)sender {
+//    self.bar.foregroundColor = [UIColor orangeColor];
+    self.bar.animated = YES;
     self.bar.percentage += 0.2;
 }
 
 - (IBAction)onButtonMinus:(id)sender {
-    self.bar.percentage -= 0.2;
+    [self.bar setPercentage:0.1 animated:NO];
+//    self.bar.percentage -= 0.2;
 }
 
 - (IBAction)onButtonClear:(id)sender {
     [self.bar reset];
 }
+
+// TODO: subclass layer to introduce negative
 
 @end

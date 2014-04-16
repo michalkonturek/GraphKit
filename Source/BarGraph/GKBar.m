@@ -10,12 +10,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-//@interface GKBar ()
-//
-////@property (nonatomic, strong) CAShapeLayer *fillLayer;
-//
-//@end
-
 @implementation GKBar
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -36,57 +30,64 @@
 }
 
 - (void)_init {
-//    [self _initLayer];
     self.clipsToBounds = YES;
     self.layer.cornerRadius = 2.0;
     self.backgroundColor = [UIColor lightGrayColor];
     self.foregroundColor = [UIColor redColor];
     _percentage = 0;
+    _animated = YES;
 }
 
-//- (void)_initLayer {
-//    _fillLayer = [CAShapeLayer layer];
-//    _fillLayer.fillColor = [[UIColor blackColor] CGColor];
-//    _fillLayer.lineCap = kCALineCapButt;
-//    _fillLayer.lineWidth = self.frame.size.width;
-////    _fillLayer.strokeEnd = 0.0;
-//    [self.layer addSublayer:_fillLayer];
-//}
+- (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated {
+    self.animated = animated;
+    self.percentage = percentage;
+}
 
 - (void)setPercentage:(CGFloat)percentage {
+    if (percentage == _percentage) return;
     if (percentage > 1) percentage = 1;
     if (percentage < 0) percentage = 0;
     
-    [self _drawTo:percentage];
-    
+    [self _progressBarTo:percentage];
     _percentage = percentage;
 }
 
-- (void)_drawTo:(CGFloat)value {
+- (void)_progressBarTo:(CGFloat)value {
     
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    CGFloat startX = (self.frame.size.width / 2);
-    CGFloat startY = (self.frame.size.height * (1 - _percentage));
+    UIBezierPath *path = [self _bezierPathWith:value];
+//    NSLog(@"S: %f E: %f", startY, endY);
     
-    [path moveToPoint:CGPointMake(startX, startY)];
-    
-    CGFloat endY = (self.frame.size.height * (1 - value));
-    
-	[path addLineToPoint:CGPointMake(startX, endY)];
-    NSLog(@"S: %f E: %f", startY, endY);
-    
-    id animation = [self _animationWithKeyPath:@"strokeEnd"];
-    
-    CAShapeLayer *layer = [self _layer];
+    CAShapeLayer *layer = [self _layerWithPath:path];
     if (_percentage > value) layer.strokeColor = [self.backgroundColor CGColor];
     
     [self.layer addSublayer:layer];
-    
-    layer.path = path.CGPath;
+//    layer.path = path.CGPath;
     layer.strokeEnd = 1.0;
-    [layer addAnimation:animation forKey:@"strokeEndAnimation"];
     
-//    NSLog(@"%@", self.fillLayer.animationKeys);
+    if (self.animated) {
+        id animation = [self _animationWithKeyPath:@"strokeEnd"];
+        [layer addAnimation:animation forKey:@"strokeEndAnimation"];
+    }
+}
+
+- (UIBezierPath *)_bezierPathWith:(CGFloat)value {
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    CGFloat startX = (self.frame.size.width / 2);
+    CGFloat startY = (self.frame.size.height * (1 - _percentage));
+    CGFloat endY = (self.frame.size.height * (1 - value));
+    [path moveToPoint:CGPointMake(startX, startY)];
+	[path addLineToPoint:CGPointMake(startX, endY)];
+    return path;
+}
+
+- (CAShapeLayer *)_layerWithPath:(UIBezierPath *)path {
+    CAShapeLayer *item = [CAShapeLayer layer];
+    item.fillColor = [[UIColor blackColor] CGColor];
+    item.strokeColor = [self.foregroundColor CGColor];
+    item.lineCap = kCALineCapButt;
+    item.lineWidth = self.frame.size.width;
+    item.path = path.CGPath;
+    return item;
 }
 
 - (CABasicAnimation *)_animationWithKeyPath:(NSString *)keyPath {
@@ -96,17 +97,6 @@
     animation.fromValue = @(0);
     animation.toValue = @(1);
     return animation;
-}
-
-- (CAShapeLayer *)_layer {
-    CAShapeLayer *item = [CAShapeLayer layer];
-    item.fillColor = [[UIColor blackColor] CGColor];
-    item.strokeColor = [self.foregroundColor CGColor];
-    item.lineCap = kCALineCapButt;
-    item.lineWidth = self.frame.size.width;
-//    _fillLayer.strokeEnd = 0.0;
-//    [self.layer addSublayer:_fillLayer];
-    return item;
 }
 
 - (void)setForegroundColor:(UIColor *)foregroundColor {
