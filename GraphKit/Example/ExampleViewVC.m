@@ -20,7 +20,7 @@
 {
     [super viewDidLoad];
 
-    self.bar.percentage = @40;
+//    self.bar.percentage = 0.4;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,7 +28,10 @@
 }
 
 - (IBAction)onButtonApply:(id)sender {
-//    self.bar.percentage = @60;
+    self.bar.percentage += 0.2;
+}
+
+- (IBAction)onButtonClear:(id)sender {
     [self.bar reset];
 }
 

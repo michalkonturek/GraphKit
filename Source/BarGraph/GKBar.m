@@ -41,7 +41,7 @@
     self.layer.cornerRadius = 2.0;
     self.backgroundColor = [UIColor lightGrayColor];
     self.foregroundColor = [UIColor redColor];
-    _percentage = @0;
+    _percentage = 0;
 }
 
 - (void)_initLayer {
@@ -53,10 +53,9 @@
     [self.layer addSublayer:_fillLayer];
 }
 
-- (void)setPercentage:(NSNumber *)percentage {
+- (void)setPercentage:(CGFloat)percentage {
     
-    CGFloat converted = ([percentage doubleValue] / 100);
-    [self _drawTo:converted];
+    [self _drawTo:percentage];
     
     _percentage = percentage;
 }
@@ -72,15 +71,22 @@
     CGFloat endY = startY * (1 - value);
 	[path addLineToPoint:CGPointMake(startX, endY)];
     
+    id animation = [self _animationWithKeyPath:@"strokeEnd"];
+    
+    self.fillLayer.path = path.CGPath;
+    self.fillLayer.strokeEnd = 1.0;
+    [self.fillLayer addAnimation:animation forKey:@"strokeEndAnimation"];
+    
+//    NSLog(@"%@", self.fillLayer.animationKeys);
+}
+
+- (CABasicAnimation *)_animationWithKeyPath:(NSString *)keyPath {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     animation.duration = 1.0;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     animation.fromValue = @(0);
     animation.toValue = @(1);
-    
-    self.fillLayer.path = path.CGPath;
-    self.fillLayer.strokeEnd = 1.0;
-    [self.fillLayer addAnimation:animation forKey:@"strokeEndAnimation"];
+    return animation;
 }
 
 - (void)setForegroundColor:(UIColor *)foregroundColor {

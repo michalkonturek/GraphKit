@@ -10,7 +10,7 @@
 
 @interface GKBar : UIView
 
-@property (nonatomic, strong) NSNumber *percentage;
+@property (nonatomic, assign) CGFloat percentage;
 @property (nonatomic, strong) UIColor *foregroundColor;
 
 - (void)reset;

@@ -16,4 +16,6 @@
 
 - (IBAction)onButtonApply:(id)sender;
 
+- (IBAction)onButtonClear:(id)sender;
+
 @end
