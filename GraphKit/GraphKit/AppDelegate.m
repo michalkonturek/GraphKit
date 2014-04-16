@@ -8,12 +8,16 @@
 
 #import "AppDelegate.h"
 
+#import "ExampleViewVC.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    
+    self.window.rootViewController = [[ExampleViewVC alloc] initWithNibName:@"ExampleViewVC" bundle:nil];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

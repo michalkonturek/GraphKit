@@ -20,6 +20,9 @@
 		84654C3718FE8EE300160F11 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84654C3518FE8EE300160F11 /* InfoPlist.strings */; };
 		84654C3918FE8EE300160F11 /* GraphKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C3818FE8EE300160F11 /* GraphKitTests.m */; };
 		84654C4818FE8F0600160F11 /* GraphKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C4718FE8F0600160F11 /* GraphKit.m */; };
+		84654C4C18FE909A00160F11 /* GKBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C4B18FE909A00160F11 /* GKBar.m */; };
+		84654C5118FE934800160F11 /* ExampleViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C4F18FE934800160F11 /* ExampleViewVC.m */; };
+		84654C5218FE934800160F11 /* ExampleViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84654C5018FE934800160F11 /* ExampleViewVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,11 @@
 		84654C3818FE8EE300160F11 /* GraphKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphKitTests.m; sourceTree = "<group>"; };
 		84654C4618FE8F0600160F11 /* GraphKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphKit.h; sourceTree = "<group>"; };
 		84654C4718FE8F0600160F11 /* GraphKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphKit.m; sourceTree = "<group>"; };
+		84654C4A18FE909A00160F11 /* GKBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKBar.h; sourceTree = "<group>"; };
+		84654C4B18FE909A00160F11 /* GKBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKBar.m; sourceTree = "<group>"; };
+		84654C4E18FE934800160F11 /* ExampleViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleViewVC.h; sourceTree = "<group>"; };
+		84654C4F18FE934800160F11 /* ExampleViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleViewVC.m; sourceTree = "<group>"; };
+		84654C5018FE934800160F11 /* ExampleViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleViewVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +118,7 @@
 		84654C1918FE8EE300160F11 /* GraphKit */ = {
 			isa = PBXGroup;
 			children = (
+				84654C4D18FE932A00160F11 /* Example */,
 				84654C4218FE8EF300160F11 /* Source */,
 				84654C2218FE8EE300160F11 /* AppDelegate.h */,
 				84654C2318FE8EE300160F11 /* AppDelegate.m */,
@@ -151,12 +160,32 @@
 		84654C4218FE8EF300160F11 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				84654C4918FE907500160F11 /* BarGraph */,
 				84654C4618FE8F0600160F11 /* GraphKit.h */,
 				84654C4718FE8F0600160F11 /* GraphKit.m */,
 			);
 			name = Source;
 			path = ../../Source;
 			sourceTree = "<group>";
+		};
+		84654C4918FE907500160F11 /* BarGraph */ = {
+			isa = PBXGroup;
+			children = (
+				84654C4A18FE909A00160F11 /* GKBar.h */,
+				84654C4B18FE909A00160F11 /* GKBar.m */,
+			);
+			path = BarGraph;
+			sourceTree = "<group>";
+		};
+		84654C4D18FE932A00160F11 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				84654C4E18FE934800160F11 /* ExampleViewVC.h */,
+				84654C4F18FE934800160F11 /* ExampleViewVC.m */,
+				84654C5018FE934800160F11 /* ExampleViewVC.xib */,
+			);
+			path = Example;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -235,6 +264,7 @@
 			files = (
 				84654C1E18FE8EE300160F11 /* InfoPlist.strings in Resources */,
 				84654C2618FE8EE300160F11 /* Images.xcassets in Resources */,
+				84654C5218FE934800160F11 /* ExampleViewVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +284,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				84654C2418FE8EE300160F11 /* AppDelegate.m in Sources */,
+				84654C4C18FE909A00160F11 /* GKBar.m in Sources */,
 				84654C2018FE8EE300160F11 /* main.m in Sources */,
+				84654C5118FE934800160F11 /* ExampleViewVC.m in Sources */,
 				84654C4818FE8F0600160F11 /* GraphKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,12 +402,14 @@
 		84654C3D18FE8EE300160F11 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GraphKit/GraphKit-Prefix.pch";
 				INFOPLIST_FILE = "GraphKit/GraphKit-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -383,12 +417,14 @@
 		84654C3E18FE8EE300160F11 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GraphKit/GraphKit-Prefix.pch";
 				INFOPLIST_FILE = "GraphKit/GraphKit-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
