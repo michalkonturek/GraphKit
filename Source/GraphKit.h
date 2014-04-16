@@ -1,13 +1,13 @@
 //
-//  MKCharts.h
-//  MKCharts
+//  GraphKit.h
+//  GraphKit
 //
-//  Created by Michal Konturek on 04/02/2014.
+//  Created by Michal Konturek on 16/04/2014.
 //  Copyright (c) 2014 Michal Konturek. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface MKCharts : NSObject
+@interface GraphKit : NSObject
 
 @end
