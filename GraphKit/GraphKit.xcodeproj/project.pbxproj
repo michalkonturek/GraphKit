@@ -23,6 +23,8 @@
 		84654C5118FE934800160F11 /* ExampleViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C4F18FE934800160F11 /* ExampleViewVC.m */; };
 		84654C5218FE934800160F11 /* ExampleViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84654C5018FE934800160F11 /* ExampleViewVC.xib */; };
 		84654C5518FEDCDF00160F11 /* BarGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C5418FEDCDF00160F11 /* BarGraphView.m */; };
+		84654C5918FF4C8300160F11 /* BarGraphViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84654C5718FF4C8300160F11 /* BarGraphViewVC.m */; };
+		84654C5A18FF4C8300160F11 /* BarGraphViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84654C5818FF4C8300160F11 /* BarGraphViewVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,9 @@
 		84654C5018FE934800160F11 /* ExampleViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleViewVC.xib; sourceTree = "<group>"; };
 		84654C5318FEDCDF00160F11 /* BarGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarGraphView.h; sourceTree = "<group>"; };
 		84654C5418FEDCDF00160F11 /* BarGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarGraphView.m; sourceTree = "<group>"; };
+		84654C5618FF4C8300160F11 /* BarGraphViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarGraphViewVC.h; sourceTree = "<group>"; };
+		84654C5718FF4C8300160F11 /* BarGraphViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarGraphViewVC.m; sourceTree = "<group>"; };
+		84654C5818FF4C8300160F11 /* BarGraphViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarGraphViewVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +190,9 @@
 				84654C4E18FE934800160F11 /* ExampleViewVC.h */,
 				84654C4F18FE934800160F11 /* ExampleViewVC.m */,
 				84654C5018FE934800160F11 /* ExampleViewVC.xib */,
+				84654C5618FF4C8300160F11 /* BarGraphViewVC.h */,
+				84654C5718FF4C8300160F11 /* BarGraphViewVC.m */,
+				84654C5818FF4C8300160F11 /* BarGraphViewVC.xib */,
 			);
 			path = Example;
 			sourceTree = SOURCE_ROOT;
@@ -266,6 +274,7 @@
 			files = (
 				84654C1E18FE8EE300160F11 /* InfoPlist.strings in Resources */,
 				84654C2618FE8EE300160F11 /* Images.xcassets in Resources */,
+				84654C5A18FF4C8300160F11 /* BarGraphViewVC.xib in Resources */,
 				84654C5218FE934800160F11 /* ExampleViewVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +296,7 @@
 			files = (
 				84654C5518FEDCDF00160F11 /* BarGraphView.m in Sources */,
 				84654C2418FE8EE300160F11 /* AppDelegate.m in Sources */,
+				84654C5918FF4C8300160F11 /* BarGraphViewVC.m in Sources */,
 				84654C4C18FE909A00160F11 /* GKBar.m in Sources */,
 				84654C2018FE8EE300160F11 /* main.m in Sources */,
 				84654C5118FE934800160F11 /* ExampleViewVC.m in Sources */,

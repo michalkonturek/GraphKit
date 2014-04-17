@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "ExampleViewVC.h"
+#import "BarGraphViewVC.h"
 
 @implementation AppDelegate
 
@@ -16,7 +17,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    self.window.rootViewController = [[ExampleViewVC alloc] initWithNibName:@"ExampleViewVC" bundle:nil];
+//    self.window.rootViewController = [[ExampleViewVC alloc] initWithNibName:@"ExampleViewVC" bundle:nil];
+    self.window.rootViewController = [[BarGraphViewVC alloc] initWithNibName:@"BarGraphViewVC" bundle:nil];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
