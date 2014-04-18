@@ -1,19 +1,25 @@
 //
 //  AppDelegate.m
-//  MKCharts
+//  GraphKit
 //
-//  Created by Michal Konturek on 04/02/2014.
+//  Created by Michal Konturek on 16/04/2014.
 //  Copyright (c) 2014 Michal Konturek. All rights reserved.
 //
 
 #import "AppDelegate.h"
+
+#import "ExampleViewVC.h"
+#import "BarGraphViewVC.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    
+//    self.window.rootViewController = [[ExampleViewVC alloc] initWithNibName:@"ExampleViewVC" bundle:nil];
+    self.window.rootViewController = [[BarGraphViewVC alloc] initWithNibName:@"BarGraphViewVC" bundle:nil];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

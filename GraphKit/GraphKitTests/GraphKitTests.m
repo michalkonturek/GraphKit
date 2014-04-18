@@ -1,18 +1,18 @@
 //
-//  MKChartsTests.m
-//  MKChartsTests
+//  GraphKitTests.m
+//  GraphKitTests
 //
-//  Created by Michal Konturek on 04/02/2014.
+//  Created by Michal Konturek on 16/04/2014.
 //  Copyright (c) 2014 Michal Konturek. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface MKChartsTests : XCTestCase
+@interface GraphKitTests : XCTestCase
 
 @end
 
-@implementation MKChartsTests
+@implementation GraphKitTests
 
 - (void)setUp
 {
