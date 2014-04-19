@@ -37,7 +37,7 @@
     self.bar.percentage -= 0.2;
 }
 
-- (IBAction)onButtonClear:(id)sender {
+- (IBAction)onButtonReset:(id)sender {
     [self.bar reset];
 }
 

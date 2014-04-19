@@ -32,4 +32,12 @@
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)onButtonFill:(id)sender {
+    [[self.graphView draw] load];
+}
+
+- (IBAction)onButtonReset:(id)sender {
+    [self.graphView reset];
+}
+
 @end

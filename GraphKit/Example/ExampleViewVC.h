@@ -17,6 +17,6 @@
 - (IBAction)onButtonAdd:(id)sender;
 - (IBAction)onButtonMinus:(id)sender;
 
-- (IBAction)onButtonClear:(id)sender;
+- (IBAction)onButtonReset:(id)sender;
 
 @end
