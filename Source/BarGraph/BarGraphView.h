@@ -32,11 +32,11 @@
 //+ (instancetype)createWithValue
 
 
-- (void)drawAndLoad;
+- (instancetype)drawAndLoad;
 
-- (void)draw;
-- (void)load;
+- (instancetype)draw;
+- (instancetype)load;
 
-- (void)reset;
+- (instancetype)reset;
 
 @end

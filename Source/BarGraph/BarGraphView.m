@@ -35,7 +35,7 @@ static CGFloat kDefaultBarWidth = 20;
 }
 
 - (void)_init {
-//    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];
     self.barHeight = kDefaultBarHeight;
     self.barWidth = kDefaultBarWidth;
     
@@ -44,23 +44,14 @@ static CGFloat kDefaultBarWidth = 20;
     self.marginRight = 0;
 }
 
-- (void)drawAndLoad {
-    [self draw];
-    [self load];
+- (instancetype)drawAndLoad {
+    return [[self draw] load];
 }
 
-- (void)draw {
-//    CGFloat x = [self _startX];
-//    CGFloat y = [self _startY];
-//    for (id value in self.values) {
-//        GKBar *bar = [GKBar createWithFrame:CGRectMake(x, y, self.barWidth, self.barHeight)];
-//        bar.percentage = [value doubleValue];
-//        [self addSubview:bar];
-//        x += [self _barSpace];
-//    }
-    
+- (instancetype)draw {
     [self _constructBars];
     [self _layoutBars];
+    return self;
 }
 
 - (void)_constructBars {
@@ -84,12 +75,13 @@ static CGFloat kDefaultBarWidth = 20;
     }];
 }
 
-- (void)load {
+- (instancetype)load {
     __block NSInteger idx = 0;
     [self.bars mk_each:^(GKBar *item) {
         item.percentage = [[self.values objectAtIndex:idx] doubleValue];
         idx++;
     }];
+    return self;
 }
 
 - (CGFloat)_startX {
@@ -110,10 +102,11 @@ static CGFloat kDefaultBarWidth = 20;
     return (self.height - self.barHeight);
 }
 
-- (void)reset {
+- (instancetype)reset {
     [self.bars mk_each:^(GKBar *item) {
         [item reset];
     }];
+    return self;
 }
 
 @end
