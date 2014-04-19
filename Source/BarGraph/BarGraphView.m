@@ -45,18 +45,13 @@ static CGFloat kDefaultBarWidth = 20;
 }
 
 - (void)draw {
-//    CGFloat height = self.frame.size.height;
-    
-//    static CGFloat barHeight = 100;
-//    CGFloat x = 20;
     CGFloat x = [self _startX];
-//    CGFloat y = self.frame.size.height - self.barHeight;
     CGFloat y = [self _startY];
     for (id value in self.values) {
-        GKBar *bar = [GKBar createWithFrame:CGRectMake(x, y, 20, self.barHeight)];
+        GKBar *bar = [GKBar createWithFrame:CGRectMake(x, y, self.barWidth, self.barHeight)];
         bar.percentage = [value doubleValue];
         [self addSubview:bar];
-        x += 30;
+        x += [self _barSpace];
     }
 }
 
@@ -75,7 +70,8 @@ static CGFloat kDefaultBarWidth = 20;
 - (CGFloat)_startX {
     CGFloat result = self.width;
     
-    CGFloat item = self.barWidth + self.marginBar;
+//    CGFloat item = self.barWidth + self.marginBar;
+    CGFloat item = [self _barSpace];
     NSInteger count = [self.values count];
     
     result = result - (item * count) + self.marginBar;
@@ -83,10 +79,13 @@ static CGFloat kDefaultBarWidth = 20;
     return result;
 }
 
+- (CGFloat)_barSpace {
+    return (self.barWidth + self.marginBar);
+}
+
 - (CGFloat)_startY {
     return (self.height - self.barHeight);
 }
-
 
 - (void)_loadData {
     [self.values mk_each:^(id item) {
