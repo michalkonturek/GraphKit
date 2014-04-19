@@ -18,6 +18,10 @@
 
 //@property (nonatomic, strong) NSArray *bars;
 
+
+@property (nonatomic, assign) CGFloat barWidth;
+
+
 @property (nonatomic, strong) UIColor *defaultBarColor;
 
 //+ (instancetype)createWithValue

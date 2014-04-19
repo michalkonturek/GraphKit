@@ -8,10 +8,12 @@
 
 #import "BarGraphView.h"
 
+#import <FrameAccessor/FrameAccessor.h>
+
 #import "GKBar.h"
 
-#define CGRectSetX(frame, w)    CGRectMake(w, frame.origin.y, frame.size.width, frame.size.height)
-#define ViewSetX(view, w)       view.frame = CGRectSetX(view.frame, w)
+//#define CGRectSetX(frame, w)    CGRectMake(w, frame.origin.y, frame.size.width, frame.size.height)
+//#define ViewSetX(view, w)       view.frame = CGRectSetX(view.frame, w)
 
 @implementation BarGraphView
 
@@ -48,6 +50,12 @@
         x += 30;
     }
 }
+
+//- (void)_layoutBars {
+//    CGFloat margin = 30;
+//    
+//    
+//}
 
 - (void)reset {
     for (id bar in self.subviews) {
