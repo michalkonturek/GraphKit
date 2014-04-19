@@ -12,6 +12,8 @@
 
 @implementation GKBar
 
+//@synthesize foregroundColor = _foregroundColor;
+
 + (instancetype)create {
     CGRect defaultRect = CGRectMake(0, 0, 25, 100);
     return [self createWithFrame:defaultRect];
@@ -115,6 +117,11 @@
         item.strokeColor = [_foregroundColor CGColor];
     }
 }
+
+//- (UIColor *)foregroundColor {
+//    NSLog(@"%@", _foregroundColor);
+//    return _foregroundColor;
+//}
 
 - (void)reset {
     [UIView animateWithDuration:0.5

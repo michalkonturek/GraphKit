@@ -15,6 +15,7 @@
 
 static CGFloat kDefaultBarHeight = 100;
 static CGFloat kDefaultBarWidth = 20;
+static CGFloat kDefaultBarMargin = 10;
 
 @implementation BarGraphView
 
@@ -38,10 +39,7 @@ static CGFloat kDefaultBarWidth = 20;
     self.backgroundColor = [UIColor clearColor];
     self.barHeight = kDefaultBarHeight;
     self.barWidth = kDefaultBarWidth;
-    
-    self.marginBar = 10;
-    self.marginLeft = 0;
-    self.marginRight = 0;
+    self.marginBar = kDefaultBarMargin;
 }
 
 - (instancetype)drawAndLoad {
@@ -90,7 +88,7 @@ static CGFloat kDefaultBarWidth = 20;
     NSInteger count = [self.values count];
     
     result = result - (item * count) + self.marginBar;
-    result = result / 2;
+    result = (result / 2);
     return result;
 }
 
@@ -107,6 +105,12 @@ static CGFloat kDefaultBarWidth = 20;
         [item reset];
     }];
     return self;
+}
+
+- (void)setBarColor:(UIColor *)color {
+    [self.bars mk_each:^(GKBar *item) {
+        item.foregroundColor = color;
+    }];
 }
 
 @end

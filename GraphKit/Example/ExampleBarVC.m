@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Michal Konturek. All rights reserved.
 //
 
-#import "ExampleViewVC.h"
+#import "ExampleBarVC.h"
 
 #import "GKBar.h"
 
-@interface ExampleViewVC ()
+@interface ExampleBarVC ()
 
 @end
 
-@implementation ExampleViewVC
+@implementation ExampleBarVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -18,19 +18,11 @@
 
 @property (nonatomic, strong) NSArray *bars;
 
-
-@property (nonatomic, assign) CGFloat marginLeft;
-@property (nonatomic, assign) CGFloat marginRight;
-@property (nonatomic, assign) CGFloat marginBar;
-
 @property (nonatomic, assign) CGFloat barHeight;
 @property (nonatomic, assign) CGFloat barWidth;
-
+@property (nonatomic, assign) CGFloat marginBar;
 
 @property (nonatomic, strong) UIColor *defaultBarColor;
-
-//+ (instancetype)createWithValue
-
 
 - (instancetype)drawAndLoad;
 
@@ -38,5 +30,7 @@
 - (instancetype)load;
 
 - (instancetype)reset;
+
+- (void)setBarColor:(UIColor *)color;
 
 @end

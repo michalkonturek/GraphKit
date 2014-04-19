@@ -10,7 +10,7 @@
 
 #import "BarGraphView.h"
 
-@interface BarGraphViewVC : UIViewController
+@interface ExampleBarGraphVC : UIViewController
 
 @property (nonatomic, weak) IBOutlet BarGraphView *graphView;
 

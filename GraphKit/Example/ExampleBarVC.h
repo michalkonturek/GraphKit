@@ -10,7 +10,7 @@
 
 @class GKBar;
 
-@interface ExampleViewVC : UIViewController
+@interface ExampleBarVC : UIViewController
 
 @property (nonatomic, weak) IBOutlet GKBar *bar;
 
