@@ -27,8 +27,6 @@
 
     [self.graphView draw];
     [self.graphView load];
-    
-//    [self.graphView drawAndLoad];
 }
 
 - (void)didReceiveMemoryWarning {

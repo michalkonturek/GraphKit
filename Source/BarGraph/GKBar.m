@@ -12,8 +12,6 @@
 
 @implementation GKBar
 
-//@synthesize foregroundColor = _foregroundColor;
-
 + (instancetype)create {
     CGRect defaultRect = CGRectMake(0, 0, 25, 100);
     return [self createWithFrame:defaultRect];
@@ -36,7 +34,6 @@
     if (self) {
         [self _init];
     }
-    
     return self;
 }
 
@@ -53,6 +50,7 @@
 - (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated {
     self.animated = animated;
     self.percentage = percentage;
+    self.animated = YES;
 }
 
 - (void)setPercentage:(CGFloat)percentage {
@@ -112,18 +110,12 @@
 
 - (void)setForegroundColor:(UIColor *)foregroundColor {
     _foregroundColor = foregroundColor;
-    
-    for (CAShapeLayer *item in self.layer.sublayers) {
-        item.strokeColor = [_foregroundColor CGColor];
-    }
-    
-    
-}
 
-//- (UIColor *)foregroundColor {
-//    NSLog(@"%@", _foregroundColor);
-//    return _foregroundColor;
-//}
+    self.layer.sublayers = nil;
+    CGFloat temp = _percentage;
+    [self setPercentage:0 animated:NO];
+    [self setPercentage:temp animated:NO];
+}
 
 - (void)reset {
     [UIView animateWithDuration:0.5

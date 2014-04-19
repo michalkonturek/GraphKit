@@ -15,7 +15,9 @@
 @property (nonatomic, weak) IBOutlet BarGraphView *graphView;
 
 - (IBAction)onButtonFill:(id)sender;
+
 - (IBAction)onButtonChange:(id)sender;
+
 - (IBAction)onButtonReset:(id)sender;
 
 @end

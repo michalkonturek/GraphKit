@@ -34,7 +34,6 @@
 }
 
 - (IBAction)onButtonMinus:(id)sender {
-//    [self.bar setPercentage:0.1 animated:NO];
     self.bar.percentage -= 0.2;
 }
 

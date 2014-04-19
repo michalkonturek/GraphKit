@@ -50,9 +50,6 @@
     }
     
     [self.navigationController pushViewController:vc animated:YES];
-    
-//    self.window.rootViewController =
-//    self.window.rootViewController = [[BarGraphViewVC alloc] initWithNibName:@"BarGraphViewVC" bundle:nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
