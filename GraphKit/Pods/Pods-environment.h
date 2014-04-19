@@ -12,3 +12,9 @@
 #define COCOAPODS_VERSION_MINOR_FrameAccessor 3
 #define COCOAPODS_VERSION_PATCH_FrameAccessor 2
 
+// MKFoundationKit/NSArray
+#define COCOAPODS_POD_AVAILABLE_MKFoundationKit_NSArray
+#define COCOAPODS_VERSION_MAJOR_MKFoundationKit_NSArray 1
+#define COCOAPODS_VERSION_MINOR_MKFoundationKit_NSArray 2
+#define COCOAPODS_VERSION_PATCH_MKFoundationKit_NSArray 2
+

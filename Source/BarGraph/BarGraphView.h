@@ -16,9 +16,14 @@
 @property (nonatomic, strong) NSArray *labels;
 @property (nonatomic, strong) NSArray *values;
 
-//@property (nonatomic, strong) NSArray *bars;
+@property (nonatomic, strong) NSArray *bars;
 
 
+@property (nonatomic, assign) CGFloat marginLeft;
+@property (nonatomic, assign) CGFloat marginRight;
+@property (nonatomic, assign) CGFloat marginBar;
+
+@property (nonatomic, assign) CGFloat barHeight;
 @property (nonatomic, assign) CGFloat barWidth;
 
 
