@@ -116,6 +116,8 @@
     for (CAShapeLayer *item in self.layer.sublayers) {
         item.strokeColor = [_foregroundColor CGColor];
     }
+    
+    
 }
 
 //- (UIColor *)foregroundColor {

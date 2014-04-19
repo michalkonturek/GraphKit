@@ -26,7 +26,6 @@
     self.graphView.marginBar = 20;
 
     [self.graphView draw];
-    [self.graphView setBarColor:[UIColor greenColor]];
     [self.graphView load];
     
 //    [self.graphView drawAndLoad];
@@ -38,6 +37,10 @@
 
 - (IBAction)onButtonFill:(id)sender {
     [[self.graphView draw] load];
+}
+
+- (IBAction)onButtonChange:(id)sender {
+    [self.graphView setBarColor:[UIColor greenColor]];
 }
 
 - (IBAction)onButtonReset:(id)sender {

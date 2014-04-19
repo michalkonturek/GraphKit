@@ -12,6 +12,8 @@
 
 @interface ExampleBarVC ()
 
+@property (nonatomic, assign) BOOL green;
+
 @end
 
 @implementation ExampleBarVC
@@ -27,7 +29,6 @@
 }
 
 - (IBAction)onButtonAdd:(id)sender {
-//    self.bar.foregroundColor = [UIColor orangeColor];
     self.bar.animated = YES;
     self.bar.percentage += 0.2;
 }
@@ -37,10 +38,13 @@
     self.bar.percentage -= 0.2;
 }
 
+- (IBAction)onButtonChange:(id)sender {
+    self.green = !self.green;
+    self.bar.foregroundColor = (self.green) ? [UIColor greenColor] : [UIColor redColor];;
+}
+
 - (IBAction)onButtonReset:(id)sender {
     [self.bar reset];
 }
-
-// TODO: subclass layer to introduce negative
 
 @end
