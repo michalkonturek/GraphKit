@@ -25,13 +25,12 @@
     self.graphView.barHeight = 140;
     self.graphView.marginBar = 20;
     
-    [self.graphView draw];
+//    [self.graphView draw];
+    [self.graphView drawAndLoad];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

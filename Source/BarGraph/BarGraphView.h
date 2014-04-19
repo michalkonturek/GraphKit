@@ -31,7 +31,12 @@
 
 //+ (instancetype)createWithValue
 
+
+- (void)drawAndLoad;
+
 - (void)draw;
+- (void)load;
+
 - (void)reset;
 
 @end
