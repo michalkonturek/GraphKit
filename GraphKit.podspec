@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "GraphKit"
-  s.version      = "0.1.0"
+  s.version      = "0.2.0"
   s.summary      = "iOS kit for creating simple types of graphs / charts."
   s.homepage     = "https://github.com/michalkonturek/GraphKit"
   s.license      = 'MIT'
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/michalkonturek'
   s.source       = { 
     :git => "https://github.com/michalkonturek/GraphKit.git", 
-    :tag => "0.1.0" 
+    :tag => "0.2.0" 
   }
 
   s.source_files = 'Source/**/*.{h,m}'
