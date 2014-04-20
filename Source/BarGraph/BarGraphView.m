@@ -62,7 +62,8 @@ static CGFloat kDefaultBarMargin = 10;
     NSInteger count = [self.values count];
     id items = [NSMutableArray arrayWithCapacity:count];
     for (NSInteger idx = 0; idx < count; idx++) {
-        id item = [GKBar create];
+        GKBar *item = [GKBar create];
+        if ([self barColor]) item.foregroundColor = [self barColor];
         [items addObject:item];
 //        [self addSubview:item];
     }
