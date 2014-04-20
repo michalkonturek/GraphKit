@@ -10,6 +10,12 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+@interface GKBar ()
+
+@property (atomic, assign) BOOL animationInProgress;
+
+@end
+
 @implementation GKBar
 
 + (instancetype)create {
@@ -57,6 +63,7 @@
     if (percentage == _percentage) return;
     if (percentage > 1) percentage = 1;
     if (percentage < 0) percentage = 0;
+    if (self.animationInProgress) return;
     
     [self _progressBarTo:percentage];
     _percentage = percentage;
@@ -105,7 +112,16 @@
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     animation.fromValue = @(0);
     animation.toValue = @(1);
+    animation.delegate = self;
     return animation;
+}
+
+- (void)animationDidStart:(CAAnimation *)anim {
+    self.animationInProgress = YES;
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    self.animationInProgress = NO;
 }
 
 - (void)setForegroundColor:(UIColor *)foregroundColor {

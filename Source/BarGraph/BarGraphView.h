@@ -29,7 +29,5 @@
 
 - (instancetype)reset;
 
-//- (void)setBarColor:(UIColor *)color;
-
 @end
 

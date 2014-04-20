@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.bar.animationDuration = 0.4;
     self.bar.percentage = 0.4;
 }
 
