@@ -24,6 +24,7 @@
 
 @property (nonatomic, strong) UIColor *barColor;
 
+- (instancetype)redraw;
 - (instancetype)construct;
 - (instancetype)draw;
 

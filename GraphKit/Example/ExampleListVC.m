@@ -27,6 +27,11 @@
     self.data = @[@"Bar", @"Bar Graph"];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellID"];
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,6 +54,7 @@
             break;
     }
     
+    [vc setTitle:[self.data objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

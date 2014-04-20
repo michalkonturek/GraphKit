@@ -35,8 +35,7 @@
 }
 
 - (IBAction)onButtonFill:(id)sender {
-//    [self.graphView draw];
-    [[self.graphView construct] draw];
+    [self.graphView draw];
 }
 
 - (IBAction)onButtonChange:(id)sender {

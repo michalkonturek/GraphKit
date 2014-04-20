@@ -49,16 +49,22 @@ static CGFloat kDefaultBarMargin = 10;
     }];
 }
 
+- (instancetype)redraw {
+    return [[self construct] draw];
+}
+
 - (instancetype)construct {
-    [self _constructBars];
+    [self _construct];
     [self _layoutBars];
     return self;
 }
 
-- (void)_constructBars {
-    
+- (void)_construct {
     if (![self.bars mk_isEmpty]) [self _deconstructBars];
-    
+    [self _constructBars];
+}
+
+- (void)_constructBars {
     NSInteger count = [self.values count];
     id items = [NSMutableArray arrayWithCapacity:count];
     for (NSInteger idx = 0; idx < count; idx++) {
