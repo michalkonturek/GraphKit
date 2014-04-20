@@ -22,15 +22,14 @@
 @property (nonatomic, assign) CGFloat barWidth;
 @property (nonatomic, assign) CGFloat marginBar;
 
-@property (nonatomic, strong) UIColor *defaultBarColor;
+@property (nonatomic, strong) UIColor *barColor;
 
-- (instancetype)drawAndLoad;
-
+- (instancetype)construct;
 - (instancetype)draw;
-- (instancetype)load;
 
 - (instancetype)reset;
 
-- (void)setBarColor:(UIColor *)color;
+//- (void)setBarColor:(UIColor *)color;
 
 @end
+

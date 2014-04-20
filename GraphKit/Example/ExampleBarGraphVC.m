@@ -10,6 +10,8 @@
 
 @interface ExampleBarGraphVC ()
 
+@property (nonatomic, assign) BOOL green;
+
 @end
 
 @implementation ExampleBarGraphVC
@@ -25,8 +27,7 @@
     self.graphView.barHeight = 140;
     self.graphView.marginBar = 20;
 
-    [self.graphView draw];
-    [self.graphView load];
+    [[self.graphView construct] draw];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,11 +35,12 @@
 }
 
 - (IBAction)onButtonFill:(id)sender {
-    [[self.graphView draw] load];
+    [self.graphView draw];
 }
 
 - (IBAction)onButtonChange:(id)sender {
-    [self.graphView setBarColor:[UIColor greenColor]];
+    self.green = !self.green;
+    self.graphView.barColor = (self.green) ? [UIColor greenColor] : [UIColor redColor];
 }
 
 - (IBAction)onButtonReset:(id)sender {

@@ -42,11 +42,14 @@ static CGFloat kDefaultBarMargin = 10;
     self.marginBar = kDefaultBarMargin;
 }
 
-- (instancetype)drawAndLoad {
-    return [[self draw] load];
+- (void)setBarColor:(UIColor *)color {
+    _barColor = color;
+    [self.bars mk_each:^(GKBar *item) {
+        item.foregroundColor = color;
+    }];
 }
 
-- (instancetype)draw {
+- (instancetype)construct {
     [self _constructBars];
     [self _layoutBars];
     return self;
@@ -54,12 +57,22 @@ static CGFloat kDefaultBarMargin = 10;
 
 - (void)_constructBars {
     
+    if (![self.bars mk_isEmpty]) [self _deconstructBars];
+    
     NSInteger count = [self.values count];
     id items = [NSMutableArray arrayWithCapacity:count];
     for (NSInteger idx = 0; idx < count; idx++) {
-        [items addObject:[GKBar create]];
+        id item = [GKBar create];
+        [items addObject:item];
+//        [self addSubview:item];
     }
     self.bars = items;
+}
+
+- (void)_deconstructBars {
+    [self.bars mk_each:^(id item) {
+        [item removeFromSuperview];
+    }];
 }
 
 - (void)_layoutBars {
@@ -73,7 +86,7 @@ static CGFloat kDefaultBarMargin = 10;
     }];
 }
 
-- (instancetype)load {
+- (instancetype)draw {
     __block NSInteger idx = 0;
     [self.bars mk_each:^(GKBar *item) {
         item.percentage = [[self.values objectAtIndex:idx] doubleValue];
@@ -105,12 +118,6 @@ static CGFloat kDefaultBarMargin = 10;
         [item reset];
     }];
     return self;
-}
-
-- (void)setBarColor:(UIColor *)color {
-    [self.bars mk_each:^(GKBar *item) {
-        item.foregroundColor = color;
-    }];
 }
 
 @end
