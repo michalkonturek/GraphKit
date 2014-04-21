@@ -22,7 +22,7 @@
     [super viewDidLoad];
 
     self.bar.animationDuration = 0.4;
-    self.bar.percentage = 0.4;
+    self.bar.percentage = 40;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,11 +31,11 @@
 
 - (IBAction)onButtonAdd:(id)sender {
     self.bar.animated = YES;
-    self.bar.percentage += 0.2;
+    self.bar.percentage += 20;
 }
 
 - (IBAction)onButtonMinus:(id)sender {
-    self.bar.percentage -= 0.2;
+    self.bar.percentage -= 20;
 }
 
 - (IBAction)onButtonChange:(id)sender {

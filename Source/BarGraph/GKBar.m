@@ -61,7 +61,7 @@
 
 - (void)setPercentage:(CGFloat)percentage {
     if (percentage == _percentage) return;
-    if (percentage > 1) percentage = 1;
+    if (percentage > 100) percentage = 100;
     if (percentage < 0) percentage = 0;
     if (self.animationInProgress) return;
     
@@ -71,8 +71,8 @@
 
 - (void)_progressBarTo:(CGFloat)value {
     
-    UIBezierPath *path = [self _bezierPathWith:value];
-//    NSLog(@"S: %f E: %f", startY, endY);
+    CGFloat converted = (value / 100);
+    UIBezierPath *path = [self _bezierPathWith:converted];
     
     CAShapeLayer *layer = [self _layerWithPath:path];
     if (_percentage > value) layer.strokeColor = [self.backgroundColor CGColor];
@@ -88,7 +88,7 @@
 - (UIBezierPath *)_bezierPathWith:(CGFloat)value {
     UIBezierPath *path = [UIBezierPath bezierPath];
     CGFloat startX = (self.frame.size.width / 2);
-    CGFloat startY = (self.frame.size.height * (1 - _percentage));
+    CGFloat startY = (self.frame.size.height * (1 - (_percentage / 100)));
     CGFloat endY = (self.frame.size.height * (1 - value));
     [path moveToPoint:CGPointMake(startX, startY)];
 	[path addLineToPoint:CGPointMake(startX, endY)];
