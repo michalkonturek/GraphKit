@@ -45,7 +45,7 @@
 
 - (void)_init {
     self.animated = YES;
-    self.animationDuration = 1.0;
+    self.animationDuration = 0.5;
     self.clipsToBounds = YES;
     self.cornerRadius = 2.0;
     self.foregroundColor = [UIColor redColor];

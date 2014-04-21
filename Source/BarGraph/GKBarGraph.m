@@ -49,6 +49,20 @@ static CGFloat kDefaultBarMargin = 10;
     }];
 }
 
+- (void)setAnimated:(BOOL)animated {
+    _animated = animated;
+    [self.bars mk_each:^(GKBar *item) {
+        item.animated = animated;
+    }];
+}
+
+- (void)setAnimationDuration:(CFTimeInterval)animationDuration {
+    _animationDuration = animationDuration;
+    [self.bars mk_each:^(GKBar *item) {
+        item.animationDuration = animationDuration;
+    }];
+}
+
 - (instancetype)redraw {
     return [[self construct] draw];
 }

@@ -18,8 +18,8 @@
 
 @property (nonatomic, assign) CGFloat percentage;
 
-@property (nonatomic, assign) CFTimeInterval animationDuration;
 @property (nonatomic, assign) BOOL animated;
+@property (nonatomic, assign) CFTimeInterval animationDuration;
 
 - (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated;
 

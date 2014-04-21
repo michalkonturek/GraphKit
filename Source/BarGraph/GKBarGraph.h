@@ -24,6 +24,9 @@
 
 @property (nonatomic, strong) UIColor *barColor;
 
+@property (nonatomic, assign) BOOL animated;
+@property (nonatomic, assign) CFTimeInterval animationDuration;
+
 - (instancetype)redraw;
 - (instancetype)construct;
 - (instancetype)draw;
