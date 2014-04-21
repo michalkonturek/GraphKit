@@ -70,7 +70,7 @@
     
     static id cellID = @"cellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = [self.data objectAtIndex:indexPath.row];
     
     return cell;

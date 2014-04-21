@@ -60,13 +60,14 @@
     
     id values = [self.dataSource valuesForLineAtIndex:index];
     
-    CGFloat margin = 30;
+    CGFloat margin = 20;
+    CGFloat axisMargin = 20;
     
     NSInteger idx = 0;
     CGFloat step = ((self.width - (2 * margin)) / [values count]);
     for (id item in values) {
         
-        CGFloat x = margin + (idx * step);
+        CGFloat x = axisMargin + margin + (idx * step);
         CGFloat y = self.height - [item floatValue];
         CGPoint point = CGPointMake(x, y);
         

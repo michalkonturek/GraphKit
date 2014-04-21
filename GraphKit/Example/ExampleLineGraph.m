@@ -18,8 +18,11 @@
     [super viewDidLoad];
 
     self.data = @[
-                  @[@20, @40, @20, @60, @40, @60, @80, @50, @20, @40],
-                  @[@40, @20, @60, @100, @60, @20, @60, @80, @40, @20]
+//                  @[@20, @40, @20, @60, @40, @60, @80, @50, @20, @40],
+//                  @[@40, @20, @60, @100, @60, @20, @60, @80, @40, @20]
+                  @[@20, @40, @20, @60, @40, @60, @80, @50],
+                  @[@40, @20, @60, @100, @60, @20, @60, @80],
+                  @[@80, @60, @40, @80, @100, @70, @90, @120]
                   ];
     
     self.graph.dataSource = self;
@@ -38,7 +41,7 @@
 }
 
 - (UIColor *)colorForLineAtIndex:(NSInteger)index {
-    id colors = @[[UIColor greenColor], [UIColor redColor]];
+    id colors = @[[UIColor greenColor], [UIColor redColor], [UIColor blueColor]];
     return [colors objectAtIndex:index];
 }
 

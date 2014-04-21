@@ -28,6 +28,7 @@
 		8472591E1904AA4F00819664 /* ExampleLineGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 8472591C1904AA4F00819664 /* ExampleLineGraph.m */; };
 		8472591F1904AA4F00819664 /* ExampleLineGraph.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8472591D1904AA4F00819664 /* ExampleLineGraph.xib */; };
 		847259231904ABE200819664 /* GKLineGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 847259221904ABE200819664 /* GKLineGraph.m */; };
+		847259291905C1D300819664 /* UIColor+GraphKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 847259281905C1D300819664 /* UIColor+GraphKit.m */; };
 		84F0E98E1902B30C00FA4810 /* ExampleListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0E98C1902B30C00FA4810 /* ExampleListVC.m */; };
 		84F0E98F1902B30C00FA4810 /* ExampleListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F0E98D1902B30C00FA4810 /* ExampleListVC.xib */; };
 		973F4746059343C9A462AA2D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E12B5B49644056930176BC /* libPods.a */; };
@@ -78,6 +79,8 @@
 		8472591D1904AA4F00819664 /* ExampleLineGraph.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleLineGraph.xib; sourceTree = "<group>"; };
 		847259211904ABE200819664 /* GKLineGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKLineGraph.h; sourceTree = "<group>"; };
 		847259221904ABE200819664 /* GKLineGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKLineGraph.m; sourceTree = "<group>"; };
+		847259271905C1D300819664 /* UIColor+GraphKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+GraphKit.h"; sourceTree = "<group>"; };
+		847259281905C1D300819664 /* UIColor+GraphKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+GraphKit.m"; sourceTree = "<group>"; };
 		84F0E98B1902B30C00FA4810 /* ExampleListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleListVC.h; sourceTree = "<group>"; };
 		84F0E98C1902B30C00FA4810 /* ExampleListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleListVC.m; sourceTree = "<group>"; };
 		84F0E98D1902B30C00FA4810 /* ExampleListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleListVC.xib; sourceTree = "<group>"; };
@@ -186,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				84654C4618FE8F0600160F11 /* GraphKit.h */,
+				847259271905C1D300819664 /* UIColor+GraphKit.h */,
+				847259281905C1D300819664 /* UIColor+GraphKit.m */,
 				84654C4918FE907500160F11 /* BarGraph */,
 				847259201904AB8F00819664 /* LineGraph */,
 			);
@@ -369,6 +374,7 @@
 				847259231904ABE200819664 /* GKLineGraph.m in Sources */,
 				84654C5518FEDCDF00160F11 /* GKBarGraph.m in Sources */,
 				84654C2418FE8EE300160F11 /* AppDelegate.m in Sources */,
+				847259291905C1D300819664 /* UIColor+GraphKit.m in Sources */,
 				84654C5918FF4C8300160F11 /* ExampleBarGraphVC.m in Sources */,
 				8472591E1904AA4F00819664 /* ExampleLineGraph.m in Sources */,
 				84654C4C18FE909A00160F11 /* GKBar.m in Sources */,
