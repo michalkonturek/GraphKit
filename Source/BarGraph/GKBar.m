@@ -45,12 +45,18 @@
 
 - (void)_init {
     self.clipsToBounds = YES;
-    self.layer.cornerRadius = 2.0;
+//    self.layer.cornerRadius = 2.0;
+    self.cornerRadius = 2.0;
     self.backgroundColor = [UIColor lightGrayColor];
     self.foregroundColor = [UIColor redColor];
     _percentage = 0;
     _animated = YES;
     _animationDuration = 0.8;
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius {
+    _cornerRadius = cornerRadius;
+    self.layer.cornerRadius = cornerRadius;
 }
 
 - (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated {

@@ -45,6 +45,7 @@
 
 - (IBAction)onButtonReset:(id)sender {
     [self.bar reset];
+    self.bar.cornerRadius = 0;
 }
 
 @end
