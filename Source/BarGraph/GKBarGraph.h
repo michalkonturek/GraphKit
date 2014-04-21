@@ -12,10 +12,6 @@
 
 @interface GKBarGraph : UIView
 
-//@property (nonatomic, strong) NSArray *colors;
-//@property (nonatomic, strong) NSArray *labels;
-//@property (nonatomic, strong) NSArray *values;
-
 @property (nonatomic, strong) NSArray *bars;
 
 @property (nonatomic, assign) CGFloat barHeight;
@@ -32,7 +28,6 @@
 - (instancetype)redraw;
 - (instancetype)construct;
 - (instancetype)draw;
-
 - (instancetype)reset;
 
 @end

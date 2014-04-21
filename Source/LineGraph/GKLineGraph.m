@@ -36,7 +36,7 @@
 }
 
 - (void)draw {
-    NSAssert(self.dataSource, @"GKLineGraph : No data source assgined.");
+    NSAssert(self.dataSource, @"GKLineGraph : No data source is assgined.");
     
     [self _drawLines];
 }

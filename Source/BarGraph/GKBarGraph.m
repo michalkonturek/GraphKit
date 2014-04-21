@@ -68,6 +68,8 @@ static CGFloat kDefaultBarMargin = 10;
 }
 
 - (instancetype)construct {
+    NSAssert(self.dataSource, @"GKBarGraph : No data source is assgined.");
+    
     [self _construct];
     [self _layoutBars];
     return self;
@@ -79,7 +81,6 @@ static CGFloat kDefaultBarMargin = 10;
 }
 
 - (void)_constructBars {
-//    NSInteger count = [self.values count];
     NSInteger count = [self.dataSource numberOfBars];
     id items = [NSMutableArray arrayWithCapacity:count];
     for (NSInteger idx = 0; idx < count; idx++) {
@@ -112,7 +113,6 @@ static CGFloat kDefaultBarMargin = 10;
     __block NSInteger idx = 0;
     id source = self.dataSource;
     [self.bars mk_each:^(GKBar *item) {
-//        item.percentage = [[self.values objectAtIndex:idx] doubleValue];
         
         if ([source respondsToSelector:@selector(animationDurationForBarAtIndex:)]) {
             item.animationDuration = [source animationDurationForBarAtIndex:idx];
@@ -131,7 +131,6 @@ static CGFloat kDefaultBarMargin = 10;
 - (CGFloat)_startX {
     CGFloat result = self.width;
     CGFloat item = [self _barSpace];
-//    NSInteger count = [self.values count];
     NSInteger count = [self.dataSource numberOfBars];
     
     result = result - (item * count) + self.marginBar;
