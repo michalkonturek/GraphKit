@@ -35,16 +35,31 @@
 }
 
 - (void)draw {
+    NSAssert(self.dataSource, @"GKLineGraph : No data source assgined.");
+    
+    [self _drawLines];
+}
+
+- (void)_drawLines {
+    for (NSInteger idx; idx < [self.dataSource numberOfLines]; idx++) {
+        [self _drawLineAtIndex:idx];
+    }
+}
+
+- (void)_drawLineAtIndex:(NSInteger)index {
     
     // http://stackoverflow.com/questions/19599266/invalid-context-0x0-under-ios-7-0-and-system-degradation
     UIGraphicsBeginImageContext(self.frame.size);
     
     UIBezierPath *path = [self _bezierPathWith:0];
     CAShapeLayer *layer = [self _layerWithPath:path];
+    
+    layer.strokeColor = [[self.dataSource colorForLineAtIndex:index] CGColor];
+    
     [self.layer addSublayer:layer];
-
-    id values = @[@100, @80, @110, @140, @90, @40, @110, @120, @70];
-//    id values = @[@0, @100, @80, @180, @75, @40, @200, @260];
+    
+    //    id values = @[@100, @80, @110, @140, @90, @40, @110, @120, @130, @70];
+    id values = [self.dataSource valuesForLineAtIndex:index];
     
     CGFloat margin = 30;
     
@@ -63,7 +78,7 @@
     }
     
     layer.path = path.CGPath;
-
+    
     if (self.animated) {
         CABasicAnimation *animation = [self _animationWithKeyPath:@"strokeEnd"];
         [layer addAnimation:animation forKey:@"strokeEndAnimation"];
@@ -71,6 +86,48 @@
     
     UIGraphicsEndImageContext();
 }
+
+//- (void)draw {
+//    
+//    // http://stackoverflow.com/questions/19599266/invalid-context-0x0-under-ios-7-0-and-system-degradation
+//    UIGraphicsBeginImageContext(self.frame.size);
+//    
+//    UIBezierPath *path = [self _bezierPathWith:0];
+//    CAShapeLayer *layer = [self _layerWithPath:path];
+//
+//    NSInteger index = 0;
+//    layer.strokeColor = [[self.dataSource colorForLineAtIndex:index] CGColor];
+//    
+//    [self.layer addSublayer:layer];
+//
+////    id values = @[@100, @80, @110, @140, @90, @40, @110, @120, @130, @70];
+//    id values = [self.dataSource valuesForLineAtIndex:index];
+//    
+//    CGFloat margin = 30;
+//    
+//    NSInteger idx = 0;
+//    CGFloat step = ((self.width - (2 * margin)) / [values count]);
+//    for (id item in values) {
+//        
+//        CGFloat x = margin + (idx * step);
+//        CGFloat y = self.height - [item floatValue];
+//        CGPoint point = CGPointMake(x, y);
+//        
+//        if (idx != 0) [path addLineToPoint:point];
+//        [path moveToPoint:point];
+//        
+//        idx++;
+//    }
+//    
+//    layer.path = path.CGPath;
+//
+//    if (self.animated) {
+//        CABasicAnimation *animation = [self _animationWithKeyPath:@"strokeEnd"];
+//        [layer addAnimation:animation forKey:@"strokeEndAnimation"];
+//    }
+//    
+//    UIGraphicsEndImageContext();
+//}
 
 - (UIBezierPath *)_bezierPathWith:(CGFloat)value {
     UIBezierPath *path = [UIBezierPath bezierPath];

@@ -8,11 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GKLineGraphDataSource;
+
 @interface GKLineGraph : UIView
 
-@property (nonatomic, assign) CFTimeInterval animationDuration;
 @property (nonatomic, assign) BOOL animated;
+@property (nonatomic, assign) CFTimeInterval animationDuration;
+
+@property (nonatomic, assign) id<GKLineGraphDataSource> dataSource;
 
 - (void)draw;
+
+@end
+
+@protocol GKLineGraphDataSource <NSObject>
+
+- (NSInteger)numberOfLines;
+- (UIColor *)colorForLineAtIndex:(NSInteger)index;
+- (NSArray *)valuesForLineAtIndex:(NSInteger)index;
 
 @end
