@@ -19,7 +19,7 @@
 @implementation GKBar
 
 + (instancetype)create {
-    CGRect defaultRect = CGRectMake(0, 0, 25, 100);
+    CGRect defaultRect = CGRectMake(0, 0, 30, 200);
     return [self createWithFrame:defaultRect];
 }
 
@@ -44,14 +44,13 @@
 }
 
 - (void)_init {
+    self.animated = YES;
+    self.animationDuration = 1.0;
     self.clipsToBounds = YES;
-//    self.layer.cornerRadius = 2.0;
     self.cornerRadius = 2.0;
-    self.backgroundColor = [UIColor lightGrayColor];
     self.foregroundColor = [UIColor redColor];
+    self.backgroundColor = [UIColor lightGrayColor];
     _percentage = 0;
-    _animated = YES;
-    _animationDuration = 0.8;
 }
 
 - (void)setCornerRadius:(CGFloat)cornerRadius {

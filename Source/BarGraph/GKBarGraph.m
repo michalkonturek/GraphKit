@@ -13,8 +13,8 @@
 
 #import "GKBar.h"
 
-static CGFloat kDefaultBarHeight = 100;
-static CGFloat kDefaultBarWidth = 20;
+static CGFloat kDefaultBarHeight = 140;
+static CGFloat kDefaultBarWidth = 22;
 static CGFloat kDefaultBarMargin = 10;
 
 @implementation GKBarGraph
