@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "GKLineGraph.h"
+#import "GraphKit.h"
 
 @interface ExampleLineGraph : UIViewController<GKLineGraphDataSource>
 

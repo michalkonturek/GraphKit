@@ -8,7 +8,7 @@
 
 #import "ExampleBarVC.h"
 
-#import "GKBar.h"
+#import "GraphKit.h"
 
 @interface ExampleBarVC ()
 
@@ -20,6 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor gk_cloudsColor];
 
     self.bar.animationDuration = 0.4;
     self.bar.percentage = 40;

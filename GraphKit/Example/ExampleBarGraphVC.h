@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "GKBarGraph.h"
+@class GKBarGraph;
 
 @interface ExampleBarGraphVC : UIViewController
 

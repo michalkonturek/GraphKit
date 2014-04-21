@@ -16,6 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor gk_cloudsColor];
 
     self.data = @[
 //                  @[@20, @40, @20, @60, @40, @60, @80, @50, @20, @40],
@@ -41,7 +43,7 @@
 }
 
 - (UIColor *)colorForLineAtIndex:(NSInteger)index {
-    id colors = @[[UIColor greenColor], [UIColor redColor], [UIColor blueColor]];
+    id colors = @[[UIColor gk_turquoiseColor], [UIColor gk_peterRiverColor], [UIColor gk_alizarinColor]];
     return [colors objectAtIndex:index];
 }
 

@@ -10,6 +10,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "UIColor+GraphKit.h"
+
 @interface GKBar ()
 
 @property (atomic, assign) BOOL animationInProgress;
@@ -48,8 +50,8 @@
     self.animationDuration = 0.5;
     self.clipsToBounds = YES;
     self.cornerRadius = 2.0;
-    self.foregroundColor = [UIColor redColor];
-    self.backgroundColor = [UIColor lightGrayColor];
+    self.foregroundColor = [UIColor gk_turquoiseColor];
+    self.backgroundColor = [UIColor gk_silverColor];
     _percentage = 0;
 }
 

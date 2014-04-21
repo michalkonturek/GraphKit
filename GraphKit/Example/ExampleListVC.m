@@ -12,6 +12,8 @@
 #import "ExampleBarGraphVC.h"
 #import "ExampleLineGraph.h"
 
+#import "UIColor+GraphKit.h"
+
 //NS_ENUM(NSInteger, <#_name#>)
 
 @interface ExampleListVC ()
@@ -24,6 +26,7 @@
     [super viewDidLoad];
     
     self.title = @"GraphKit";
+    self.view.backgroundColor = [UIColor gk_cloudsColor];
     
     self.data = @[@"Bar", @"Bar Graph", @"Line Graph"];
     
@@ -72,6 +75,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = [self.data objectAtIndex:indexPath.row];
+    cell.textLabel.textColor = [UIColor gk_midnightBlueColor];
+    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }

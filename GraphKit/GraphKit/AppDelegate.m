@@ -10,11 +10,21 @@
 
 #import "ExampleListVC.h"
 
+#import "UIColor+GraphKit.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor gk_greenSeaColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor gk_cloudsColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor gk_cloudsColor]}];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     id vc = [[ExampleListVC alloc] initWithNibName:@"ExampleListVC" bundle:nil];
     id nav = [[UINavigationController alloc] initWithRootViewController:vc];

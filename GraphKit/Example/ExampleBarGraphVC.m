@@ -8,6 +8,8 @@
 
 #import "ExampleBarGraphVC.h"
 
+#import "GraphKit.h"
+
 @interface ExampleBarGraphVC ()
 
 @property (nonatomic, assign) BOOL green;
@@ -18,6 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor gk_cloudsColor];
 
 //    id values = @[@10, @25, @40, @60, @85, @100];
     id values = @[@30, @10, @40, @60, @50, @75];
