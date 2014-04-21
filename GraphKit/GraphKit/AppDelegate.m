@@ -12,6 +12,8 @@
 
 #import "UIColor+GraphKit.h"
 
+#import <BButton/BButton.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -24,7 +26,13 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+//    [[UIButton appearanceWhenContainedIn:[UIViewController class], nil] setBackgroundColor:[UIColor gk_wetAsphaltColor]];
+//    [[UIButton appearanceWhenContainedIn:[UIViewController class], nil] setTitleColor:[UIColor gk_cloudsColor]
+//                                                                             forState:UIControlStateNormal];
+//    [[UIButton appearanceWhenContainedIn:[UIViewController class], nil] setTitleColor:[UIColor gk_alizarinColor]
+//                                                                             forState:UIControlStateNormal];
+    
+    [[BButton appearance] setButtonCornerRadius:@2];
     
     id vc = [[ExampleListVC alloc] initWithNibName:@"ExampleListVC" bundle:nil];
     id nav = [[UINavigationController alloc] initWithRootViewController:vc];

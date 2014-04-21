@@ -10,6 +10,8 @@
 
 #import "GraphKit.h"
 
+#import "UIViewController+BButton.h"
+
 @interface ExampleBarGraphVC ()
 
 @property (nonatomic, assign) BOOL green;
@@ -20,6 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupButtons];
     
     self.view.backgroundColor = [UIColor gk_cloudsColor];
 
@@ -34,6 +38,8 @@
     [self.graphView construct];
     self.graphView.animationDuration = 1.0;
     [self.graphView draw];
+    
+    self.green = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,7 +52,7 @@
 
 - (IBAction)onButtonChange:(id)sender {
     self.green = !self.green;
-    self.graphView.barColor = (self.green) ? [UIColor greenColor] : [UIColor redColor];
+    self.graphView.barColor = (self.green) ? [UIColor gk_turquoiseColor] : [UIColor gk_amethystColor];
 }
 
 - (IBAction)onButtonReset:(id)sender {

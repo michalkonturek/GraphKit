@@ -29,6 +29,7 @@
 		8472591F1904AA4F00819664 /* ExampleLineGraph.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8472591D1904AA4F00819664 /* ExampleLineGraph.xib */; };
 		847259231904ABE200819664 /* GKLineGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 847259221904ABE200819664 /* GKLineGraph.m */; };
 		847259291905C1D300819664 /* UIColor+GraphKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 847259281905C1D300819664 /* UIColor+GraphKit.m */; };
+		8472592F1905D63500819664 /* UIViewController+BButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8472592E1905D63500819664 /* UIViewController+BButton.m */; };
 		84F0E98E1902B30C00FA4810 /* ExampleListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0E98C1902B30C00FA4810 /* ExampleListVC.m */; };
 		84F0E98F1902B30C00FA4810 /* ExampleListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F0E98D1902B30C00FA4810 /* ExampleListVC.xib */; };
 		973F4746059343C9A462AA2D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E12B5B49644056930176BC /* libPods.a */; };
@@ -81,6 +82,8 @@
 		847259221904ABE200819664 /* GKLineGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKLineGraph.m; sourceTree = "<group>"; };
 		847259271905C1D300819664 /* UIColor+GraphKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+GraphKit.h"; sourceTree = "<group>"; };
 		847259281905C1D300819664 /* UIColor+GraphKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+GraphKit.m"; sourceTree = "<group>"; };
+		8472592D1905D63500819664 /* UIViewController+BButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BButton.h"; sourceTree = "<group>"; };
+		8472592E1905D63500819664 /* UIViewController+BButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BButton.m"; sourceTree = "<group>"; };
 		84F0E98B1902B30C00FA4810 /* ExampleListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleListVC.h; sourceTree = "<group>"; };
 		84F0E98C1902B30C00FA4810 /* ExampleListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleListVC.m; sourceTree = "<group>"; };
 		84F0E98D1902B30C00FA4810 /* ExampleListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleListVC.xib; sourceTree = "<group>"; };
@@ -224,6 +227,8 @@
 				8472591B1904AA4F00819664 /* ExampleLineGraph.h */,
 				8472591C1904AA4F00819664 /* ExampleLineGraph.m */,
 				8472591D1904AA4F00819664 /* ExampleLineGraph.xib */,
+				8472592D1905D63500819664 /* UIViewController+BButton.h */,
+				8472592E1905D63500819664 /* UIViewController+BButton.m */,
 			);
 			path = Example;
 			sourceTree = SOURCE_ROOT;
@@ -372,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				847259231904ABE200819664 /* GKLineGraph.m in Sources */,
+				8472592F1905D63500819664 /* UIViewController+BButton.m in Sources */,
 				84654C5518FEDCDF00160F11 /* GKBarGraph.m in Sources */,
 				84654C2418FE8EE300160F11 /* AppDelegate.m in Sources */,
 				847259291905C1D300819664 /* UIColor+GraphKit.m in Sources */,

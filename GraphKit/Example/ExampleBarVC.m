@@ -10,6 +10,8 @@
 
 #import "GraphKit.h"
 
+#import "UIViewController+BButton.h"
+
 @interface ExampleBarVC ()
 
 @property (nonatomic, assign) BOOL green;
@@ -21,10 +23,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupButtons];
+    
     self.view.backgroundColor = [UIColor gk_cloudsColor];
 
     self.bar.animationDuration = 0.4;
     self.bar.percentage = 40;
+    
+    self.green = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,12 +48,11 @@
 
 - (IBAction)onButtonChange:(id)sender {
     self.green = !self.green;
-    self.bar.foregroundColor = (self.green) ? [UIColor greenColor] : [UIColor redColor];;
+    self.bar.foregroundColor = (self.green) ? [UIColor gk_turquoiseColor] : [UIColor gk_amethystColor];;
 }
 
 - (IBAction)onButtonReset:(id)sender {
     [self.bar reset];
-    self.bar.cornerRadius = 0;
 }
 
 @end
