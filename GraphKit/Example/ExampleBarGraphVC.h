@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class GKBarGraph;
+#import "GraphKit.h"
 
-@interface ExampleBarGraphVC : UIViewController
+@interface ExampleBarGraphVC : UIViewController<GKBarGraphDataSource>
 
 @property (nonatomic, weak) IBOutlet GKBarGraph *graphView;
+
+@property (nonatomic, strong) NSArray *data;
 
 - (IBAction)onButtonFill:(id)sender;
 
