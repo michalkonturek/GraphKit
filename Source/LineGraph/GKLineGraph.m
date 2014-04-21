@@ -82,6 +82,9 @@
     
     if (self.animated) {
         CABasicAnimation *animation = [self _animationWithKeyPath:@"strokeEnd"];
+        if ([self.dataSource respondsToSelector:@selector(animationDurationForLineAtIndex:)]) {
+            animation.duration = [self.dataSource animationDurationForLineAtIndex:index];
+        }
         [layer addAnimation:animation forKey:@"strokeEndAnimation"];
     }
     

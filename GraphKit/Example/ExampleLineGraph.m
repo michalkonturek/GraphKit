@@ -52,5 +52,9 @@
     return [self.data objectAtIndex:index];
 }
 
+- (CFTimeInterval)animationDurationForLineAtIndex:(NSInteger)index {
+    return [[@[@1, @1.4, @1.8] objectAtIndex:index] doubleValue];
+}
+
 
 @end

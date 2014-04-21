@@ -28,4 +28,7 @@
 - (UIColor *)colorForLineAtIndex:(NSInteger)index;
 - (NSArray *)valuesForLineAtIndex:(NSInteger)index;
 
+@optional
+- (CFTimeInterval)animationDurationForLineAtIndex:(NSInteger)index;
+
 @end
