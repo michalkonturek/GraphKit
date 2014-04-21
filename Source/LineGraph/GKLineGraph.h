@@ -14,6 +14,7 @@
 
 @property (nonatomic, assign) BOOL animated;
 @property (nonatomic, assign) CFTimeInterval animationDuration;
+@property (nonatomic, assign) CGFloat lineWidth;
 
 @property (nonatomic, assign) id<GKLineGraphDataSource> dataSource;
 

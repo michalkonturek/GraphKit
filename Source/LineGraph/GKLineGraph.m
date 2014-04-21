@@ -31,6 +31,7 @@
 - (void)_init {
     self.animated = YES;
     self.animationDuration = 1;
+    self.lineWidth = 3.0;
     self.clipsToBounds = YES;
 }
 
@@ -91,7 +92,7 @@
     UIBezierPath *path = [UIBezierPath bezierPath];
     path.lineCapStyle = kCGLineCapRound;
     path.lineJoinStyle = kCGLineJoinRound;
-    path.lineWidth = 3.0;
+    path.lineWidth = self.lineWidth;
     return path;
 }
 
@@ -100,7 +101,7 @@
     item.fillColor = [[UIColor blackColor] CGColor];
     item.lineCap = kCALineCapRound;
     item.lineJoin  = kCALineJoinRound;
-    item.lineWidth = 3.0; // NOTE
+    item.lineWidth = self.lineWidth;
 //    item.strokeColor = [self.foregroundColor CGColor];
     item.strokeColor = [[UIColor redColor] CGColor];
     item.strokeEnd = 1;

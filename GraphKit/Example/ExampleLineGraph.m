@@ -28,6 +28,7 @@
                   ];
     
     self.graph.dataSource = self;
+    self.graph.lineWidth = 4.0;
     
     [self.graph draw];
 }
