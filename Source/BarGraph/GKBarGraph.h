@@ -40,10 +40,10 @@
 @protocol GKBarGraphDataSource <NSObject>
 
 - (NSInteger)numberOfBars;
-- (UIColor *)colorForBarAtIndex:(NSInteger)index;
 - (NSNumber *)valueForBarAtIndex:(NSInteger)index;
 
 @optional
+- (UIColor *)colorForBarAtIndex:(NSInteger)index;
 - (CFTimeInterval)animationDurationForBarAtIndex:(NSInteger)index;
 
 @end

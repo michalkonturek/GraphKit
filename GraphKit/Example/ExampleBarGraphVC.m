@@ -38,7 +38,7 @@
     self.graphView.marginBar = 20;
     
     [self.graphView construct];
-    self.graphView.animationDuration = 1.0;
+    self.graphView.animationDuration = 2.0;
     [self.graphView draw];
     
     self.green = YES;
@@ -67,6 +67,10 @@
     return [self.data count];
 }
 
+- (NSNumber *)valueForBarAtIndex:(NSInteger)index {
+    return [self.data objectAtIndex:index];
+}
+
 - (UIColor *)colorForBarAtIndex:(NSInteger)index {
     id colors = @[[UIColor gk_turquoiseColor],
                   [UIColor gk_peterRiverColor],
@@ -76,10 +80,6 @@
                   [UIColor gk_carrotColor]
                   ];
     return [colors objectAtIndex:index];
-}
-
-- (NSNumber *)valueForBarAtIndex:(NSInteger)index {
-    return [self.data objectAtIndex:index];
 }
 
 - (CFTimeInterval)animationDurationForBarAtIndex:(NSInteger)index {

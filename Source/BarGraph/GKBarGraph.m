@@ -118,7 +118,9 @@ static CGFloat kDefaultBarMargin = 10;
             item.animationDuration = [source animationDurationForBarAtIndex:idx];
         }
         
-        item.foregroundColor = [source colorForBarAtIndex:idx];
+        if ([source respondsToSelector:@selector(colorForBarAtIndex:)]) {
+            item.foregroundColor = [source colorForBarAtIndex:idx];
+        }
         
         item.percentage = [[source valueForBarAtIndex:idx] doubleValue];
         idx++;
