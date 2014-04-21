@@ -107,9 +107,9 @@
 }
 
 - (CABasicAnimation *)_animationWithKeyPath:(NSString *)keyPath {
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    animation.duration = self.animationDuration;
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.duration = self.animationDuration;
     animation.fromValue = @(0);
     animation.toValue = @(1);
     animation.delegate = self;

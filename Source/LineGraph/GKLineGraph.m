@@ -8,24 +8,98 @@
 
 #import "GKLineGraph.h"
 
+#import <FrameAccessor/FrameAccessor.h>
+
 @implementation GKLineGraph
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        // Initialization code
+        [self _init];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self _init];
+    }
+    return self;
 }
-*/
+
+- (void)_init {
+    self.animated = YES;
+    self.animationDuration = 1;
+    self.clipsToBounds = YES;
+}
+
+- (void)draw {
+    
+    // http://stackoverflow.com/questions/19599266/invalid-context-0x0-under-ios-7-0-and-system-degradation
+    UIGraphicsBeginImageContext(self.frame.size);
+    
+    UIBezierPath *path = [self _bezierPathWith:0];
+    CAShapeLayer *layer = [self _layerWithPath:path];
+    [self.layer addSublayer:layer];
+
+    id values = @[@100, @80, @110, @140, @90, @40, @110, @120, @70];
+//    id values = @[@0, @100, @80, @180, @75, @40, @200, @260];
+    
+    CGFloat margin = 30;
+    
+    NSInteger idx = 0;
+    CGFloat step = ((self.width - (2 * margin)) / [values count]);
+    for (id item in values) {
+        
+        CGFloat x = margin + (idx * step);
+        CGFloat y = self.height - [item floatValue];
+        CGPoint point = CGPointMake(x, y);
+        
+        if (idx != 0) [path addLineToPoint:point];
+        [path moveToPoint:point];
+        
+        idx++;
+    }
+    
+    layer.path = path.CGPath;
+
+    if (self.animated) {
+        CABasicAnimation *animation = [self _animationWithKeyPath:@"strokeEnd"];
+        [layer addAnimation:animation forKey:@"strokeEndAnimation"];
+    }
+    
+    UIGraphicsEndImageContext();
+}
+
+- (UIBezierPath *)_bezierPathWith:(CGFloat)value {
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    path.lineCapStyle = kCGLineCapRound;
+    path.lineJoinStyle = kCGLineJoinRound;
+    path.lineWidth = 3.0;
+    return path;
+}
+
+- (CAShapeLayer *)_layerWithPath:(UIBezierPath *)path {
+    CAShapeLayer *item = [CAShapeLayer layer];
+    item.fillColor = [[UIColor blackColor] CGColor];
+    item.lineCap = kCALineCapRound;
+    item.lineJoin  = kCALineJoinRound;
+    item.lineWidth = 3.0; // NOTE
+//    item.strokeColor = [self.foregroundColor CGColor];
+    item.strokeColor = [[UIColor redColor] CGColor];
+    item.strokeEnd = 1;
+    return item;
+}
+
+- (CABasicAnimation *)_animationWithKeyPath:(NSString *)keyPath {
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.duration = self.animationDuration;
+    animation.fromValue = @(0);
+    animation.toValue = @(1);
+//    animation.delegate = self;
+    return animation;
+}
 
 @end

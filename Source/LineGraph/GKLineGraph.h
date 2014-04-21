@@ -10,4 +10,9 @@
 
 @interface GKLineGraph : UIView
 
+@property (nonatomic, assign) CFTimeInterval animationDuration;
+@property (nonatomic, assign) BOOL animated;
+
+- (void)draw;
+
 @end

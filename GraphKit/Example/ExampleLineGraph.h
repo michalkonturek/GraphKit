@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "GKLineGraph.h"
+
 @interface ExampleLineGraph : UIViewController
+
+@property (nonatomic, weak) IBOutlet GKLineGraph *graph;
 
 @end

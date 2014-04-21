@@ -10,6 +10,7 @@
 
 #import "ExampleBarVC.h"
 #import "ExampleBarGraphVC.h"
+#import "ExampleLineGraph.h"
 
 //NS_ENUM(NSInteger, <#_name#>)
 
@@ -24,7 +25,7 @@
     
     self.title = @"GraphKit";
     
-    self.data = @[@"Bar", @"Bar Graph"];
+    self.data = @[@"Bar", @"Bar Graph", @"Line Graph"];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellID"];
     
@@ -50,6 +51,9 @@
         case 1:
             vc = [[ExampleBarGraphVC alloc] initWithNibName:@"ExampleBarGraphVC" bundle:nil];
             break;
+        case 2:
+            vc = [[ExampleLineGraph alloc] initWithNibName:@"ExampleLineGraph" bundle:nil];
+            break;
         default:
             break;
     }
@@ -59,7 +63,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return [self.data count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
