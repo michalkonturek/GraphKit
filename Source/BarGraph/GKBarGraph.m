@@ -1,12 +1,12 @@
 //
-//  BarGraphView.m
+//  GKBarGraph.m
 //  GraphKit
 //
 //  Created by Michal Konturek on 16/04/2014.
 //  Copyright (c) 2014 Michal Konturek. All rights reserved.
 //
 
-#import "BarGraphView.h"
+#import "GKBarGraph.h"
 
 #import <FrameAccessor/FrameAccessor.h>
 #import <MKFoundationKit/NSArray+MK.h>
@@ -17,7 +17,7 @@ static CGFloat kDefaultBarHeight = 100;
 static CGFloat kDefaultBarWidth = 20;
 static CGFloat kDefaultBarMargin = 10;
 
-@implementation BarGraphView
+@implementation GKBarGraph
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];

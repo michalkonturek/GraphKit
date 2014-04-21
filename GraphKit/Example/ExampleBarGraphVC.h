@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "BarGraphView.h"
+#import "GKBarGraph.h"
 
 @interface ExampleBarGraphVC : UIViewController
 
-@property (nonatomic, weak) IBOutlet BarGraphView *graphView;
+@property (nonatomic, weak) IBOutlet GKBarGraph *graphView;
 
 - (IBAction)onButtonFill:(id)sender;
 

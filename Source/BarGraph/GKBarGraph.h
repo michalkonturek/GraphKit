@@ -1,5 +1,5 @@
 //
-//  BarGraphView.h
+//  GKBarGraph.h
 //  GraphKit
 //
 //  Created by Michal Konturek on 16/04/2014.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BarGraphView : UIView
+@interface GKBarGraph : UIView
 
 @property (nonatomic, assign) id dataSource;
 
