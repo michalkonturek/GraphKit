@@ -25,7 +25,7 @@
     
     self.view.backgroundColor = [UIColor gk_cloudsColor];
     
-    self.data = @[@30, @10, @40, @60, @50, @75];
+    self.data = @[@65, @10, @40, @90, @50, @75];
     
 //    self.graphView.barWidth = 22;
 //    self.graphView.barHeight = 140;
@@ -72,7 +72,7 @@
                   [UIColor gk_alizarinColor],
                   [UIColor gk_amethystColor],
                   [UIColor gk_emerlandColor],
-                  [UIColor gk_carrotColor]
+                  [UIColor gk_sunflowerColor]
                   ];
     return [colors objectAtIndex:index];
 }
