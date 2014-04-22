@@ -20,11 +20,9 @@
     self.view.backgroundColor = [UIColor gk_cloudsColor];
 
     self.data = @[
-//                  @[@20, @40, @20, @60, @40, @60, @80, @50, @20, @40],
-//                  @[@40, @20, @60, @100, @60, @20, @60, @80, @40, @20]
-                  @[@20, @40, @20, @60, @40, @60, @80, @50],
-                  @[@40, @20, @60, @100, @60, @20, @60, @80],
-                  @[@80, @60, @40, @80, @100, @70, @90, @120]
+                  @[@20, @40, @20, @60, @40, @180, @80, @50],
+                  @[@40, @20, @60, @100, @60, @20, @60, @10],
+                  @[@80, @60, @40, @160, @100, @40, @110, @80]
                   ];
     
     self.graph.dataSource = self;
@@ -55,6 +53,5 @@
 - (CFTimeInterval)animationDurationForLineAtIndex:(NSInteger)index {
     return [[@[@1, @1.4, @1.8] objectAtIndex:index] doubleValue];
 }
-
 
 @end
