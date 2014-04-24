@@ -36,7 +36,7 @@ static CGFloat kDefaultBarMargin = 10;
 }
 
 - (void)_init {
-    self.backgroundColor = [UIColor clearColor];
+//    self.backgroundColor = [UIColor clearColor];
     self.barHeight = kDefaultBarHeight;
     self.barWidth = kDefaultBarWidth;
     self.marginBar = kDefaultBarMargin;
@@ -72,6 +72,8 @@ static CGFloat kDefaultBarMargin = 10;
     
     [self _construct];
     [self _layoutBars];
+    [self _layoutLabels];
+    
     return self;
 }
 
@@ -111,10 +113,34 @@ static CGFloat kDefaultBarMargin = 10;
 
 - (void)_layoutLabels {
 
+    __block NSInteger idx = 0;
     [self.bars mk_each:^(GKBar *item) {
         
+        CGFloat labelWidth = 40;
+        CGFloat startX = item.x - ((labelWidth - item.width) / 2);
+        
+        CGRect frame = CGRectMake(startX, [self _startLabelY], labelWidth, [self _labelHeight]);
+        UILabel *label = [[UILabel alloc] initWithFrame:frame];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont boldSystemFontOfSize:13];
+        label.textColor = [UIColor lightGrayColor];
+        label.text = [self.dataSource titleForBarAtIndex:idx];
+        
+        [self addSubview:label];
+        
+        item.y -= [self _labelHeight] + 5;
+        idx++;
     }];
     
+}
+
+- (CGFloat)_startLabelY {
+    return (self.height - [self _labelHeight]);
+}
+
+- (CGFloat)_labelHeight {
+    return 15;
+
 }
 
 - (instancetype)draw {
