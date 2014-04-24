@@ -57,6 +57,7 @@
     [self.graphView reset];
 }
 
+
 #pragma mark - GKBarGraphDataSource
 
 - (NSInteger)numberOfBars {
@@ -82,6 +83,11 @@
     CGFloat percentage = [[self valueForBarAtIndex:index] doubleValue];
     percentage = (percentage / 100);
     return (self.graphView.animationDuration * percentage);
+}
+
+- (NSString *)titleForBarAtIndex:(NSInteger)index {
+    id titles = @[@"US", @"UK", @"DE", @"PL", @"CN", @"JP"];
+    return [titles objectAtIndex:index];
 }
 
 @end

@@ -109,6 +109,14 @@ static CGFloat kDefaultBarMargin = 10;
     }];
 }
 
+- (void)_layoutLabels {
+
+    [self.bars mk_each:^(GKBar *item) {
+        
+    }];
+    
+}
+
 - (instancetype)draw {
     __block NSInteger idx = 0;
     id source = self.dataSource;
