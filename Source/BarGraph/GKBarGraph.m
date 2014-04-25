@@ -15,7 +15,7 @@
 
 static CGFloat kDefaultBarHeight = 140;
 static CGFloat kDefaultBarWidth = 22;
-static CGFloat kDefaultBarMargin = 10;
+static CGFloat kDefaultBarMargin = 20;
 
 @implementation GKBarGraph
 
@@ -117,9 +117,11 @@ static CGFloat kDefaultBarMargin = 10;
     [self.bars mk_each:^(GKBar *item) {
         
         CGFloat labelWidth = 40;
+        CGFloat labelHeight = 15;
         CGFloat startX = item.x - ((labelWidth - item.width) / 2);
+        CGFloat startY = (self.height - labelHeight);
         
-        CGRect frame = CGRectMake(startX, [self _startLabelY], labelWidth, [self _labelHeight]);
+        CGRect frame = CGRectMake(startX, startY, labelWidth, labelHeight);
         UILabel *label = [[UILabel alloc] initWithFrame:frame];
         label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont boldSystemFontOfSize:13];
@@ -128,20 +130,19 @@ static CGFloat kDefaultBarMargin = 10;
         
         [self addSubview:label];
         
-        item.y -= [self _labelHeight] + 5;
+        item.y -= labelHeight + 5;
         idx++;
     }];
     
 }
 
-- (CGFloat)_startLabelY {
-    return (self.height - [self _labelHeight]);
-}
+//- (CGFloat)_startLabelY {
+//    return (self.height - [self _labelHeight]);
+//}
 
-- (CGFloat)_labelHeight {
-    return 15;
-
-}
+//- (CGFloat)_labelHeight {
+//    return 15;
+//}
 
 - (instancetype)draw {
     __block NSInteger idx = 0;

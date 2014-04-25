@@ -12,18 +12,17 @@
 
 @interface GKBarGraph : UIView
 
-@property (nonatomic, strong) NSArray *bars;
-
-@property (nonatomic, assign) CGFloat barHeight;
-@property (nonatomic, assign) CGFloat barWidth;
-@property (nonatomic, assign) CGFloat marginBar;
-
-@property (nonatomic, strong) UIColor *barColor;
-
 @property (nonatomic, assign) BOOL animated;
 @property (nonatomic, assign) CFTimeInterval animationDuration;
 
 @property (nonatomic, assign) id<GKBarGraphDataSource> dataSource;
+
+@property (nonatomic, strong) NSArray *bars;
+@property (nonatomic, strong) UIColor *barColor;
+
+@property (nonatomic, assign) CGFloat barHeight;
+@property (nonatomic, assign) CGFloat barWidth;
+@property (nonatomic, assign) CGFloat marginBar;
 
 - (instancetype)redraw;
 - (instancetype)construct;

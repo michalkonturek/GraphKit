@@ -30,7 +30,7 @@
     
 //    self.graphView.barWidth = 22;
 //    self.graphView.barHeight = 140;
-    self.graphView.marginBar = 20;
+//    self.graphView.marginBar = 25;
     self.graphView.dataSource = self;
     
     [self.graphView construct];

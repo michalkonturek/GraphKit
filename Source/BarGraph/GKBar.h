@@ -13,13 +13,13 @@
 + (instancetype)create;
 + (instancetype)createWithFrame:(CGRect)frame;
 
-@property (nonatomic, assign) CGFloat cornerRadius;
-@property (nonatomic, strong) UIColor *foregroundColor;
+@property (nonatomic, assign) BOOL animated;
+@property (nonatomic, assign) CFTimeInterval animationDuration;
 
 @property (nonatomic, assign) CGFloat percentage;
 
-@property (nonatomic, assign) BOOL animated;
-@property (nonatomic, assign) CFTimeInterval animationDuration;
+@property (nonatomic, assign) CGFloat cornerRadius;
+@property (nonatomic, strong) UIColor *foregroundColor;
 
 - (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated;
 
