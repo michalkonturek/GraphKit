@@ -73,8 +73,8 @@ static CGFloat kDefaultLabelHeight = 15;
     NSAssert(self.dataSource, @"GKBarGraph : No data source is assgined.");
     
     [self _construct];
-    [self _layoutBars];
-    [self _layoutLabels];
+    [self _positionBars];
+    [self _positionLabels];
     
     return self;
 }
@@ -108,7 +108,7 @@ static CGFloat kDefaultLabelHeight = 15;
     }];
 }
 
-- (void)_layoutBars {
+- (void)_positionBars {
     CGFloat y = [self _barStartY];
     
     __block CGFloat x = [self _barStartX];
@@ -165,7 +165,7 @@ static CGFloat kDefaultLabelHeight = 15;
     }];
 }
 
-- (void)_layoutLabels {
+- (void)_positionLabels {
 
     __block NSInteger idx = 0;
     [self.bars mk_each:^(GKBar *bar) {

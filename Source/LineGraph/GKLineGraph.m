@@ -49,7 +49,7 @@ static CGFloat kAxisMargin = 40.0;
     
     if ([self _hasTitleLabels]) [self _removeTitleLabels];
     [self _constructTitleLabels];
-    [self _layoutTitleLabels];
+    [self _positionTitleLabels];
     
     [self _drawLines];
 }
@@ -80,9 +80,10 @@ static CGFloat kAxisMargin = 40.0;
     [self.titleLabels mk_each:^(id item) {
         [item removeFromSuperview];
     }];
+    self.titleLabels = nil;
 }
 
-- (void)_layoutTitleLabels {
+- (void)_positionTitleLabels {
     
     __block NSInteger idx = 0;
     id values = [self.dataSource valuesForLineAtIndex:0];
@@ -113,12 +114,14 @@ static CGFloat kAxisMargin = 40.0;
     return step;
 }
 
+
+
 - (CGFloat)_plotWidth {
     return (self.width - (2 * self.margin) - kAxisMargin);
 }
 
 - (void)_drawLines {
-    for (NSInteger idx; idx < [self.dataSource numberOfLines]; idx++) {
+    for (NSInteger idx = 0; idx < [self.dataSource numberOfLines]; idx++) {
         [self _drawLineAtIndex:idx];
     }
 }
@@ -140,7 +143,6 @@ static CGFloat kAxisMargin = 40.0;
     for (id item in values) {
 
         CGFloat x = [self _pointXForIndex:idx];
-//        CGFloat y = self.height - [item floatValue];
         CGFloat y = [self _positionYForLineValue:[item floatValue]];
         CGPoint point = CGPointMake(x, y);
         
@@ -197,6 +199,11 @@ static CGFloat kAxisMargin = 40.0;
     animation.toValue = @(1);
 //    animation.delegate = self;
     return animation;
+}
+
+- (void)reset {
+    self.layer.sublayers = nil;
+    [self _removeTitleLabels];
 }
 
 @end

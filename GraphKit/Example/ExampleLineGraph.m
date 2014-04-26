@@ -21,7 +21,7 @@
     self.view.backgroundColor = [UIColor gk_cloudsColor];
 
     self.data = @[
-                  @[@20, @40, @20, @60, @40, @180, @80],
+                  @[@20, @40, @20, @60, @40, @140, @80],
                   @[@40, @20, @60, @100, @60, @20, @60],
                   @[@80, @60, @40, @160, @100, @40, @110]
                   ];
@@ -36,6 +36,19 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+
+#pragma mark -
+
+- (IBAction)onButtonDraw:(id)sender {
+    [self.graph reset];
+    [self.graph draw];
+}
+
+- (IBAction)onButtonReset:(id)sender {
+    [self.graph reset];    
+}
+
 
 #pragma mark - GKLineGraphDataSource
 

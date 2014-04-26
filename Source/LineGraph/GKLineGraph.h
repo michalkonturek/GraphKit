@@ -25,6 +25,7 @@
 @property (nonatomic, assign) CGFloat margin;
 
 - (void)draw;
+- (void)reset;
 
 @end
 
