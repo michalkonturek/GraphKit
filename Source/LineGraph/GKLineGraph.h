@@ -19,6 +19,11 @@
 
 @property (nonatomic, assign) CGFloat lineWidth;
 
+@property (nonatomic, strong) NSArray *titleLabels;
+@property (nonatomic, strong) NSArray *valueLabels;
+
+@property (nonatomic, assign) CGFloat margin;
+
 - (void)draw;
 
 @end
@@ -31,5 +36,7 @@
 
 @optional
 - (CFTimeInterval)animationDurationForLineAtIndex:(NSInteger)index;
+
+- (NSString *)titleForLineAtIndex:(NSInteger)index;
 
 @end

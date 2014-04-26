@@ -40,6 +40,7 @@
 @optional
 - (UIColor *)colorForBarAtIndex:(NSInteger)index;
 - (CFTimeInterval)animationDurationForBarAtIndex:(NSInteger)index;
+
 - (NSString *)titleForBarAtIndex:(NSInteger)index;
 
 @end

@@ -9,6 +9,13 @@
 #import "GKLineGraph.h"
 
 #import <FrameAccessor/FrameAccessor.h>
+#import <MKFoundationKit/NSArray+MK.h>
+
+static CGFloat kDefaultLabelWidth = 40;
+static CGFloat kDefaultLabelHeight = 15;
+static CGFloat kDefaultMargin = 20;
+
+static CGFloat kAxisMargin = 40;
 
 @implementation GKLineGraph
 
@@ -32,6 +39,7 @@
     self.animated = YES;
     self.animationDuration = 1;
     self.lineWidth = 3.0;
+    self.margin = kDefaultMargin;
     self.clipsToBounds = YES;
 }
 
@@ -39,6 +47,65 @@
     NSAssert(self.dataSource, @"GKLineGraph : No data source is assgined.");
     
     [self _drawLines];
+}
+
+- (BOOL)_hasTitleLabels {
+    return ![self.titleLabels mk_isEmpty];
+}
+
+- (void)_constructTitleLabels {
+    
+    NSInteger count = [self.dataSource numberOfLines];
+    id items = [NSMutableArray arrayWithCapacity:count];
+    for (NSInteger idx = 0; idx < count; idx++) {
+        
+        CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
+        UILabel *item = [[UILabel alloc] initWithFrame:frame];
+        item.textAlignment = NSTextAlignmentCenter;
+        item.font = [UIFont boldSystemFontOfSize:13];
+        item.textColor = [UIColor lightGrayColor];
+        item.text = [self.dataSource titleForLineAtIndex:idx];
+        
+        [items addObject:item];
+    }
+    self.titleLabels = items;
+}
+
+- (void)_removeTitleLabels {
+    [self.titleLabels mk_each:^(id item) {
+        [item removeFromSuperview];
+    }];
+}
+
+- (void)_layoutTitleLabels {
+    
+    __block NSInteger idx = 0;
+    id values = [self.dataSource valuesForLineAtIndex:0];
+    [values mk_each:^(id value) {
+        
+        CGFloat labelWidth = kDefaultLabelWidth;
+        CGFloat labelHeight = kDefaultLabelHeight;
+//        CGFloat startX = bar.x - (labelWidth / 2);
+//        CGFloat startY = (self.height - labelHeight);
+//        
+//        UILabel *label = [self.titleLabels objectAtIndex:idx];
+//        label.x = startX;
+//        label.y = startY;
+//        
+//        [self addSubview:label];
+
+        idx++;
+    }];
+}
+
+- (CGFloat)_stepX {
+    id values = [self.dataSource valuesForLineAtIndex:0];
+    CGFloat step = ([self _plotWidth] / [values count]);
+    return step;
+}
+
+- (CGFloat)_plotWidth {
+    return (self.width - (2 * self.margin) - kAxisMargin);
 }
 
 - (void)_drawLines {
@@ -59,16 +126,16 @@
     
     [self.layer addSublayer:layer];
     
-    id values = [self.dataSource valuesForLineAtIndex:index];
-    
-    CGFloat margin = 20;
-    CGFloat axisMargin = 20;
+//    CGFloat margin = self.margin;
+//    CGFloat axisMargin = kAxisMargin;
     
     NSInteger idx = 0;
-    CGFloat step = ((self.width - (2 * margin)) / [values count]);
+    id values = [self.dataSource valuesForLineAtIndex:index];
+//    CGFloat step = ((self.width - (2 * margin) - axisMargin) / [values count]);
+    CGFloat step = [self _stepX];
     for (id item in values) {
         
-        CGFloat x = axisMargin + margin + (idx * step);
+        CGFloat x = kAxisMargin + self.margin + (idx * step);
         CGFloat y = self.height - [item floatValue];
         CGPoint point = CGPointMake(x, y);
         

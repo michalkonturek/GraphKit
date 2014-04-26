@@ -25,6 +25,7 @@
                   @[@40, @20, @60, @100, @60, @20, @60, @10],
                   @[@80, @60, @40, @160, @100, @40, @110, @80]
                   ];
+    self.labels = @[@"2001", @"2002", @"2003", @"2004", @"2005", @"2006", @"2007", @"2008"];
     
     self.graph.dataSource = self;
     self.graph.lineWidth = 4.0;
@@ -53,6 +54,10 @@
 
 - (CFTimeInterval)animationDurationForLineAtIndex:(NSInteger)index {
     return [[@[@1, @1.4, @1.8] objectAtIndex:index] doubleValue];
+}
+
+- (NSString *)labelsForLineAtIndex:(NSInteger)index {
+    return [self.data objectAtIndex:index];
 }
 
 @end

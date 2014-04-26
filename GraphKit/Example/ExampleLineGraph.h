@@ -15,5 +15,6 @@
 @property (nonatomic, weak) IBOutlet GKLineGraph *graph;
 
 @property (nonatomic, strong) NSArray *data;
+@property (nonatomic, strong) NSArray *labels;
 
 @end
