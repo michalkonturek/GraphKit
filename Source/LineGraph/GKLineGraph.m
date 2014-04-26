@@ -11,11 +11,12 @@
 #import <FrameAccessor/FrameAccessor.h>
 #import <MKFoundationKit/NSArray+MK.h>
 
-static CGFloat kDefaultLabelWidth = 40;
-static CGFloat kDefaultLabelHeight = 15;
-static CGFloat kDefaultMargin = 10;
+static CGFloat kDefaultLabelWidth = 40.0;
+static CGFloat kDefaultLabelHeight = 15.0;
+static CGFloat kDefaultLineWidth = 3.0;
+static CGFloat kDefaultMargin = 10.0;
 
-static CGFloat kAxisMargin = 40;
+static CGFloat kAxisMargin = 40.0;
 
 @implementation GKLineGraph
 
@@ -38,7 +39,7 @@ static CGFloat kAxisMargin = 40;
 - (void)_init {
     self.animated = YES;
     self.animationDuration = 1;
-    self.lineWidth = 3.0;
+    self.lineWidth = kDefaultLineWidth;
     self.margin = kDefaultMargin;
     self.clipsToBounds = YES;
 }
@@ -134,18 +135,13 @@ static CGFloat kAxisMargin = 40;
     
     [self.layer addSublayer:layer];
     
-//    CGFloat margin = self.margin;
-//    CGFloat axisMargin = kAxisMargin;
-    
     NSInteger idx = 0;
     id values = [self.dataSource valuesForLineAtIndex:index];
-//    CGFloat step = ((self.width - (2 * margin) - axisMargin) / [values count]);
-//    CGFloat step = [self _stepX];
     for (id item in values) {
-        
-//        CGFloat x = kAxisMargin + self.margin + (idx * step);
+
         CGFloat x = [self _pointXForIndex:idx];
-        CGFloat y = self.height - [item floatValue];
+//        CGFloat y = self.height - [item floatValue];
+        CGFloat y = [self _positionYForLineValue:[item floatValue]];
         CGPoint point = CGPointMake(x, y);
         
         if (idx != 0) [path addLineToPoint:point];
@@ -165,6 +161,12 @@ static CGFloat kAxisMargin = 40;
     }
     
     UIGraphicsEndImageContext();
+}
+
+- (CGFloat)_positionYForLineValue:(CGFloat)value {
+    CGFloat result = (self.height -  value);
+    result -= kDefaultLabelHeight + 5;
+    return result;
 }
 
 - (UIBezierPath *)_bezierPathWith:(CGFloat)value {

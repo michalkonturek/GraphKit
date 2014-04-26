@@ -28,7 +28,7 @@
     self.labels = @[@"2001", @"2002", @"2003", @"2004", @"2005", @"2006", @"2007"];
     
     self.graph.dataSource = self;
-    self.graph.lineWidth = 4.0;
+    self.graph.lineWidth = 3.0;
     
     [self.graph draw];
 }
