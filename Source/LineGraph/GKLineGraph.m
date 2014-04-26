@@ -13,7 +13,7 @@
 
 static CGFloat kDefaultLabelWidth = 40;
 static CGFloat kDefaultLabelHeight = 15;
-static CGFloat kDefaultMargin = 20;
+static CGFloat kDefaultMargin = 10;
 
 static CGFloat kAxisMargin = 40;
 
@@ -46,6 +46,10 @@ static CGFloat kAxisMargin = 40;
 - (void)draw {
     NSAssert(self.dataSource, @"GKLineGraph : No data source is assgined.");
     
+    if ([self _hasTitleLabels]) [self _removeTitleLabels];
+    [self _constructTitleLabels];
+    [self _layoutTitleLabels];
+    
     [self _drawLines];
 }
 
@@ -55,14 +59,14 @@ static CGFloat kAxisMargin = 40;
 
 - (void)_constructTitleLabels {
     
-    NSInteger count = [self.dataSource numberOfLines];
+    NSInteger count = [[self.dataSource valuesForLineAtIndex:0] count];
     id items = [NSMutableArray arrayWithCapacity:count];
     for (NSInteger idx = 0; idx < count; idx++) {
         
         CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
         item.textAlignment = NSTextAlignmentCenter;
-        item.font = [UIFont boldSystemFontOfSize:13];
+        item.font = [UIFont boldSystemFontOfSize:12];
         item.textColor = [UIColor lightGrayColor];
         item.text = [self.dataSource titleForLineAtIndex:idx];
         
@@ -85,17 +89,21 @@ static CGFloat kAxisMargin = 40;
         
         CGFloat labelWidth = kDefaultLabelWidth;
         CGFloat labelHeight = kDefaultLabelHeight;
-//        CGFloat startX = bar.x - (labelWidth / 2);
-//        CGFloat startY = (self.height - labelHeight);
-//        
-//        UILabel *label = [self.titleLabels objectAtIndex:idx];
-//        label.x = startX;
-//        label.y = startY;
-//        
-//        [self addSubview:label];
+        CGFloat startX = [self _pointXForIndex:idx] - (labelWidth / 2);
+        CGFloat startY = (self.height - labelHeight);
+        
+        UILabel *label = [self.titleLabels objectAtIndex:idx];
+        label.x = startX;
+        label.y = startY;
+        
+        [self addSubview:label];
 
         idx++;
     }];
+}
+
+- (CGFloat)_pointXForIndex:(NSInteger)index {
+    return kAxisMargin + self.margin + (index * [self _stepX]);
 }
 
 - (CGFloat)_stepX {
@@ -132,10 +140,11 @@ static CGFloat kAxisMargin = 40;
     NSInteger idx = 0;
     id values = [self.dataSource valuesForLineAtIndex:index];
 //    CGFloat step = ((self.width - (2 * margin) - axisMargin) / [values count]);
-    CGFloat step = [self _stepX];
+//    CGFloat step = [self _stepX];
     for (id item in values) {
         
-        CGFloat x = kAxisMargin + self.margin + (idx * step);
+//        CGFloat x = kAxisMargin + self.margin + (idx * step);
+        CGFloat x = [self _pointXForIndex:idx];
         CGFloat y = self.height - [item floatValue];
         CGPoint point = CGPointMake(x, y);
         

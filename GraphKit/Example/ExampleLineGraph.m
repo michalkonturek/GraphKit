@@ -56,8 +56,8 @@
     return [[@[@1, @1.4, @1.8] objectAtIndex:index] doubleValue];
 }
 
-- (NSString *)labelsForLineAtIndex:(NSInteger)index {
-    return [self.data objectAtIndex:index];
+- (NSString *)titleForLineAtIndex:(NSInteger)index {
+    return [self.labels objectAtIndex:index];
 }
 
 @end
