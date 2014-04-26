@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet GKBarGraph *graphView;
 
 @property (nonatomic, strong) NSArray *data;
+@property (nonatomic, strong) NSArray *labels;
 
 - (IBAction)onButtonFill:(id)sender;
 

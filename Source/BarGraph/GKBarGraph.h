@@ -18,6 +18,7 @@
 @property (nonatomic, assign) id<GKBarGraphDataSource> dataSource;
 
 @property (nonatomic, strong) NSArray *bars;
+@property (nonatomic, strong) NSArray *labels;
 @property (nonatomic, strong) UIColor *barColor;
 
 @property (nonatomic, assign) CGFloat barHeight;

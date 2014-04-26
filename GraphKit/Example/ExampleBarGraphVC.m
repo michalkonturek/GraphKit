@@ -27,6 +27,7 @@
     self.view.backgroundColor = [UIColor gk_cloudsColor];
     
     self.data = @[@65, @10, @40, @90, @50, @75];
+    self.labels = @[@"US", @"UK", @"DE", @"PL", @"CN", @"JP"];
     
 //    self.graphView.barWidth = 22;
 //    self.graphView.barHeight = 140;
@@ -86,8 +87,7 @@
 }
 
 - (NSString *)titleForBarAtIndex:(NSInteger)index {
-    id titles = @[@"US", @"UK", @"DE", @"PL", @"CN", @"JP"];
-    return [titles objectAtIndex:index];
+    return [self.labels objectAtIndex:index];
 }
 
 @end

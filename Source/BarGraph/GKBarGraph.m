@@ -16,6 +16,8 @@
 static CGFloat kDefaultBarHeight = 140;
 static CGFloat kDefaultBarWidth = 22;
 static CGFloat kDefaultBarMargin = 20;
+static CGFloat kDefaultLabelWidth = 40;
+static CGFloat kDefaultLabelHeight = 15;
 
 @implementation GKBarGraph
 
@@ -31,12 +33,12 @@ static CGFloat kDefaultBarMargin = 20;
     self = [super initWithFrame:frame];
     if (self) {
         [self _init];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
 
 - (void)_init {
-//    self.backgroundColor = [UIColor clearColor];
     self.barHeight = kDefaultBarHeight;
     self.barWidth = kDefaultBarWidth;
     self.marginBar = kDefaultBarMargin;
@@ -78,8 +80,15 @@ static CGFloat kDefaultBarMargin = 20;
 }
 
 - (void)_construct {
-    if (![self.bars mk_isEmpty]) [self _deconstructBars];
+    if ([self _hasBars]) [self _removeBars];
+    if ([self _hasLabels]) [self _removeLabels];
+    
     [self _constructBars];
+    [self _constructLabels];
+}
+
+- (BOOL)_hasBars {
+    return ![self.bars mk_isEmpty];
 }
 
 - (void)_constructBars {
@@ -89,21 +98,20 @@ static CGFloat kDefaultBarMargin = 20;
         GKBar *item = [GKBar create];
         if ([self barColor]) item.foregroundColor = [self barColor];
         [items addObject:item];
-//        [self addSubview:item];
     }
     self.bars = items;
 }
 
-- (void)_deconstructBars {
+- (void)_removeBars {
     [self.bars mk_each:^(id item) {
         [item removeFromSuperview];
     }];
 }
 
 - (void)_layoutBars {
-    CGFloat y = [self _startY];
+    CGFloat y = [self _barStartY];
     
-    __block CGFloat x = [self _startX];
+    __block CGFloat x = [self _barStartX];
     [self.bars mk_each:^(GKBar *item) {
         item.frame = CGRectMake(x, y, _barWidth, _barHeight);
         [self addSubview:item];
@@ -111,38 +119,72 @@ static CGFloat kDefaultBarMargin = 20;
     }];
 }
 
+- (CGFloat)_barStartX {
+    CGFloat result = self.width;
+    CGFloat item = [self _barSpace];
+    NSInteger count = [self.dataSource numberOfBars];
+    
+    result = result - (item * count) + self.marginBar;
+    result = (result / 2);
+    return result;
+}
+
+- (CGFloat)_barSpace {
+    return (self.barWidth + self.marginBar);
+}
+
+- (CGFloat)_barStartY {
+    return (self.height - self.barHeight);
+}
+
+- (BOOL)_hasLabels {
+    return ![self.labels mk_isEmpty];
+}
+
+- (void)_constructLabels {
+    
+    NSInteger count = [self.dataSource numberOfBars];
+    id items = [NSMutableArray arrayWithCapacity:count];
+    for (NSInteger idx = 0; idx < count; idx++) {
+        
+        CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
+        UILabel *item = [[UILabel alloc] initWithFrame:frame];
+        item.textAlignment = NSTextAlignmentCenter;
+        item.font = [UIFont boldSystemFontOfSize:13];
+        item.textColor = [UIColor lightGrayColor];
+        item.text = [self.dataSource titleForBarAtIndex:idx];
+        
+        [items addObject:item];
+    }
+    self.labels = items;
+}
+
+- (void)_removeLabels {
+    [self.labels mk_each:^(id item) {
+        [item removeFromSuperview];
+    }];
+}
+
 - (void)_layoutLabels {
 
     __block NSInteger idx = 0;
-    [self.bars mk_each:^(GKBar *item) {
+    [self.bars mk_each:^(GKBar *bar) {
         
-        CGFloat labelWidth = 40;
-        CGFloat labelHeight = 15;
-        CGFloat startX = item.x - ((labelWidth - item.width) / 2);
+        CGFloat labelWidth = kDefaultLabelWidth;
+        CGFloat labelHeight = kDefaultLabelHeight;
+        CGFloat startX = bar.x - ((labelWidth - self.barWidth) / 2);
         CGFloat startY = (self.height - labelHeight);
         
-        CGRect frame = CGRectMake(startX, startY, labelWidth, labelHeight);
-        UILabel *label = [[UILabel alloc] initWithFrame:frame];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont boldSystemFontOfSize:13];
-        label.textColor = [UIColor lightGrayColor];
-        label.text = [self.dataSource titleForBarAtIndex:idx];
+        UILabel *label = [self.labels objectAtIndex:idx];
+        label.x = startX;
+        label.y = startY;
         
         [self addSubview:label];
         
-        item.y -= labelHeight + 5;
+        bar.y -= labelHeight + 5;
         idx++;
     }];
-    
 }
-
-//- (CGFloat)_startLabelY {
-//    return (self.height - [self _labelHeight]);
-//}
-
-//- (CGFloat)_labelHeight {
-//    return 15;
-//}
 
 - (instancetype)draw {
     __block NSInteger idx = 0;
@@ -161,24 +203,6 @@ static CGFloat kDefaultBarMargin = 20;
         idx++;
     }];
     return self;
-}
-
-- (CGFloat)_startX {
-    CGFloat result = self.width;
-    CGFloat item = [self _barSpace];
-    NSInteger count = [self.dataSource numberOfBars];
-    
-    result = result - (item * count) + self.marginBar;
-    result = (result / 2);
-    return result;
-}
-
-- (CGFloat)_barSpace {
-    return (self.barWidth + self.marginBar);
-}
-
-- (CGFloat)_startY {
-    return (self.height - self.barHeight);
 }
 
 - (instancetype)reset {
