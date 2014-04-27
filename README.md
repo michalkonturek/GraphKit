@@ -23,20 +23,20 @@ Source code of this project is available under the standard MIT license. Please 
 
 Initialize `GKBarGraph` from nib or programmatically:
 
-```
+```objc
 CGRect frame = CGRectMake(0, 40, 320, 200);
 self.graphView = [[GKBarGraph alloc] initWithFrame:frame];
 ```
 
 then set `GKGraphViewDataSource` 
 
-```
+```objc
 self.graphView.dataSource = self;
 ```
 
 and call `draw` method.
 
-```
+```objc
 [self.graphView draw];
 ```
 
@@ -48,7 +48,7 @@ Please see [example][BAR].
 
 #### `GKBarGraphDataSource` Protocol
 
-```
+```objc
 @required
 - (NSInteger)numberOfBars;
 - (NSNumber *)valueForBarAtIndex:(NSInteger)index;
@@ -64,7 +64,7 @@ Please see [example][BAR].
 
 ![Build Platform](images/line-graph.png)
 
-```
+```objc
 CGRect frame = CGRectMake(0, 40, 320, 200);
 self.graphView = [[GKLineGraph alloc] initWithFrame:frame];
 
@@ -81,7 +81,7 @@ Please see [example][LINE].
 
 #### `GKLineGraphDataSource` Protocol
 
-```
+```objc
 @required
 - (NSInteger)numberOfLines;
 - (UIColor *)colorForLineAtIndex:(NSInteger)index;
