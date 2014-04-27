@@ -1,8 +1,10 @@
 # GraphKit
 
-[![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)](https://github.com/michalkonturek/GraphKit/blob/master/LICENSE)
-[![Build Platform](https://cocoapod-badges.herokuapp.com/p/GraphKit/badge.png)](https://github.com/michalkonturek/GraphKit)
-[![Build Version](https://cocoapod-badges.herokuapp.com/v/GraphKit/badge.png)](https://github.com/michalkonturek/GraphKit)
+[![License MIT](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/michalkonturek/GraphKit/blob/master/LICENSE)
+[![CocoaPods](https://img.shields.io/cocoapods/v/GraphKit.svg?style=flat)](https://github.com/michalkonturek/GraphKit)
+[![License MIT](http://img.shields.io/badge/twitter-@MichalKonturek-blue.svg?style=flat)](http://twitter.com/michalkonturek)
+
+
 
 A lightweight library of animated charts for iOS.
 
@@ -13,6 +15,14 @@ Source code of this project is available under the standard MIT license. Please 
 
 [PODS]:http://cocoapods.org/
 [LICENSE]:https://github.com/michalkonturek/GraphKit/blob/master/LICENSE
+
+
+## Contact
+
+[Michal Konturek][me-gh] [@michalkonturek][me-tw]
+
+[me-gh]:https://github.com/michalkonturek
+[me-tw]:http://twitter.com/micalkonturek
 
 
 ## Usage
@@ -92,5 +102,5 @@ Please see [example][LINE].
 - (NSString *)titleForLineAtIndex:(NSInteger)index;
 ```
 
-[@MichalKonturek](https://twitter.com/MichalKonturek)
+<!--[@MichalKonturek](https://twitter.com/MichalKonturek)-->
 
