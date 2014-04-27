@@ -27,7 +27,8 @@
     self.data = @[
                   @[@20, @40, @20, @60, @40, @140, @80],
                   @[@40, @20, @60, @100, @60, @20, @60],
-                  @[@80, @60, @40, @160, @100, @40, @110]
+                  @[@80, @60, @40, @160, @100, @40, @110],
+                  @[@120, @150, @80, @120, @140, @100, @0]
                   ];
     self.labels = @[@"2001", @"2002", @"2003", @"2004", @"2005", @"2006", @"2007"];
     
@@ -61,7 +62,11 @@
 }
 
 - (UIColor *)colorForLineAtIndex:(NSInteger)index {
-    id colors = @[[UIColor gk_turquoiseColor], [UIColor gk_peterRiverColor], [UIColor gk_alizarinColor]];
+    id colors = @[[UIColor gk_turquoiseColor],
+                  [UIColor gk_peterRiverColor],
+                  [UIColor gk_alizarinColor],
+                  [UIColor gk_sunflowerColor]
+                  ];
     return [colors objectAtIndex:index];
 }
 
@@ -70,7 +75,7 @@
 }
 
 - (CFTimeInterval)animationDurationForLineAtIndex:(NSInteger)index {
-    return [[@[@1, @1.6, @2.2] objectAtIndex:index] doubleValue];
+    return [[@[@1, @1.6, @2.2, @1.4] objectAtIndex:index] doubleValue];
 }
 
 - (NSString *)titleForLineAtIndex:(NSInteger)index {

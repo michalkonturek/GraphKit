@@ -17,6 +17,7 @@ static NSInteger kDefaultValueLabelCount = 5;
 
 static CGFloat kDefaultLineWidth = 3.0;
 static CGFloat kDefaultMargin = 10.0;
+static CGFloat kDefaultMarginBottom = 10.0;
 
 static CGFloat kAxisMargin = 50.0;
 
@@ -139,15 +140,13 @@ static CGFloat kAxisMargin = 50.0;
         
         CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
+        item.textAlignment = NSTextAlignmentRight;
         item.font = [UIFont boldSystemFontOfSize:12];
         item.textColor = [UIColor lightGrayColor];
-//        item.text = [self.dataSource titleForLineAtIndex:idx];
-        item.x = 10.0;
     
         CGFloat value = [self _minValue] + (idx * [self _stepValueLabelY]);
         item.centerY = [self _positionYForLineValue:value];
         
-//        CGFloat rounded = round(2.0f * value) / 2.0f;
         item.text = [@(ceil(value)) stringValue];
         
         [items addObject:item];
@@ -238,7 +237,7 @@ static CGFloat kAxisMargin = 50.0;
 
 - (CGFloat)_positionYForLineValue:(CGFloat)value {
     CGFloat result = (self.height -  value);
-    result -= kDefaultLabelHeight + 5;
+    result -= kDefaultLabelHeight + kDefaultMarginBottom;
     return result;
 }
 
