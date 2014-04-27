@@ -25,10 +25,10 @@
 @property (nonatomic, assign) CGFloat barWidth;
 @property (nonatomic, assign) CGFloat marginBar;
 
-- (instancetype)redraw;
-- (instancetype)construct;
-- (instancetype)draw;
-- (instancetype)reset;
+- (void)draw;
+//- (void)construct;
+//- (instancetype)draw;
+- (void)reset;
 
 @end
 

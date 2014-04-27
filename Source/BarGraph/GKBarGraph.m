@@ -65,27 +65,27 @@ static CGFloat kDefaultLabelHeight = 15;
     }];
 }
 
-- (instancetype)redraw {
-    return [[self construct] draw];
+- (void)draw {
+    [self construct];
+    [self _drawBars];
 }
 
-- (instancetype)construct {
+- (void)construct {
     NSAssert(self.dataSource, @"GKBarGraph : No data source is assgined.");
     
-    [self _construct];
-    [self _positionBars];
-    [self _positionLabels];
-    
-    return self;
-}
-
-- (void)_construct {
     if ([self _hasBars]) [self _removeBars];
     if ([self _hasLabels]) [self _removeLabels];
     
     [self _constructBars];
     [self _constructLabels];
+    
+    [self _positionBars];
+    [self _positionLabels];
 }
+
+//- (void)_construct {
+//
+//}
 
 - (BOOL)_hasBars {
     return ![self.bars mk_isEmpty];
@@ -186,7 +186,7 @@ static CGFloat kDefaultLabelHeight = 15;
     }];
 }
 
-- (instancetype)draw {
+- (void)_drawBars {
     __block NSInteger idx = 0;
     id source = self.dataSource;
     [self.bars mk_each:^(GKBar *item) {
@@ -202,14 +202,12 @@ static CGFloat kDefaultLabelHeight = 15;
         item.percentage = [[source valueForBarAtIndex:idx] doubleValue];
         idx++;
     }];
-    return self;
 }
 
-- (instancetype)reset {
+- (void)reset {
     [self.bars mk_each:^(GKBar *item) {
         [item reset];
     }];
-    return self;
 }
 
 @end
