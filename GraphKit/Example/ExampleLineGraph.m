@@ -8,6 +8,8 @@
 
 #import "ExampleLineGraph.h"
 
+#import "UIViewController+BButton.h"
+
 @interface ExampleLineGraph ()
 
 @end
@@ -17,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    [self setupButtons];
     
     self.view.backgroundColor = [UIColor gk_cloudsColor];
 

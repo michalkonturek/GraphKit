@@ -44,13 +44,6 @@ static CGFloat kDefaultLabelHeight = 15;
     self.marginBar = kDefaultBarMargin;
 }
 
-- (void)setBarColor:(UIColor *)color {
-    _barColor = color;
-    [self.bars mk_each:^(GKBar *item) {
-        item.foregroundColor = color;
-    }];
-}
-
 - (void)setAnimated:(BOOL)animated {
     _animated = animated;
     [self.bars mk_each:^(GKBar *item) {
@@ -62,6 +55,13 @@ static CGFloat kDefaultLabelHeight = 15;
     _animationDuration = animationDuration;
     [self.bars mk_each:^(GKBar *item) {
         item.animationDuration = animationDuration;
+    }];
+}
+
+- (void)setBarColor:(UIColor *)color {
+    _barColor = color;
+    [self.bars mk_each:^(GKBar *item) {
+        item.foregroundColor = color;
     }];
 }
 

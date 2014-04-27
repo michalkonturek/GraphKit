@@ -13,10 +13,19 @@
 
 static CGFloat kDefaultLabelWidth = 40.0;
 static CGFloat kDefaultLabelHeight = 15.0;
+static NSInteger kDefaultValueLabelCount = 5;
+
 static CGFloat kDefaultLineWidth = 3.0;
 static CGFloat kDefaultMargin = 10.0;
 
-static CGFloat kAxisMargin = 40.0;
+static CGFloat kAxisMargin = 50.0;
+
+@interface GKLineGraph ()
+
+@property (nonatomic, strong) NSArray *titleLabels;
+@property (nonatomic, strong) NSArray *valueLabels;
+
+@end
 
 @implementation GKLineGraph
 
@@ -50,12 +59,19 @@ static CGFloat kAxisMargin = 40.0;
     if ([self _hasTitleLabels]) [self _removeTitleLabels];
     [self _constructTitleLabels];
     [self _positionTitleLabels];
+
+    if ([self _hasValueLabels]) [self _removeValueLabels];
+    [self _constructValueLabels];
     
     [self _drawLines];
 }
 
 - (BOOL)_hasTitleLabels {
     return ![self.titleLabels mk_isEmpty];
+}
+
+- (BOOL)_hasValueLabels {
+    return ![self.valueLabels mk_isEmpty];
 }
 
 - (void)_constructTitleLabels {
@@ -110,11 +126,62 @@ static CGFloat kAxisMargin = 40.0;
 
 - (CGFloat)_stepX {
     id values = [self.dataSource valuesForLineAtIndex:0];
-    CGFloat step = ([self _plotWidth] / [values count]);
-    return step;
+    CGFloat result = ([self _plotWidth] / [values count]);
+    return result;
 }
 
+- (void)_constructValueLabels {
+    
+    NSInteger count = kDefaultValueLabelCount;
+    id items = [NSMutableArray arrayWithCapacity:count];
+    for (NSInteger idx = 0; idx < count; idx++) {
+        
+        CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
+        UILabel *item = [[UILabel alloc] initWithFrame:frame];
+        item.font = [UIFont boldSystemFontOfSize:12];
+        item.textColor = [UIColor lightGrayColor];
+        item.text = [self.dataSource titleForLineAtIndex:idx];
+        item.x = 10.0;
+    
+        CGFloat value = [self _minValue] + (idx * [self _stepValueLabelY]);
+        item.centerY = [self _positionYForLineValue:value];
+        
+        [items addObject:item];
+        [self addSubview:item];
+    }
+    self.valueLabels = items;
+}
 
+- (CGFloat)_stepValueLabelY {
+    return (([self _maxValue] - [self _minValue]) / kDefaultValueLabelCount);
+}
+
+- (CGFloat)_maxValue {
+    id values = [self _allValues];
+    return [[values mk_max] floatValue];
+}
+
+- (CGFloat)_minValue {
+    id values = [self _allValues];
+    return [[values mk_min] floatValue];
+}
+
+- (NSArray *)_allValues {
+    NSInteger count = [self.dataSource numberOfLines];
+    id values = [NSMutableArray array];
+    for (NSInteger idx = 0; idx < count; idx++) {
+        id item = [self.dataSource valuesForLineAtIndex:idx];
+        [values addObjectsFromArray:item];
+    }
+    return values;
+}
+
+- (void)_removeValueLabels {
+    [self.valueLabels mk_each:^(id item) {
+        [item removeFromSuperview];
+    }];
+    self.valueLabels = nil;
+}
 
 - (CGFloat)_plotWidth {
     return (self.width - (2 * self.margin) - kAxisMargin);

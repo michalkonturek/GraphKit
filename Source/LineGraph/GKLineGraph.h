@@ -19,8 +19,8 @@
 
 @property (nonatomic, assign) CGFloat lineWidth;
 
-@property (nonatomic, strong) NSArray *titleLabels;
-@property (nonatomic, strong) NSArray *valueLabels;
+//@property (nonatomic, strong) NSArray *titleLabels;
+//@property (nonatomic, strong) NSArray *valueLabels;
 
 @property (nonatomic, assign) CGFloat margin;
 
