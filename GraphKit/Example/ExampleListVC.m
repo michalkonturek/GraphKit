@@ -14,8 +14,6 @@
 
 #import "UIColor+GraphKit.h"
 
-//NS_ENUM(NSInteger, <#_name#>)
-
 @interface ExampleListVC ()
 
 @end

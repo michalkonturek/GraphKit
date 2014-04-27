@@ -26,12 +26,6 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     
-//    [[UIButton appearanceWhenContainedIn:[UIViewController class], nil] setBackgroundColor:[UIColor gk_wetAsphaltColor]];
-//    [[UIButton appearanceWhenContainedIn:[UIViewController class], nil] setTitleColor:[UIColor gk_cloudsColor]
-//                                                                             forState:UIControlStateNormal];
-//    [[UIButton appearanceWhenContainedIn:[UIViewController class], nil] setTitleColor:[UIColor gk_alizarinColor]
-//                                                                             forState:UIControlStateNormal];
-    
     [[BButton appearance] setButtonCornerRadius:@2];
     
     id vc = [[ExampleListVC alloc] initWithNibName:@"ExampleListVC" bundle:nil];
