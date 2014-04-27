@@ -1,0 +1,16 @@
+PODS:
+  - BButton (3.2.3)
+  - FrameAccessor (1.3.2)
+  - MKFoundationKit/NSArray (1.2.2)
+
+DEPENDENCIES:
+  - BButton
+  - FrameAccessor (~> 1.3.2)
+  - MKFoundationKit/NSArray (~> 1.2.2)
+
+SPEC CHECKSUMS:
+  BButton: b405745cd7ccc9444c696b8690fb79541623766a
+  FrameAccessor: 1c383c4dc298925749fb2a6b9c05cd45be0d8857
+  MKFoundationKit: 7f203cb163a892826fa567842c441b1a13b4e70b
+
+COCOAPODS: 0.32.1

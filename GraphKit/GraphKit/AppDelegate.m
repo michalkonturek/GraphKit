@@ -8,8 +8,11 @@
 
 #import "AppDelegate.h"
 
-#import "ExampleViewVC.h"
-#import "BarGraphViewVC.h"
+#import "ExampleListVC.h"
+
+#import "UIColor+GraphKit.h"
+
+#import <BButton/BButton.h>
 
 @implementation AppDelegate
 
@@ -17,8 +20,17 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    self.window.rootViewController = [[ExampleViewVC alloc] initWithNibName:@"ExampleViewVC" bundle:nil];
-    self.window.rootViewController = [[BarGraphViewVC alloc] initWithNibName:@"BarGraphViewVC" bundle:nil];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor gk_greenSeaColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor gk_cloudsColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor gk_cloudsColor]}];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    
+    [[BButton appearance] setButtonCornerRadius:@2];
+    
+    id vc = [[ExampleListVC alloc] initWithNibName:@"ExampleListVC" bundle:nil];
+    id nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nav;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

@@ -10,10 +10,18 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "UIColor+GraphKit.h"
+
+@interface GKBar ()
+
+@property (atomic, assign) BOOL animationInProgress;
+
+@end
+
 @implementation GKBar
 
 + (instancetype)create {
-    CGRect defaultRect = CGRectMake(0, 0, 25, 100);
+    CGRect defaultRect = CGRectMake(0, 0, 30, 200);
     return [self createWithFrame:defaultRect];
 }
 
@@ -34,29 +42,35 @@
     if (self) {
         [self _init];
     }
-    
     return self;
 }
 
 - (void)_init {
+    self.animated = YES;
+    self.animationDuration = 0.5;
     self.clipsToBounds = YES;
-    self.layer.cornerRadius = 2.0;
-    self.backgroundColor = [UIColor lightGrayColor];
-    self.foregroundColor = [UIColor redColor];
+    self.cornerRadius = 2.0;
+    self.foregroundColor = [UIColor gk_turquoiseColor];
+    self.backgroundColor = [UIColor gk_silverColor];
     _percentage = 0;
-    _animated = YES;
-    _animationDuration = 0.8;
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius {
+    _cornerRadius = cornerRadius;
+    self.layer.cornerRadius = cornerRadius;
 }
 
 - (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated {
     self.animated = animated;
     self.percentage = percentage;
+    self.animated = YES;
 }
 
 - (void)setPercentage:(CGFloat)percentage {
     if (percentage == _percentage) return;
-    if (percentage > 1) percentage = 1;
+    if (percentage > 100) percentage = 100;
     if (percentage < 0) percentage = 0;
+    if (self.animationInProgress) return;
     
     [self _progressBarTo:percentage];
     _percentage = percentage;
@@ -64,8 +78,8 @@
 
 - (void)_progressBarTo:(CGFloat)value {
     
-    UIBezierPath *path = [self _bezierPathWith:value];
-//    NSLog(@"S: %f E: %f", startY, endY);
+    CGFloat converted = (value / 100);
+    UIBezierPath *path = [self _bezierPathWith:converted];
     
     CAShapeLayer *layer = [self _layerWithPath:path];
     if (_percentage > value) layer.strokeColor = [self.backgroundColor CGColor];
@@ -81,7 +95,7 @@
 - (UIBezierPath *)_bezierPathWith:(CGFloat)value {
     UIBezierPath *path = [UIBezierPath bezierPath];
     CGFloat startX = (self.frame.size.width / 2);
-    CGFloat startY = (self.frame.size.height * (1 - _percentage));
+    CGFloat startY = (self.frame.size.height * (1 - (_percentage / 100)));
     CGFloat endY = (self.frame.size.height * (1 - value));
     [path moveToPoint:CGPointMake(startX, startY)];
 	[path addLineToPoint:CGPointMake(startX, endY)];
@@ -100,20 +114,30 @@
 }
 
 - (CABasicAnimation *)_animationWithKeyPath:(NSString *)keyPath {
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    animation.duration = self.animationDuration;
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.duration = self.animationDuration;
     animation.fromValue = @(0);
     animation.toValue = @(1);
+    animation.delegate = self;
     return animation;
+}
+
+- (void)animationDidStart:(CAAnimation *)anim {
+    self.animationInProgress = YES;
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    self.animationInProgress = NO;
 }
 
 - (void)setForegroundColor:(UIColor *)foregroundColor {
     _foregroundColor = foregroundColor;
-    
-    for (CAShapeLayer *item in self.layer.sublayers) {
-        item.strokeColor = [_foregroundColor CGColor];
-    }
+
+    self.layer.sublayers = nil;
+    CGFloat temp = _percentage;
+    [self setPercentage:0 animated:NO];
+    [self setPercentage:temp animated:NO];
 }
 
 - (void)reset {

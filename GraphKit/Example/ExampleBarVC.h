@@ -10,13 +10,16 @@
 
 @class GKBar;
 
-@interface ExampleViewVC : UIViewController
+@interface ExampleBarVC : UIViewController
 
 @property (nonatomic, weak) IBOutlet GKBar *bar;
 
 - (IBAction)onButtonAdd:(id)sender;
+
 - (IBAction)onButtonMinus:(id)sender;
 
-- (IBAction)onButtonClear:(id)sender;
+- (IBAction)onButtonChange:(id)sender;
+
+- (IBAction)onButtonReset:(id)sender;
 
 @end
