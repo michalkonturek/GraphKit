@@ -21,8 +21,6 @@ Source code of this project is available under the standard MIT license. Please 
 
 ![Build Platform](images/bar-graph.png)
 
-https://github.com/michalkonturek/GraphKit/blob/master/LICENSE
-
 Initialize `GKBarGraph` from nib or programmatically:
 
 ```
@@ -70,7 +68,7 @@ Please see [example][BAR].
 CGRect frame = CGRectMake(0, 40, 320, 200);
 self.graphView = [[GKLineGraph alloc] initWithFrame:frame];
 
-self.graph.dataSource = <<data-source>>;
+self.graph.dataSource = self;
 self.graph.lineWidth = 3.0;
 
 [self.graph draw];
