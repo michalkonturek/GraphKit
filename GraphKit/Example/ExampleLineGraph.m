@@ -70,7 +70,7 @@
 }
 
 - (CFTimeInterval)animationDurationForLineAtIndex:(NSInteger)index {
-    return [[@[@1, @1.4, @1.8] objectAtIndex:index] doubleValue];
+    return [[@[@1, @1.6, @2.2] objectAtIndex:index] doubleValue];
 }
 
 - (NSString *)titleForLineAtIndex:(NSInteger)index {

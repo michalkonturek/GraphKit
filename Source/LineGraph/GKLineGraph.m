@@ -132,19 +132,23 @@ static CGFloat kAxisMargin = 50.0;
 
 - (void)_constructValueLabels {
     
-    NSInteger count = kDefaultValueLabelCount;
+    NSInteger count = kDefaultValueLabelCount + 1;
     id items = [NSMutableArray arrayWithCapacity:count];
+    
     for (NSInteger idx = 0; idx < count; idx++) {
         
         CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
         item.font = [UIFont boldSystemFontOfSize:12];
         item.textColor = [UIColor lightGrayColor];
-        item.text = [self.dataSource titleForLineAtIndex:idx];
+//        item.text = [self.dataSource titleForLineAtIndex:idx];
         item.x = 10.0;
     
         CGFloat value = [self _minValue] + (idx * [self _stepValueLabelY]);
         item.centerY = [self _positionYForLineValue:value];
+        
+//        CGFloat rounded = round(2.0f * value) / 2.0f;
+        item.text = [@(ceil(value)) stringValue];
         
         [items addObject:item];
         [self addSubview:item];
@@ -271,6 +275,7 @@ static CGFloat kAxisMargin = 50.0;
 - (void)reset {
     self.layer.sublayers = nil;
     [self _removeTitleLabels];
+    [self _removeValueLabels];
 }
 
 @end
