@@ -26,8 +26,6 @@
 @property (nonatomic, assign) CGFloat marginBar;
 
 - (void)draw;
-//- (void)construct;
-//- (instancetype)draw;
 - (void)reset;
 
 @end

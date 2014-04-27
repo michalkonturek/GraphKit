@@ -32,8 +32,8 @@
 //    self.graphView.barWidth = 22;
 //    self.graphView.barHeight = 140;
 //    self.graphView.marginBar = 25;
+//    self.graphView.animationDuration = 2.0;
     
-    self.graphView.animationDuration = 2.0;
     self.graphView.dataSource = self;
     
     [self.graphView draw];

@@ -12,6 +12,8 @@
 
 #import "UIColor+GraphKit.h"
 
+static CFTimeInterval kDefaultAnimationDuration = 1.0;
+
 @interface GKBar ()
 
 @property (atomic, assign) BOOL animationInProgress;
@@ -47,7 +49,7 @@
 
 - (void)_init {
     self.animated = YES;
-    self.animationDuration = 0.5;
+    self.animationDuration = kDefaultAnimationDuration;
     self.clipsToBounds = YES;
     self.cornerRadius = 2.0;
     self.foregroundColor = [UIColor gk_turquoiseColor];

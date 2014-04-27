@@ -19,6 +19,8 @@ static CGFloat kDefaultBarMargin = 20;
 static CGFloat kDefaultLabelWidth = 40;
 static CGFloat kDefaultLabelHeight = 15;
 
+static CGFloat kDefaultAnimationDuration = 2.0;
+
 @implementation GKBarGraph
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -39,6 +41,7 @@ static CGFloat kDefaultLabelHeight = 15;
 }
 
 - (void)_init {
+    self.animationDuration = kDefaultAnimationDuration;
     self.barHeight = kDefaultBarHeight;
     self.barWidth = kDefaultBarWidth;
     self.marginBar = kDefaultBarMargin;
@@ -66,11 +69,11 @@ static CGFloat kDefaultLabelHeight = 15;
 }
 
 - (void)draw {
-    [self construct];
+    [self _construct];
     [self _drawBars];
 }
 
-- (void)construct {
+- (void)_construct {
     NSAssert(self.dataSource, @"GKBarGraph : No data source is assgined.");
     
     if ([self _hasBars]) [self _removeBars];
@@ -82,10 +85,6 @@ static CGFloat kDefaultLabelHeight = 15;
     [self _positionBars];
     [self _positionLabels];
 }
-
-//- (void)_construct {
-//
-//}
 
 - (BOOL)_hasBars {
     return ![self.bars mk_isEmpty];
