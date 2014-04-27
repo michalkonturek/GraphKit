@@ -19,6 +19,8 @@ static CGFloat kDefaultBarMargin = 20;
 static CGFloat kDefaultLabelWidth = 40;
 static CGFloat kDefaultLabelHeight = 15;
 
+static CGFloat kDefaultAnimationDuration = 2.0;
+
 @implementation GKBarGraph
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -39,6 +41,7 @@ static CGFloat kDefaultLabelHeight = 15;
 }
 
 - (void)_init {
+    self.animationDuration = kDefaultAnimationDuration;
     self.barHeight = kDefaultBarHeight;
     self.barWidth = kDefaultBarWidth;
     self.marginBar = kDefaultBarMargin;
@@ -65,26 +68,22 @@ static CGFloat kDefaultLabelHeight = 15;
     }];
 }
 
-- (instancetype)redraw {
-    return [[self construct] draw];
-}
-
-- (instancetype)construct {
-    NSAssert(self.dataSource, @"GKBarGraph : No data source is assgined.");
-    
+- (void)draw {
     [self _construct];
-    [self _positionBars];
-    [self _positionLabels];
-    
-    return self;
+    [self _drawBars];
 }
 
 - (void)_construct {
+    NSAssert(self.dataSource, @"GKBarGraph : No data source is assgined.");
+    
     if ([self _hasBars]) [self _removeBars];
     if ([self _hasLabels]) [self _removeLabels];
     
     [self _constructBars];
     [self _constructLabels];
+    
+    [self _positionBars];
+    [self _positionLabels];
 }
 
 - (BOOL)_hasBars {
@@ -186,7 +185,7 @@ static CGFloat kDefaultLabelHeight = 15;
     }];
 }
 
-- (instancetype)draw {
+- (void)_drawBars {
     __block NSInteger idx = 0;
     id source = self.dataSource;
     [self.bars mk_each:^(GKBar *item) {
@@ -202,14 +201,12 @@ static CGFloat kDefaultLabelHeight = 15;
         item.percentage = [[source valueForBarAtIndex:idx] doubleValue];
         idx++;
     }];
-    return self;
 }
 
-- (instancetype)reset {
+- (void)reset {
     [self.bars mk_each:^(GKBar *item) {
         [item reset];
     }];
-    return self;
 }
 
 @end
