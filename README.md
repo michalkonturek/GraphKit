@@ -1,11 +1,11 @@
 # GraphKit
 
+[![License MIT](https://img.shields.io/badge/contact-@MichalKonturek-blue.svg?style=flat)](http://twitter.com/michalkonturek)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/michalkonturek/GraphKit/blob/master/LICENSE)
 [![CocoaPods](https://img.shields.io/cocoapods/v/GraphKit.svg?style=flat)](https://github.com/michalkonturek/GraphKit)
-[![License MIT](https://img.shields.io/badge/contact-@MichalKonturek-blue.svg?style=flat)](http://twitter.com/michalkonturek)
 
 
-A lightweight library of animated charts for iOS.
+A lightweight library of animated charts for iOS. 
 
 
 ## License
@@ -17,6 +17,8 @@ Source code of this project is available under the standard MIT license. Please 
 
 
 ## Usage
+
+To see a quick demo, simply type `pod try GraphKit`.
 
 ### Bar Graph
 
