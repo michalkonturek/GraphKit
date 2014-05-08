@@ -35,8 +35,13 @@
 @property (nonatomic, assign) id<GKLineGraphDataSource> dataSource;
 
 @property (nonatomic, assign) CGFloat lineWidth;
-
 @property (nonatomic, assign) CGFloat margin;
+
+@property (nonatomic, assign) NSInteger valueLabelCount;
+//@property (nonatomic, strong) NSNumber *maxValue;
+
+@property (nonatomic, assign) CGFloat *minValue;
+@property (nonatomic, assign) BOOL startFromZero;
 
 - (void)draw;
 - (void)reset;
