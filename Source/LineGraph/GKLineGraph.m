@@ -151,7 +151,6 @@ static CGFloat kAxisMargin = 50.0;
 
 - (void)_constructValueLabels {
     
-//    NSInteger count = self.valueLabelCount + 1;
     NSInteger count = self.valueLabelCount;
     id items = [NSMutableArray arrayWithCapacity:count];
     
@@ -176,7 +175,6 @@ static CGFloat kAxisMargin = 50.0;
 }
 
 - (CGFloat)_stepValueLabelY {
-//    return (([self _maxValue] - [self _minValue]) / self.valueLabelCount);
     return (([self _maxValue] - [self _minValue]) / (self.valueLabelCount - 1));
 }
 
@@ -213,7 +211,6 @@ static CGFloat kAxisMargin = 50.0;
 }
 
 - (CGFloat)_plotHeight {
-//    return (self.height - (kDefaultLabelHeight + kDefaultMarginBottom));
     return (self.height - (2 * kDefaultLabelHeight + kDefaultMarginBottom));
 }
 
@@ -263,29 +260,11 @@ static CGFloat kAxisMargin = 50.0;
 }
 
 - (CGFloat)_positionYForLineValue:(CGFloat)value {
-    
-//    CGFloat result = ((value - 0) / [self _plotHeight] - 0);
-//    result = (result * ([self _maxValue] - [self _minValue])) + [self _minValue];
-//    
-//    result = ([self _plotHeight] -  result);
-//    
-//    return result;
-    
-    
     CGFloat scale = (value - [self _minValue]) / ([self _maxValue] - [self _minValue]);
     CGFloat result = [self _plotHeight] * scale;
     result = ([self _plotHeight] -  result);
     result += kDefaultLabelHeight;
     return result;
-    
-//    CGFloat result = ([self _plotHeight] -  value);
-////    result -= kDefaultLabelHeight + kDefaultMarginBottom;
-//    return result;
-
-    
-//    CGFloat result = (self.height -  value);
-//    result -= kDefaultLabelHeight + kDefaultMarginBottom;
-//    return result;
 }
 
 - (UIBezierPath *)_bezierPathWith:(CGFloat)value {

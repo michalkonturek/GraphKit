@@ -76,7 +76,7 @@
 }
 
 
-#pragma mark -
+#pragma mark - Event Handlers
 
 - (IBAction)onButtonDraw:(id)sender {
     [self.graph reset];
