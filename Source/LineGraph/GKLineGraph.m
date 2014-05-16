@@ -69,7 +69,7 @@ static CGFloat kAxisMargin = 50.0;
     self.lineWidth = kDefaultLineWidth;
     self.margin = kDefaultMargin;
     self.valueLabelCount = kDefaultValueLabelCount;
-//    self.clipsToBounds = YES;
+    self.clipsToBounds = YES;
 }
 
 - (void)draw {
@@ -166,8 +166,8 @@ static CGFloat kAxisMargin = 50.0;
         CGFloat value = [self _minValue] + (idx * [self _stepValueLabelY]);
         item.centerY = [self _positionYForLineValue:value];
         
-//        item.text = [@(ceil(value)) stringValue];
-        item.text = [@(value) stringValue];
+        item.text = [@(ceil(value)) stringValue];
+//        item.text = [@(value) stringValue];
         
         [items addObject:item];
         [self addSubview:item];
