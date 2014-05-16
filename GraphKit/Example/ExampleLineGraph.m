@@ -24,6 +24,12 @@
     
     self.view.backgroundColor = [UIColor gk_cloudsColor];
 
+    [self _setupExampleGraph];
+//    [self _setupTestingGraph];
+}
+
+- (void)_setupExampleGraph {
+
     self.data = @[
                   @[@20, @40, @20, @60, @40, @140, @80],
                   @[@40, @20, @60, @100, @60, @20, @60],
@@ -32,10 +38,27 @@
 //                  @[@620, @650, @580, @620, @540, @400, @0]
                   ];
     
-//    self.data = @[
-//                  @[@10, @4, @8, @2, @9, @3, @6],
-//                  @[@1, @2, @3, @4, @5, @6, @10]
-//                  ];
+    self.labels = @[@"2001", @"2002", @"2003", @"2004", @"2005", @"2006", @"2007"];
+    
+    self.graph.dataSource = self;
+    self.graph.lineWidth = 3.0;
+    
+    self.graph.valueLabelCount = 6;
+    
+    [self.graph draw];
+}
+
+- (void)_setupTestingGraph {
+    
+    /*
+     A custom max and min values can be achieved by adding 
+     values for another line and setting its color to clear.
+     */
+    
+    self.data = @[
+                  @[@10, @4, @8, @2, @9, @3, @6],
+                  @[@1, @2, @3, @4, @5, @6, @10]
+                  ];
     
     self.labels = @[@"2001", @"2002", @"2003", @"2004", @"2005", @"2006", @"2007"];
     
@@ -43,7 +66,7 @@
     self.graph.lineWidth = 3.0;
     
 //    self.graph.startFromZero = YES;
-    self.graph.valueLabelCount = 6;
+    self.graph.valueLabelCount = 10;
     
     [self.graph draw];
 }
@@ -73,7 +96,6 @@
 
 - (UIColor *)colorForLineAtIndex:(NSInteger)index {
     id colors = @[[UIColor gk_turquoiseColor],
-//                  [UIColor clearColor],
                   [UIColor gk_peterRiverColor],
                   [UIColor gk_alizarinColor],
                   [UIColor gk_sunflowerColor]

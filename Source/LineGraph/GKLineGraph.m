@@ -186,7 +186,7 @@ static CGFloat kAxisMargin = 50.0;
 }
 
 - (CGFloat)_minValue {
-    if (self.startFromZero) return 1;
+    if (self.startFromZero) return 0;
     id values = [self _allValues];
     return [[values mk_min] floatValue];
 }
