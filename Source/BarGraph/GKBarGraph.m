@@ -215,6 +215,10 @@ static CGFloat kDefaultAnimationDuration = 2.0;
             item.foregroundColor = [source colorForBarAtIndex:idx];
         }
         
+        if ([source respondsToSelector:@selector(colorForBarBackgroundAtIndex:)]) {
+            item.backgroundColor = [source colorForBarBackgroundAtIndex:idx];
+        }
+        
         item.percentage = [[source valueForBarAtIndex:idx] doubleValue];
         idx++;
     }];

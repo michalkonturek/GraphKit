@@ -58,6 +58,7 @@ Please see [example][BAR].
 
 @optional
 - (UIColor *)colorForBarAtIndex:(NSInteger)index;
+- (UIColor *)colorForBarBackgroundAtIndex:(NSInteger)index;
 - (CFTimeInterval)animationDurationForBarAtIndex:(NSInteger)index;
 - (NSString *)titleForBarAtIndex:(NSInteger)index;
 ```
