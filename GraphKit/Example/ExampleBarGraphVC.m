@@ -80,6 +80,10 @@
     return [colors objectAtIndex:index];
 }
 
+//- (UIColor *)colorForBarBackgroundAtIndex:(NSInteger)index {
+//    return [UIColor redColor];
+//}
+
 - (CFTimeInterval)animationDurationForBarAtIndex:(NSInteger)index {
     CGFloat percentage = [[self valueForBarAtIndex:index] doubleValue];
     percentage = (percentage / 100);

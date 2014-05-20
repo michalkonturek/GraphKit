@@ -29,12 +29,12 @@
 #import <MKFoundationKit/NSArray+MK.h>
 
 static CGFloat kDefaultLabelWidth = 40.0;
-static CGFloat kDefaultLabelHeight = 15.0;
+static CGFloat kDefaultLabelHeight = 12.0;
 static NSInteger kDefaultValueLabelCount = 5;
 
 static CGFloat kDefaultLineWidth = 3.0;
 static CGFloat kDefaultMargin = 10.0;
-static CGFloat kDefaultMarginBottom = 10.0;
+static CGFloat kDefaultMarginBottom = 20.0;
 
 static CGFloat kAxisMargin = 50.0;
 
@@ -68,6 +68,7 @@ static CGFloat kAxisMargin = 50.0;
     self.animationDuration = 1;
     self.lineWidth = kDefaultLineWidth;
     self.margin = kDefaultMargin;
+    self.valueLabelCount = kDefaultValueLabelCount;
     self.clipsToBounds = YES;
 }
 
@@ -150,7 +151,7 @@ static CGFloat kAxisMargin = 50.0;
 
 - (void)_constructValueLabels {
     
-    NSInteger count = kDefaultValueLabelCount + 1;
+    NSInteger count = self.valueLabelCount;
     id items = [NSMutableArray arrayWithCapacity:count];
     
     for (NSInteger idx = 0; idx < count; idx++) {
@@ -165,6 +166,7 @@ static CGFloat kAxisMargin = 50.0;
         item.centerY = [self _positionYForLineValue:value];
         
         item.text = [@(ceil(value)) stringValue];
+//        item.text = [@(value) stringValue];
         
         [items addObject:item];
         [self addSubview:item];
@@ -173,7 +175,7 @@ static CGFloat kAxisMargin = 50.0;
 }
 
 - (CGFloat)_stepValueLabelY {
-    return (([self _maxValue] - [self _minValue]) / kDefaultValueLabelCount);
+    return (([self _maxValue] - [self _minValue]) / (self.valueLabelCount - 1));
 }
 
 - (CGFloat)_maxValue {
@@ -182,6 +184,7 @@ static CGFloat kAxisMargin = 50.0;
 }
 
 - (CGFloat)_minValue {
+    if (self.startFromZero) return 0;
     id values = [self _allValues];
     return [[values mk_min] floatValue];
 }
@@ -205,6 +208,10 @@ static CGFloat kAxisMargin = 50.0;
 
 - (CGFloat)_plotWidth {
     return (self.width - (2 * self.margin) - kAxisMargin);
+}
+
+- (CGFloat)_plotHeight {
+    return (self.height - (2 * kDefaultLabelHeight + kDefaultMarginBottom));
 }
 
 - (void)_drawLines {
@@ -253,8 +260,10 @@ static CGFloat kAxisMargin = 50.0;
 }
 
 - (CGFloat)_positionYForLineValue:(CGFloat)value {
-    CGFloat result = (self.height -  value);
-    result -= kDefaultLabelHeight + kDefaultMarginBottom;
+    CGFloat scale = (value - [self _minValue]) / ([self _maxValue] - [self _minValue]);
+    CGFloat result = [self _plotHeight] * scale;
+    result = ([self _plotHeight] -  result);
+    result += kDefaultLabelHeight;
     return result;
 }
 
