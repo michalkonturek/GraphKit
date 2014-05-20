@@ -25,7 +25,8 @@
     self.view.backgroundColor = [UIColor gk_cloudsColor];
 
     [self _setupExampleGraph];
-//    [self _setupTestingGraph];
+//    [self _setupTestingGraphLow];
+//    [self _setupTestingGraphHigh];
 }
 
 - (void)_setupExampleGraph {
@@ -48,7 +49,7 @@
     [self.graph draw];
 }
 
-- (void)_setupTestingGraph {
+- (void)_setupTestingGraphLow {
     
     /*
      A custom max and min values can be achieved by adding 
@@ -66,6 +67,23 @@
     self.graph.lineWidth = 3.0;
     
 //    self.graph.startFromZero = YES;
+    self.graph.valueLabelCount = 10;
+    
+    [self.graph draw];
+}
+
+- (void)_setupTestingGraphHigh {
+    
+    self.data = @[
+                  @[@1000, @2000, @3000, @4000, @5000, @6000, @10000]
+                  ];
+    
+    self.labels = @[@"2001", @"2002", @"2003", @"2004", @"2005", @"2006", @"2007"];
+    
+    self.graph.dataSource = self;
+    self.graph.lineWidth = 3.0;
+    
+    //    self.graph.startFromZero = YES;
     self.graph.valueLabelCount = 10;
     
     [self.graph draw];
