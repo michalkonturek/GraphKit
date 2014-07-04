@@ -33,6 +33,7 @@
 		84F0E98E1902B30C00FA4810 /* ExampleListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0E98C1902B30C00FA4810 /* ExampleListVC.m */; };
 		84F0E98F1902B30C00FA4810 /* ExampleListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F0E98D1902B30C00FA4810 /* ExampleListVC.xib */; };
 		973F4746059343C9A462AA2D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E12B5B49644056930176BC /* libPods.a */; };
+		B758FCEB19673B7C00F843E5 /* GKLineDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = B758FCEA19673B7C00F843E5 /* GKLineDataPoint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,8 @@
 		84F0E98B1902B30C00FA4810 /* ExampleListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleListVC.h; sourceTree = "<group>"; };
 		84F0E98C1902B30C00FA4810 /* ExampleListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleListVC.m; sourceTree = "<group>"; };
 		84F0E98D1902B30C00FA4810 /* ExampleListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleListVC.xib; sourceTree = "<group>"; };
+		B758FCE919673B7C00F843E5 /* GKLineDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKLineDataPoint.h; sourceTree = "<group>"; };
+		B758FCEA19673B7C00F843E5 /* GKLineDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKLineDataPoint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +239,8 @@
 		847259201904AB8F00819664 /* LineGraph */ = {
 			isa = PBXGroup;
 			children = (
+				B758FCE919673B7C00F843E5 /* GKLineDataPoint.h */,
+				B758FCEA19673B7C00F843E5 /* GKLineDataPoint.m */,
 				847259211904ABE200819664 /* GKLineGraph.h */,
 				847259221904ABE200819664 /* GKLineGraph.m */,
 			);
@@ -382,6 +387,7 @@
 				84654C2418FE8EE300160F11 /* AppDelegate.m in Sources */,
 				847259291905C1D300819664 /* UIColor+GraphKit.m in Sources */,
 				84654C5918FF4C8300160F11 /* ExampleBarGraphVC.m in Sources */,
+				B758FCEB19673B7C00F843E5 /* GKLineDataPoint.m in Sources */,
 				8472591E1904AA4F00819664 /* ExampleLineGraph.m in Sources */,
 				84654C4C18FE909A00160F11 /* GKBar.m in Sources */,
 				84654C2018FE8EE300160F11 /* main.m in Sources */,
