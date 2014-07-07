@@ -24,24 +24,36 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GKLineDataPoint.h"
 
 @protocol GKLineGraphDataSource;
+@protocol GKLineGraphDelegate;
 
 @interface GKLineGraph : UIView
 
 @property (nonatomic, assign) BOOL animated;
 @property (nonatomic, assign) CFTimeInterval animationDuration;
 
+@property (nonatomic, weak, readwrite) id <GKLineGraphDelegate> delegate;
 @property (nonatomic, assign) id<GKLineGraphDataSource> dataSource;
 
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat margin;
 
 @property (nonatomic, assign) NSInteger valueLabelCount;
-//@property (nonatomic, strong) NSNumber *maxValue;
 
 @property (nonatomic, assign) CGFloat *minValue;
 @property (nonatomic, assign) BOOL startFromZero;
+@property (nonatomic, assign) BOOL ensureXAxisVisibility;
+@property (nonatomic, assign) BOOL drawCoordinateSystem;
+@property (nonatomic, assign) BOOL drawVerticalGridLines;
+@property (nonatomic, assign) BOOL drawHorizontalGridLines;
+@property (nonatomic, assign) NSInteger touchDistanceThreshold;
+@property (nonatomic, assign) BOOL drawXAxisLabelsAtAxis;
+
+@property (nonatomic, strong) UIColor *coordinateSystemColor;
+@property (nonatomic, strong) UIColor *gridLinesColor;
+@property (nonatomic, strong) UIColor *labelTextColor;
 
 - (void)draw;
 - (void)reset;
@@ -50,13 +62,25 @@
 
 @protocol GKLineGraphDataSource <NSObject>
 
-- (NSInteger)numberOfLines;
-- (UIColor *)colorForLineAtIndex:(NSInteger)index;
-- (NSArray *)valuesForLineAtIndex:(NSInteger)index;
+- (NSInteger) numberOfLines;
+- (UIColor *) colorForLineAtIndex: (NSInteger)index;
+- (NSArray *) valuesForLineAtIndex: (NSInteger)index;
 
 @optional
-- (CFTimeInterval)animationDurationForLineAtIndex:(NSInteger)index;
 
-- (NSString *)titleForLineAtIndex:(NSInteger)index;
+- (CFTimeInterval) animationDurationForLineAtIndex:(NSInteger)index;
+- (NSString *) titleForLineAtIndex:(NSInteger)index;
+- (NSString *) identifierForLineAtIndex:(NSInteger)index;
+- (NSArray *) dashPatternForLineAtIndex: (NSInteger)index;
+
+@end
+
+@protocol GKLineGraphDelegate <NSObject>
+
+- (void)lineGraph:(GKLineGraph *)lineGraph willSelectDataPoint:(GKLineDataPoint *)dataPoint AtPoint:(CGPoint) targetPoint;
+- (void)lineGraph:(GKLineGraph *)lineGraph didSelectDataPoint:(GKLineDataPoint *)dataPoint AtPoint:(CGPoint) targetPoint;
+- (void)lineGraph:(GKLineGraph *)lineGraph willDeselectDataPoint:(GKLineDataPoint *)dataPoint AtPoint:(CGPoint) targetPoint;
+- (void)lineGraph:(GKLineGraph *)lineGraph didDeselectDataPoint:(GKLineDataPoint *)dataPoint AtPoint:(CGPoint) targetPoint;
+- (void)lineGraph:(GKLineGraph *)lineGraph didReselectDataPoint:(GKLineDataPoint *)dataPoint AtPoint:(CGPoint) targetPoint;
 
 @end
