@@ -49,6 +49,7 @@
 @property (nonatomic, assign) BOOL drawVerticalGridLines;
 @property (nonatomic, assign) BOOL drawHorizontalGridLines;
 @property (nonatomic, assign) NSInteger touchDistanceThreshold;
+@property (nonatomic, assign) BOOL drawXAxisLabelsAtAxis;
 
 @property (nonatomic, strong) UIColor *coordinateSystemColor;
 @property (nonatomic, strong) UIColor *gridLinesColor;
@@ -69,6 +70,7 @@
 
 - (CFTimeInterval) animationDurationForLineAtIndex:(NSInteger)index;
 - (NSString *) titleForLineAtIndex:(NSInteger)index;
+- (NSString *) identifierForLineAtIndex:(NSInteger)index;
 - (NSArray *) dashPatternForLineAtIndex: (NSInteger)index;
 
 @end

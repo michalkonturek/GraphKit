@@ -34,12 +34,13 @@ static NSInteger kDefaultValueLabelCount = 5;
 
 static NSInteger kCoordinateLayerIndexTag = -1;
 static CGFloat kDefaultTouchDistanceThreshold = 5.0;
+static NSInteger kXAxisTickLength = 5;
 
 static CGFloat kDefaultLineWidth = 3.0;
 static CGFloat kDefaultMargin = 10.0;
 static CGFloat kDefaultMarginBottom = 20.0;
 
-static CGFloat kAxisMargin = 50.0;
+static CGFloat kAxisMargin = 40.0;
 
 @interface GKLineGraph ()
 
@@ -87,10 +88,18 @@ static CGFloat kAxisMargin = 50.0;
     
     if ([self _hasTitleLabels]) [self _removeTitleLabels];
     [self _constructTitleLabels];
-    [self _positionTitleLabels];
-
+    
+    if (self.drawXAxisLabelsAtAxis)
+    {
+        [self _positionTitleLabelsNew];
+    } else
+    {
+        [self _positionTitleLabels];
+    }
+    
     if ([self _hasValueLabels]) [self _removeValueLabels];
-    [self _constructValueLabels];
+    // [self _constructValueLabels];
+    [self _constructValueLabelsNew];
     
     [self _drawLines];
 }
@@ -112,8 +121,8 @@ static CGFloat kAxisMargin = 50.0;
     
     NSInteger count = [[self.dataSource valuesForLineAtIndex:0] count];
     id items = [NSMutableArray arrayWithCapacity:count];
-    for (NSInteger idx = 0; idx < count; idx++) {
-        
+    for (NSInteger idx = 0; idx < count; idx++)
+    {
         CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
         item.textAlignment = NSTextAlignmentCenter;
@@ -133,8 +142,8 @@ static CGFloat kAxisMargin = 50.0;
     self.titleLabels = nil;
 }
 
-- (void)_positionTitleLabels {
-    
+- (void)_positionTitleLabels
+{
     __block NSInteger idx = 0;
     id values = [self.dataSource valuesForLineAtIndex:0];
     [values mk_each:^(id value) {
@@ -149,9 +158,39 @@ static CGFloat kAxisMargin = 50.0;
         label.y = startY;
         
         [self addSubview:label];
-
+        
         idx++;
     }];
+}
+
+- (void)_positionTitleLabelsNew
+{
+    __block NSInteger idx = 0;
+    id values = [self.dataSource valuesForLineAtIndex:0];
+    [values mk_each:^(id value)
+     {
+         CGFloat labelWidth = kDefaultLabelWidth;
+         CGFloat labelHeight = kDefaultLabelHeight;
+         CGFloat startX = [self _pointXForIndex:idx] - (labelWidth / 2);
+         
+         CGFloat startY = (self.height - labelHeight);
+         if ([self _maxValue] <= 0.0)
+         {
+             startY = [self _positionYForLineValue:0] + labelHeight;
+         }
+         if ([self _minValue] >= 0.0)
+         {
+             startY = [self _positionYForLineValue:0] - labelHeight - (kXAxisTickLength * [[UIScreen mainScreen] scale]) - 5;
+         }
+         
+         UILabel *label = [self.titleLabels objectAtIndex:idx];
+         label.x = startX;
+         label.y = startY;
+         
+         [self addSubview:label];
+         
+         idx++;
+     }];
 }
 
 - (CGFloat)_pointXForIndex:(float)index {
@@ -164,34 +203,86 @@ static CGFloat kAxisMargin = 50.0;
 }
 
 - (CGFloat)_stepX {
-    id values = [self.dataSource valuesForLineAtIndex:0];
+    NSArray *values = [self.dataSource valuesForLineAtIndex:0];
     CGFloat result = ([self _plotWidth] / [values count]);
     return result;
 }
 
-- (void)_constructValueLabels {
-    
+- (void)_constructValueLabels
+{
     NSInteger count = self.valueLabelCount;
-    id items = [NSMutableArray arrayWithCapacity:count];
+    NSMutableArray *items = [NSMutableArray arrayWithCapacity:count];
     
-    for (NSInteger idx = 0; idx < count; idx++) {
-        
+    for (NSInteger idx = 0; idx < count; idx++)
+    {
         CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
         item.textAlignment = NSTextAlignmentRight;
         item.font = [UIFont boldSystemFontOfSize:12];
         item.textColor = [UIColor lightGrayColor];
-    
+        
         CGFloat value = [self _minValue] + (idx * [self _stepValueLabelY]);
         item.centerY = [self _positionYForLineValue:value];
         
         item.text = [@(ceil(value)) stringValue];
-//        item.text = [@(value) stringValue];
+        //        item.text = [@(value) stringValue];
         
         [items addObject:item];
         [self addSubview:item];
     }
     self.valueLabels = items;
+}
+
+- (void)_constructValueLabelsNew
+{
+    NSInteger maxDistance = MAX ([self _maxValue], fabs([self _minValue]));
+    NSInteger stepSize = maxDistance / 10;
+    stepSize = 5 * floor((stepSize/5)+0.5);
+    
+    NSMutableArray *items = [NSMutableArray arrayWithCapacity:5];
+    
+    NSInteger currentStepValue = 0;
+    while (currentStepValue <= [self _maxValue])
+    {
+        CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
+        UILabel *item = [[UILabel alloc] initWithFrame:frame];
+        item.textAlignment = NSTextAlignmentRight;
+        item.font = [UIFont boldSystemFontOfSize:12];
+        item.textColor = [UIColor lightGrayColor];
+        
+        item.centerY = [self _positionYForLineValue:currentStepValue];
+        
+        item.text = [@(ceil(currentStepValue)) stringValue];
+        //        item.text = [@(value) stringValue];
+        
+        [items addObject:item];
+        [self addSubview:item];
+        
+        currentStepValue += stepSize;
+    }
+    
+    currentStepValue = 0;
+    while (currentStepValue >= [self _minValue])
+    {
+        CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
+        UILabel *item = [[UILabel alloc] initWithFrame:frame];
+        item.textAlignment = NSTextAlignmentRight;
+        item.font = [UIFont boldSystemFontOfSize:12];
+        item.textColor = [UIColor lightGrayColor];
+        
+        item.centerY = [self _positionYForLineValue:currentStepValue];
+        
+        item.text = [@(ceil(currentStepValue)) stringValue];
+        //        item.text = [@(value) stringValue];
+        
+        [items addObject:item];
+        [self addSubview:item];
+        
+        currentStepValue -= stepSize;
+    }
+    
+    self.valueLabels = items;
+    self.valueLabelCount = [items count];
 }
 
 - (CGFloat)_stepValueLabelY {
@@ -242,7 +333,7 @@ static CGFloat kAxisMargin = 50.0;
     NSInteger numValues = 0;
     for (NSInteger idx = 0; idx < [self.dataSource numberOfLines]; idx++) {
         numValues = MAX(numValues, [[self.dataSource valuesForLineAtIndex:idx] count]);
-
+        
         [self _drawLineAtIndex:idx];
     }
     
@@ -279,7 +370,7 @@ static CGFloat kAxisMargin = 50.0;
         UILabel *label = [self.valueLabels objectAtIndex:idx];
         CGFloat yCoordinate = label.frame.origin.y + (label.frame.size.height / 2);
         // NSLog(@"yValue: %f", yValue);
-
+        
         [path moveToPoint:CGPointMake([self _pointXForIndex:0], yCoordinate)];
         [path addLineToPoint:CGPointMake([self _pointXForIndex:0], yCoordinate)];
         [path addLineToPoint:CGPointMake([self _pointXForIndex:indexCount], yCoordinate)];
@@ -348,7 +439,7 @@ static CGFloat kAxisMargin = 50.0;
     CGFloat x = [self _pointXForIndex:0];
     CGFloat y = [self _positionYForLineValue:[self _minValue]];
     CGPoint point = CGPointMake(x, y);
-
+    
     [path moveToPoint:point];
     [path addLineToPoint:point];
     
@@ -365,22 +456,35 @@ static CGFloat kAxisMargin = 50.0;
     
     [path moveToPoint:point];
     [path addLineToPoint:point];
-
+    
     x = [self _pointXForIndex:indexCount];
     point = CGPointMake(x, y);
     
     [path addLineToPoint:point];
-
+    
     // Draw x Copordinate Caps
-    float maxCapValue = 0.03125 * MAX([self _maxValue], fabs([self _minValue]));
-    float minCapValue = -1 * maxCapValue;
-
-    for (int step = 1; step < indexCount; step++)
+    for (int step = 0; step < indexCount; step++)
     {
-        [path moveToPoint:CGPointMake([self _pointXForIndex:step], [self _positionYForLineValue:maxCapValue])];
-        [path addLineToPoint:CGPointMake([self _pointXForIndex:step], [self _positionYForLineValue:maxCapValue])];
-        [path addLineToPoint:CGPointMake([self _pointXForIndex:step], [self _positionYForLineValue:minCapValue])];
+        CGFloat baseYCoordinate = [self _positionYForLineValue:0];
+        [path moveToPoint:CGPointMake([self _pointXForIndex:step], baseYCoordinate - (kXAxisTickLength * [[UIScreen mainScreen] scale]))];
+        [path addLineToPoint:CGPointMake([self _pointXForIndex:step], baseYCoordinate - (kXAxisTickLength * [[UIScreen mainScreen] scale]))];
+        [path addLineToPoint:CGPointMake([self _pointXForIndex:step], baseYCoordinate + (kXAxisTickLength * [[UIScreen mainScreen] scale]))];
         // bezierPath.lineJoinStyle = kCGLineJoinRound;
+    }
+    
+    // Draw y coordinate caps
+    NSInteger count = self.valueLabelCount;
+    for (NSInteger idx = 0; idx < count; idx++)
+    {
+        UILabel *label = [self.valueLabels objectAtIndex:idx];
+        CGFloat yCoordinate = label.frame.origin.y + (label.frame.size.height / 2);
+        // NSLog(@"yValue: %f", yValue);
+        CGFloat left = [self _pointXForIndex:0] - (kXAxisTickLength * [[UIScreen mainScreen] scale]);
+        CGFloat right = [self _pointXForIndex:0] + (kXAxisTickLength * [[UIScreen mainScreen] scale]);
+        
+        [path moveToPoint:CGPointMake(left, yCoordinate)];
+        [path addLineToPoint:CGPointMake(left, yCoordinate)];
+        [path addLineToPoint:CGPointMake(right, yCoordinate)];
     }
     
     layer.path = path.CGPath;
@@ -409,6 +513,11 @@ static CGFloat kAxisMargin = 50.0;
         NSArray *dashPattern = [self.dataSource dashPatternForLineAtIndex:index];
         [layer setLineDashPattern:dashPattern];
     }
+    if ([_dataSource respondsToSelector:@selector(identifierForLineAtIndex:)])
+    {
+        NSString *lineIdentifier = [self.dataSource identifierForLineAtIndex:index];
+        [layer setValue:lineIdentifier forKey:@"identifier"];
+    }
     
     [layer setValue:[NSNumber numberWithInteger:index] forKey:@"indexTag"];
     
@@ -419,7 +528,6 @@ static CGFloat kAxisMargin = 50.0;
     NSInteger idx = 0;
     id values = [self.dataSource valuesForLineAtIndex:index];
     for (id item in values) {
-
         CGFloat x = [self _pointXForIndex:idx];
         CGFloat y = [self _positionYForLineValue:[item floatValue]];
         CGPoint point = CGPointMake(x, y);
@@ -467,7 +575,7 @@ static CGFloat kAxisMargin = 50.0;
     item.lineCap = kCALineCapRound;
     item.lineJoin  = kCALineJoinRound;
     item.lineWidth = self.lineWidth;
-//    item.strokeColor = [self.foregroundColor CGColor];
+    //    item.strokeColor = [self.foregroundColor CGColor];
     item.strokeColor = [[UIColor redColor] CGColor];
     item.strokeEnd = 1;
     return item;
@@ -479,14 +587,14 @@ static CGFloat kAxisMargin = 50.0;
     animation.duration = self.animationDuration;
     animation.fromValue = @(0);
     animation.toValue = @(1);
-//    animation.delegate = self;
+    //    animation.delegate = self;
     return animation;
 }
 
 - (void)reset {
-    self.layer.sublayers = nil;
     [self _removeTitleLabels];
     [self _removeValueLabels];
+    self.layer.sublayers = nil;
     self.selectedDataPoint = [GKLineDataPoint new];
 }
 
@@ -503,17 +611,17 @@ void processPathElement(void* info, const CGPathElement* element)
     if (element->type == kCGPathElementMoveToPoint)
     {
         NSMutableDictionary *theDict = (__bridge NSMutableDictionary *) info;
-    
+        
         NSValue *pointValue = theDict[@"thePoint"];
         CGPoint touchedPoint = [pointValue CGPointValue];
-
+        
         CGFloat xDist = (touchedPoint.x - pointArg.x);
         CGFloat yDist = (touchedPoint.y - pointArg.y);
         distance = sqrt((xDist * xDist) + (yDist * yDist));
         
         NSNumber *thresholdNumber = (NSNumber*)theDict[@"touchThreshold"];
         NSInteger touchDistanceThreshold = [thresholdNumber integerValue];
-
+        
         if (distance <= touchDistanceThreshold)
         {
             theDict[@"pointOnPath"] = [NSNumber numberWithBool:YES];
@@ -539,39 +647,39 @@ void processPathElement(void* info, const CGPathElement* element)
     GKLineDataPoint *selectedDataPoint = [GKLineDataPoint new];
     
     [subLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop)
-    {
-        // CALayer *layer = (CALayer *) obj;
-        // NSLog (@"Layer: %@", NSStringFromClass([layer class]));
-        
-        if ([obj isKindOfClass:[CAShapeLayer class]])
-        {
-            CAShapeLayer *shapeLayer = (CAShapeLayer *) obj;
-            NSNumber *lineIndexNumber = [shapeLayer valueForKey:@"indexTag"];
-            NSInteger lineIndex = [lineIndexNumber integerValue];
-            
-            if ((lineIndexNumber != nil) && (lineIndex > -1))
-            {
-                CGPathRef path = [shapeLayer path];
-
-                CGPathApply(path, (__bridge void *)(dict), processPathElement);
-
-                // if (CGPathContainsPoint(path, nil, point, YES)) {
-                NSNumber *didTouchNumber = dict[@"pointOnPath"];
-                BOOL didTouchPoint = [didTouchNumber boolValue];
-
-                if (didTouchPoint)
-                {
-                    // NSLog (@"Touch detected on Point at Shape Index: %i", indexTag);
-                    NSInteger valueIndex =  [self _indexForPointX:point.x]; // [valueIndexNumber integerValue];
-                    // NSLog (@"Touch detected on Point at Shape Index: %i", valueIndex);
-                    
-                    selectedDataPoint.lineIndex = lineIndex;
-                    selectedDataPoint.valueIndex = valueIndex;
-                    *stop = YES;
-                }
-            }
-        }
-    }];
+     {
+         // CALayer *layer = (CALayer *) obj;
+         // NSLog (@"Layer: %@", NSStringFromClass([layer class]));
+         
+         if ([obj isKindOfClass:[CAShapeLayer class]])
+         {
+             CAShapeLayer *shapeLayer = (CAShapeLayer *) obj;
+             NSNumber *lineIndexNumber = [shapeLayer valueForKey:@"indexTag"];
+             NSInteger lineIndex = [lineIndexNumber integerValue];
+             
+             if ((lineIndexNumber != nil) && (lineIndex > -1))
+             {
+                 CGPathRef path = [shapeLayer path];
+                 
+                 CGPathApply(path, (__bridge void *)(dict), processPathElement);
+                 
+                 // if (CGPathContainsPoint(path, nil, point, YES)) {
+                 NSNumber *didTouchNumber = dict[@"pointOnPath"];
+                 BOOL didTouchPoint = [didTouchNumber boolValue];
+                 
+                 if (didTouchPoint)
+                 {
+                     // NSLog (@"Touch detected on Point at Shape Index: %i", indexTag);
+                     NSInteger valueIndex =  [self _indexForPointX:point.x]; // [valueIndexNumber integerValue];
+                     // NSLog (@"Touch detected on Point at Shape Index: %i", valueIndex);
+                     
+                     selectedDataPoint.lineIndex = lineIndex;
+                     selectedDataPoint.valueIndex = valueIndex;
+                     *stop = YES;
+                 }
+             }
+         }
+     }];
     
     [self maybeNotifyDelegateOfSelectionChangeFrom:_selectedDataPoint to:selectedDataPoint AtPoint:point];
 }
@@ -584,13 +692,13 @@ void processPathElement(void* info, const CGPathElement* element)
         {
             [_delegate lineGraph:self willDeselectDataPoint:previousSelection AtPoint:targetPoint];
         }
-
+        
         _selectedDataPoint = newSelection;
-
+        
         if (![newSelection isEmptyDataPoint])
         {
             [_delegate lineGraph:self willSelectDataPoint:newSelection AtPoint:targetPoint];
-
+            
             if (![previousSelection isEmptyDataPoint])
             {
                 [_delegate lineGraph:self didDeselectDataPoint:previousSelection AtPoint:targetPoint];
