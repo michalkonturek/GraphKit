@@ -1,10 +1,15 @@
 # MKFoundationKit
 
-[![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)](https://github.com/michalkonturek/MKFoundationKit/blob/master/LICENSE)
+[![Twitter](https://img.shields.io/badge/contact-@MichalKonturek-blue.svg?style=flat)](http://twitter.com/michalkonturek)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/michalkonturek/MKFoundationKit/blob/master/LICENSE)
+[![CocoaPods](https://img.shields.io/cocoapods/v/MKFoundationKit.svg?style=flat)](https://github.com/michalkonturek/MKFoundationKit)
+[![Build Status](http://img.shields.io/travis/michalkonturek/MKFoundationKit.svg?style=flat)](https://travis-ci.org/michalkonturek/MKFoundationKit)
+
+<!--[![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)](https://github.com/michalkonturek/MKFoundationKit/blob/master/LICENSE)
 [![Build Platform](https://cocoapod-badges.herokuapp.com/p/MKFoundationKit/badge.png)](https://github.com/michalkonturek/MKFoundationKit)
 [![Build Version](https://cocoapod-badges.herokuapp.com/v/MKFoundationKit/badge.png)](https://github.com/michalkonturek/MKFoundationKit)
 [![Build Status](https://travis-ci.org/michalkonturek/MKFoundationKit.png?branch=master)](https://travis-ci.org/michalkonturek/MKFoundationKit)
-
+-->
 
 MKFoundationKit is a collection of categories for `NSFoundation` classes to accelerate development. 
 
@@ -446,6 +451,15 @@ Source code of this project is available under the standard MIT license. Please 
 
 - (BOOL)mk_matchesRegex:(NSString *)regex;
 ```
+
+## Contributing
+
+1. Fork it.
+2. Create your feature branch (`git checkout -b new-feature`).
+3. Commit your changes (`git commit -am 'Added new-feature'`).
+4. Push to the branch (`git push origin new-feature`).
+5. Create new Pull Request.
+
 
 <!--- - - 
 

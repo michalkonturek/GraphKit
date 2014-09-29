@@ -1,6 +1,4 @@
 //
-//  BButton.m
-//
 //  Created by Mathieu Bolard on 31/07/12.
 //  Copyright (c) 2012 Mathieu Bolard. All rights reserved.
 //
@@ -24,7 +22,6 @@
 
 static CGFloat const kBButtonCornerRadiusV2 = 6.0f;
 static CGFloat const kBButtonCornerRadiusV3 = 4.0f;
-static NSArray * kFontAwesomeStrings;
 
 @interface BButton ()
 
@@ -32,10 +29,6 @@ static NSArray * kFontAwesomeStrings;
 
 - (void)setup;
 - (void)setTextAttributesForStyle:(BButtonStyle)aStyle;
-
-- (void)didRecieveMemoryWarningNotification:(NSNotification *)notification;
-
-- (NSString *)stringFromFontAwesomeIcon:(FAIcon)icon;
 
 + (UIColor *)colorForButtonType:(BButtonType)type style:(BButtonStyle)style;
 + (UIColor *)colorForV2StyleButtonWithType:(BButtonType)type;
@@ -62,10 +55,6 @@ static NSArray * kFontAwesomeStrings;
     _shouldShowDisabled = YES;
     _buttonStyle = BButtonStyleBootstrapV3;
     [self setType:BButtonTypeDefault];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didRecieveMemoryWarningNotification:)
-                                                 name:UIApplicationDidReceiveMemoryWarningNotification
-                                               object:nil];
 }
 
 - (void)setTextAttributesForStyle:(BButtonStyle)aStyle
@@ -85,18 +74,18 @@ static NSArray * kFontAwesomeStrings;
 
 #pragma mark - Initialization
 
-- (id)initWithFrame:(CGRect)frame type:(BButtonType)type style:(BButtonStyle)style
+- (instancetype)initWithFrame:(CGRect)frame type:(BButtonType)type style:(BButtonStyle)style
 {
     return [self initWithFrame:frame
                          color:[BButton colorForButtonType:type style:style]
                          style:style];
 }
 
-- (id)initWithFrame:(CGRect)frame
-               type:(BButtonType)type
-              style:(BButtonStyle)style
-               icon:(FAIcon)icon
-           fontSize:(CGFloat)fontSize
+- (instancetype)initWithFrame:(CGRect)frame
+                         type:(BButtonType)type
+                        style:(BButtonStyle)style
+                         icon:(FAIcon)icon
+                     fontSize:(CGFloat)fontSize
 {
     return [self initWithFrame:frame
                          color:[BButton colorForButtonType:type style:style]
@@ -105,10 +94,10 @@ static NSArray * kFontAwesomeStrings;
                       fontSize:fontSize];
 }
 
-- (id)initWithFrame:(CGRect)frame color:(UIColor *)color style:(BButtonStyle)style
+- (instancetype)initWithFrame:(CGRect)frame color:(UIColor *)color style:(BButtonStyle)style
 {
     self = [self initWithFrame:frame];
-    if(self) {
+    if (self) {
         _buttonStyle = style;
         [self setColor:color];
         [self setTextAttributesForStyle:style];
@@ -116,36 +105,36 @@ static NSArray * kFontAwesomeStrings;
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
-              color:(UIColor *)color
-              style:(BButtonStyle)style
-               icon:(FAIcon)icon
-           fontSize:(CGFloat)fontSize
+- (instancetype)initWithFrame:(CGRect)frame
+                        color:(UIColor *)color
+                        style:(BButtonStyle)style
+                         icon:(FAIcon)icon
+                     fontSize:(CGFloat)fontSize
 {
     self = [self initWithFrame:frame color:color style:style];
-    if(self) {
+    if (self) {
         [[self titleLabel] setFont:[UIFont fontWithName:kFontAwesomeFont size:fontSize]];
         [[self titleLabel] setTextAlignment:NSTextAlignmentCenter];
-        [self setTitle:[self stringFromFontAwesomeIcon:icon]
+        [self setTitle:[NSString fa_stringForFontAwesomeIcon:icon]
               forState:UIControlStateNormal];
     }
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if(self) {
+    if (self) {
         [self setup];
         [self setTextAttributesForStyle:_buttonStyle];
     }
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    if(self) {
+    if (self) {
         [self setup];
     }
     return self;
@@ -155,26 +144,22 @@ static NSArray * kFontAwesomeStrings;
 {
     _color = nil;
     _buttonCornerRadius = nil;
-    kFontAwesomeStrings = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationDidReceiveMemoryWarningNotification
-                                                  object:nil];
 }
 
 #pragma mark - Class initialization
 
-+ (BButton *)awesomeButtonWithOnlyIcon:(FAIcon)icon
-                                  type:(BButtonType)type
-                                 style:(BButtonStyle)style
++ (instancetype)awesomeButtonWithOnlyIcon:(FAIcon)icon
+                                     type:(BButtonType)type
+                                    style:(BButtonStyle)style
 {
     return [BButton awesomeButtonWithOnlyIcon:icon
                                         color:[BButton colorForButtonType:type style:style]
                                         style:style];
 }
 
-+ (BButton *)awesomeButtonWithOnlyIcon:(FAIcon)icon
-                                 color:(UIColor *)color
-                                 style:(BButtonStyle)style
++ (instancetype)awesomeButtonWithOnlyIcon:(FAIcon)icon
+                                    color:(UIColor *)color
+                                    style:(BButtonStyle)style
 {
     return [[BButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 40.0f, 40.0f)
                                     color:color
@@ -201,11 +186,11 @@ static NSArray * kFontAwesomeStrings;
 
 - (NSNumber *)buttonCornerRadius
 {
-    if(!_buttonCornerRadius) {
+    if (!_buttonCornerRadius) {
         _buttonCornerRadius = [[[self class] appearance] buttonCornerRadius];
     }
     
-    if(_buttonCornerRadius) {
+    if (_buttonCornerRadius) {
         return _buttonCornerRadius;
     }
     
@@ -218,7 +203,7 @@ static NSArray * kFontAwesomeStrings;
 {
     _color = newColor;
     
-    if([newColor bb_isLightColor]) {
+    if ([newColor bb_isLightColor]) {
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self setTitleShadowColor:[[UIColor whiteColor] colorWithAlphaComponent:0.6f] forState:UIControlStateNormal];
         
@@ -240,26 +225,18 @@ static NSArray * kFontAwesomeStrings;
 {
     _shouldShowDisabled = show;
     
-    if(show) {
+    if (show) {
         if([self.color bb_isLightColor])
             [self setTitleColor:[UIColor colorWithWhite:0.4f alpha:0.5f] forState:UIControlStateDisabled];
         else
             [self setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateDisabled];
     }
     else {
-        if([self.color bb_isLightColor])
+        if ([self.color bb_isLightColor])
             [self setTitleColor:[UIColor blackColor] forState:UIControlStateDisabled];
         else
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     }
-}
-
-#pragma mark - Notifications
-
-- (void)didRecieveMemoryWarningNotification:(NSNotification *)notification
-{
-    NSLog(@"%@ recieved %@", [BButton class], notification.name);
-    kFontAwesomeStrings = nil;
 }
 
 #pragma mark - BButton
@@ -278,7 +255,7 @@ static NSArray * kFontAwesomeStrings;
 
 - (void)addAwesomeIcon:(FAIcon)icon beforeTitle:(BOOL)before
 {
-    NSString *iconString = [self stringFromFontAwesomeIcon:icon];
+    NSString *iconString = [NSString fa_stringForFontAwesomeIcon:icon];
     self.titleLabel.font = [UIFont fontWithName:kFontAwesomeFont
                                            size:self.titleLabel.font.pointSize];
     
@@ -294,15 +271,6 @@ static NSArray * kFontAwesomeStrings;
     }
     
     [self setTitle:title forState:UIControlStateNormal];
-}
-
-- (NSString *)stringFromFontAwesomeIcon:(FAIcon)icon
-{
-    if(!kFontAwesomeStrings) {
-        kFontAwesomeStrings = [NSString fa_allFontAwesomeStrings];
-    }
-    return [NSString fa_stringFromFontAwesomeStrings:kFontAwesomeStrings
-                                             forIcon:icon];
 }
 
 + (UIColor *)colorForButtonType:(BButtonType)type style:(BButtonStyle)style

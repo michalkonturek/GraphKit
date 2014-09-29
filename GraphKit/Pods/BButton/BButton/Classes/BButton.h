@@ -1,6 +1,4 @@
 //
-//  BButton.h
-//
 //  Created by Mathieu Bolard on 31/07/12.
 //  Copyright (c) 2012 Mathieu Bolard. All rights reserved.
 //
@@ -87,7 +85,7 @@ typedef NS_ENUM(NSUInteger, BButtonType) {
  *
  *  @return An initialized `BButton` object or `nil` if the object could not be successfully initialized.
  */
-- (id)initWithFrame:(CGRect)frame type:(BButtonType)type style:(BButtonStyle)style;
+- (instancetype)initWithFrame:(CGRect)frame type:(BButtonType)type style:(BButtonStyle)style;
 
 /**
  *  Initializes and returns a button having the given frame, type, style, icon, and font size.
@@ -100,11 +98,11 @@ typedef NS_ENUM(NSUInteger, BButtonType) {
  *
  *  @return An initialized `BButton` object or `nil` if the object could not be successfully initialized.
  */
-- (id)initWithFrame:(CGRect)frame
-               type:(BButtonType)type
-              style:(BButtonStyle)style
-               icon:(FAIcon)icon
-           fontSize:(CGFloat)fontSize;
+- (instancetype)initWithFrame:(CGRect)frame
+                         type:(BButtonType)type
+                        style:(BButtonStyle)style
+                         icon:(FAIcon)icon
+                     fontSize:(CGFloat)fontSize;
 
 /**
  *  Initializes and returns a button having the given frame, color, and style.
@@ -115,7 +113,7 @@ typedef NS_ENUM(NSUInteger, BButtonType) {
  *
  *  @return An initialized `BButton` object or `nil` if the object could not be successfully initialized.
  */
-- (id)initWithFrame:(CGRect)frame color:(UIColor *)color style:(BButtonStyle)style;
+- (instancetype)initWithFrame:(CGRect)frame color:(UIColor *)color style:(BButtonStyle)style;
 
 /**
  *  Initializes and returns a button having the given frame, color, style, icon, and font size.
@@ -128,11 +126,11 @@ typedef NS_ENUM(NSUInteger, BButtonType) {
  *
  *  @return An initialized `BButton` object or `nil` if the object could not be successfully initialized.
  */
-- (id)initWithFrame:(CGRect)frame
-              color:(UIColor *)color
-              style:(BButtonStyle)style
-               icon:(FAIcon)icon
-           fontSize:(CGFloat)fontSize;
+- (instancetype)initWithFrame:(CGRect)frame
+                        color:(UIColor *)color
+                        style:(BButtonStyle)style
+                         icon:(FAIcon)icon
+                     fontSize:(CGFloat)fontSize;
 
 /**
  *  Initializes and returns a special icon-only button having the given icon, type, and style. The button frame is set with an origin of `(0.0, 0.0)` and a size of `(40.0, 40.0)`. The button font size is set to `20.0`.
@@ -143,9 +141,9 @@ typedef NS_ENUM(NSUInteger, BButtonType) {
  *
  *  @return An initialized `BButton` object or `nil` if the object could not be successfully initialized.
  */
-+ (BButton *)awesomeButtonWithOnlyIcon:(FAIcon)icon
-                                  type:(BButtonType)type
-                                 style:(BButtonStyle)style;
++ (instancetype)awesomeButtonWithOnlyIcon:(FAIcon)icon
+                                     type:(BButtonType)type
+                                    style:(BButtonStyle)style;
 
 /**
  *  Initializes and returns a special icon-only button having the given icon, color, and style. The button frame is set with an origin of `(0.0, 0.0)` and a size of `(40.0, 40.0)`. The button font size is set to `20.0`.
@@ -156,9 +154,9 @@ typedef NS_ENUM(NSUInteger, BButtonType) {
  *
  *  @return An initialized `BButton` object or `nil` if the object could not be successfully initialized.
  */
-+ (BButton *)awesomeButtonWithOnlyIcon:(FAIcon)icon
-                                 color:(UIColor *)color
-                                 style:(BButtonStyle)style;
++ (instancetype)awesomeButtonWithOnlyIcon:(FAIcon)icon
+                                    color:(UIColor *)color
+                                    style:(BButtonStyle)style;
 
 #pragma mark - BButton
 
