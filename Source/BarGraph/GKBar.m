@@ -101,7 +101,7 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
     UIBezierPath *path = [self _bezierPathWith:converted];
     
     CAShapeLayer *layer = [self _layerWithPath:path];
-    if (_percentage > value) layer.strokeColor = [[UIColor whiteColor] CGColor];
+    if (_percentage > value) layer.strokeColor = [self.backgroundColor CGColor];
     
     [self.layer addSublayer:layer];
     
