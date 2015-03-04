@@ -42,7 +42,7 @@
 
 @property (nonatomic, assign) CGFloat *minValue;
 @property (nonatomic, assign) BOOL startFromZero;
-
+@property (nonatomic, strong) UIColor *labelColour;
 - (void)draw;
 - (void)reset;
 
