@@ -103,7 +103,7 @@ static CGFloat kAxisMargin = 50.0;
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
         item.textAlignment = NSTextAlignmentCenter;
         item.font = [UIFont boldSystemFontOfSize:12];
-        item.textColor = [UIColor lightGrayColor];
+        item.textColor = self.labelColour;
         item.text = [self.dataSource titleForLineAtIndex:idx];
         
         [items addObject:item];
@@ -132,7 +132,7 @@ static CGFloat kAxisMargin = 50.0;
         UILabel *label = [self.titleLabels objectAtIndex:idx];
         label.x = startX;
         label.y = startY;
-        
+        label.textColor = self.labelColour;
         [self addSubview:label];
 
         idx++;
