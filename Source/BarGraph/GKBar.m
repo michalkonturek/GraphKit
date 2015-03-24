@@ -124,7 +124,7 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
 - (CAShapeLayer *)_layerWithPath:(UIBezierPath *)path {
     CAShapeLayer *item = [CAShapeLayer layer];
     item.fillColor = [[UIColor blackColor] CGColor];
-    item.lineCap = kCALineCapButt;
+    item.lineCap = kCALineCapRound;
     item.lineWidth = self.frame.size.width;
     item.path = path.CGPath;
     item.strokeColor = [self.foregroundColor CGColor];

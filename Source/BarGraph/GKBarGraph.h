@@ -55,6 +55,19 @@
  */
 @property (nonatomic, assign) CGFloat customFontSize;
 
+@property (nonatomic, strong) UIView *underlineBar;
+
+/**
+ *  The Custom Color of the Underline Bar Color
+ */
+@property (nonatomic, strong) UIColor *underlineBarColor;
+/**
+ *  Enables Hiding/Showing of an Underline beneath the Bar Graph
+ *  Default is NO
+ */
+@property (nonatomic, assign) BOOL showUnderlineBar;
+
+
 
 - (void)draw;
 - (void)reset;

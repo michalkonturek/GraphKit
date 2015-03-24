@@ -63,7 +63,11 @@ static CGFloat kDefaultAnimationDuration = 2.0;
     self.barWidth = kDefaultBarWidth;
     self.marginBar = kDefaultBarMargin;
     
+    self.customFontColor = [UIColor lightGrayColor];
+    
     self.customFontSize = 13;
+    self.underlineBarColor = [UIColor blackColor];
+    self.showUnderlineBar = NO;
 }
 
 - (void)setAnimated:(BOOL)animated {
@@ -98,8 +102,11 @@ static CGFloat kDefaultAnimationDuration = 2.0;
     if ([self _hasBars]) [self _removeBars];
     if ([self _hasLabels]) [self _removeLabels];
     
+    [self _removeUnderlineBar];
+    
     [self _constructBars];
     [self _constructLabels];
+    [self _constructUnderlineBar];
     
     [self _positionBars];
     [self _positionLabels];
@@ -176,11 +183,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
         }
         item.font = itemFont;
         
-        UIColor *itemTextColor = [UIColor lightGrayColor];
-        if (self.customFontColor != nil)
-        {
-            itemTextColor = self.customFontColor;
-        }
+        UIColor *itemTextColor = self.customFontColor;
         item.textColor = itemTextColor;
         
         item.text = [self.dataSource titleForBarAtIndex:idx];
@@ -215,6 +218,38 @@ static CGFloat kDefaultAnimationDuration = 2.0;
         bar.y -= labelHeight + 5;
         idx++;
     }];
+}
+
+- (void)_constructUnderlineBar
+{
+    if (_showUnderlineBar)
+    {
+        self.underlineBar = [UIView new];
+        
+        NSInteger count = [self.dataSource numberOfBars];
+        CGFloat totalBarWidth = (self.barWidth + self.marginBar);
+        CGFloat graphWidth = totalBarWidth * count;
+        
+        CGFloat labelHeight = kDefaultLabelHeight;
+        CGFloat startY = (self.height - labelHeight);
+        CGFloat startX = [self _barStartX];
+        startX -= self.marginBar;
+        startY -= 5;
+        
+        graphWidth += self.marginBar;
+        
+        [self.underlineBar setFrame:CGRectMake(startX, startY, graphWidth, 1)];
+        
+        self.underlineBar.backgroundColor = _underlineBarColor;
+        
+        [self addSubview:self.underlineBar];
+    }
+}
+
+- (void)_removeUnderlineBar
+{
+    [self.underlineBar removeFromSuperview];
+    self.underlineBar = nil;
 }
 
 - (void)_drawBars {
