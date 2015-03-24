@@ -70,6 +70,9 @@ static CGFloat kAxisMargin = 50.0;
     self.margin = kDefaultMargin;
     self.valueLabelCount = kDefaultValueLabelCount;
     self.clipsToBounds = YES;
+    
+    self.xAxisCustomFontSize = 12;
+    self.yAxisCustomFontSize = 12;
 }
 
 - (void)draw {
@@ -102,8 +105,22 @@ static CGFloat kAxisMargin = 50.0;
         CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
         item.textAlignment = NSTextAlignmentCenter;
-        item.font = [UIFont boldSystemFontOfSize:12];
-        item.textColor = [UIColor lightGrayColor];
+        UIFont *itemFont = [UIFont boldSystemFontOfSize:self.yAxisCustomFontSize];
+        if (self.yAxisCustomFontName != nil && self.yAxisCustomFontName.length > 0)
+        {
+            itemFont = [UIFont fontWithName:self.yAxisCustomFontName size:self.yAxisCustomFontSize];
+        }
+        item.font = itemFont;
+        
+        UIColor *itemTextColor = [UIColor lightGrayColor];
+        if (self.yAxisCustomFontColor != nil)
+        {
+            itemTextColor = self.yAxisCustomFontColor;
+        }
+        item.textColor = itemTextColor;
+        
+        item.adjustsFontSizeToFitWidth = YES;
+        
         item.text = [self.dataSource titleForLineAtIndex:idx];
         
         [items addObject:item];
@@ -159,14 +176,27 @@ static CGFloat kAxisMargin = 50.0;
         CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
         item.textAlignment = NSTextAlignmentRight;
-        item.font = [UIFont boldSystemFontOfSize:12];
-        item.textColor = [UIColor lightGrayColor];
+        UIFont *itemFont = [UIFont boldSystemFontOfSize:self.xAxisCustomFontSize];
+        if (self.xAxisCustomFontName != nil && self.xAxisCustomFontName.length > 0)
+        {
+            itemFont = [UIFont fontWithName:self.xAxisCustomFontName size:self.xAxisCustomFontSize];
+        }
+        item.font = itemFont;
+        
+        UIColor *itemTextColor = [UIColor lightGrayColor];
+        if (self.xAxisCustomFontColor != nil)
+        {
+            itemTextColor = self.xAxisCustomFontColor;
+        }
+        item.textColor = itemTextColor;
     
         CGFloat value = [self _minValue] + (idx * [self _stepValueLabelY]);
         item.centerY = [self _positionYForLineValue:value];
         
         item.text = [@(ceil(value)) stringValue];
 //        item.text = [@(value) stringValue];
+        
+        item.adjustsFontSizeToFitWidth = YES;
         
         [items addObject:item];
         [self addSubview:item];

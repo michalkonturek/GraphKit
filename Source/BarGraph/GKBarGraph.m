@@ -62,6 +62,8 @@ static CGFloat kDefaultAnimationDuration = 2.0;
     self.barHeight = kDefaultBarHeight;
     self.barWidth = kDefaultBarWidth;
     self.marginBar = kDefaultBarMargin;
+    
+    self.customFontSize = 13;
 }
 
 - (void)setAnimated:(BOOL)animated {
@@ -166,8 +168,21 @@ static CGFloat kDefaultAnimationDuration = 2.0;
         CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
         item.textAlignment = NSTextAlignmentCenter;
-        item.font = [UIFont boldSystemFontOfSize:13];
-        item.textColor = [UIColor lightGrayColor];
+        
+        UIFont *itemFont = [UIFont boldSystemFontOfSize:self.customFontSize];
+        if (self.customFontName != nil && self.customFontName.length > 0)
+        {
+            itemFont = [UIFont fontWithName:self.customFontName size:self.customFontSize];
+        }
+        item.font = itemFont;
+        
+        UIColor *itemTextColor = [UIColor lightGrayColor];
+        if (self.customFontColor != nil)
+        {
+            itemTextColor = self.customFontColor;
+        }
+        item.textColor = itemTextColor;
+        
         item.text = [self.dataSource titleForBarAtIndex:idx];
         
         [items addObject:item];

@@ -42,6 +42,20 @@
 @property (nonatomic, assign) CGFloat barWidth;
 @property (nonatomic, assign) CGFloat marginBar;
 
+/**
+ *  The Custom Font Name will be used if set otherwise the graph will default to the boldSystemFont
+ */
+@property (nonatomic, strong) NSString *customFontName;
+/**
+ *  The Custom Font Color will be used if set otherwise the graph will default to the lightGrayColor
+ */
+@property (nonatomic, strong) UIColor *customFontColor;
+/**
+ *  The Custom Font Size will be used if set otherwise the graph will default to the value 13
+ */
+@property (nonatomic, assign) CGFloat customFontSize;
+
+
 - (void)draw;
 - (void)reset;
 

@@ -13,4 +13,4 @@ SPEC CHECKSUMS:
   FrameAccessor: 5eec95b29b5e9a3afe72a7a2e9ed25b000d3bcc3
   MKFoundationKit: 4858fe474ee45f988db5ff1e229d700743e71ed8
 
-COCOAPODS: 0.34.1
+COCOAPODS: 0.35.0
