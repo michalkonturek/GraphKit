@@ -66,28 +66,22 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 
 - (void)setAnimated:(BOOL)animated {
     _animated = animated;
-    [self.bars mk_each:^(NSArray *bar) {
-        [bar mk_each:^(GKStackedBar *item) {
-            item.animated = animated;
-        }];
+    [self.bars mk_each:^(GKStackedBar *item) {
+        item.animated = animated;
     }];
 }
 
 - (void)setAnimationDuration:(CFTimeInterval)animationDuration {
     _animationDuration = animationDuration;
-    [self.bars mk_each:^(NSArray *bar) {
-        [bar mk_each:^(GKStackedBar *item) {
-            item.animationDuration = animationDuration;
-        }];
+    [self.bars mk_each:^(GKStackedBar *item) {
+        item.animationDuration = animationDuration;
     }];
 }
 
-- (void)setBarColor:(UIColor *)color {
-    _barColor = color;
-    [self.bars mk_each:^(NSArray *bar) {
-        [bar mk_each:^(GKStackedBar *item) {
-            item.foregroundColor = color;
-        }];
+- (void)setBarColors:(NSArray *)barColors {
+    _barColors = barColors;
+    [self.bars mk_each:^(GKStackedBar *item) {
+        item.foregroundColors = barColors;
     }];
 }
 
@@ -98,13 +92,13 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 
 - (void)_construct {
     NSAssert(self.dataSource, @"GKStackedBarGraph : No data source is assigned.");
-    
+
     if ([self _hasBars]) [self _removeBars];
     if ([self _hasLabels]) [self _removeLabels];
-    
+
     [self _constructBars];
     [self _constructLabels];
-    
+
     [self _positionBars];
     [self _positionLabels];
 }
@@ -115,40 +109,28 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 
 - (void)_constructBars {
     NSInteger barCount = [self.dataSource numberOfBars];
-    NSInteger stackCount = [self.dataSource numberOfStacks];
-    
     id bars = [NSMutableArray arrayWithCapacity:barCount];
     for (NSInteger idx = 0; idx < barCount; idx++) {
-        
-        id stacks = [NSMutableArray arrayWithCapacity:stackCount];
-        for (NSInteger sIdx = 0; sIdx < stackCount; sIdx++) {
-            GKStackedBar *item = [GKStackedBar create];
-            if ([self barColor]) item.foregroundColor = [self barColor];
-            [stacks addObject:item];
-        }
-        [bars addObject:stacks];
+        GKStackedBar *item = [GKStackedBar create];
+        if ([self barColors]) item.foregroundColors = [self barColors];
+        [bars addObject:item];
     }
     self.bars = bars;
 }
 
 - (void)_removeBars {
-    [self.bars mk_each:^(NSArray *bar) {
-        [bar mk_each:^(GKStackedBar *item) {
-            [item removeFromSuperview];
-        }];
+    [self.bars mk_each:^(GKStackedBar *item) {
+        [item removeFromSuperview];
     }];
 }
 
 - (void)_positionBars {
+    CGFloat y = [self _barStartY];
+
     __block CGFloat x = [self _barStartX];
-    [self.bars mk_each:^(NSArray *bar) {
-        __block CGFloat y = [self _barStartY];
-        
-        [bar mk_each:^(GKStackedBar *item) {
-            item.frame = CGRectMake(x, y, _barWidth, _barHeight);
-            [self addSubview:item];
-            y += 10;
-        }];
+    [self.bars mk_each:^(GKStackedBar *item) {
+        item.frame = CGRectMake(x, y, _barWidth, _barHeight);
+        [self addSubview:item];
         x += [self _barSpace];
     }];
 }
@@ -157,7 +139,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
     CGFloat result = self.width;
     CGFloat item = [self _barSpace];
     NSInteger count = [self.dataSource numberOfBars];
-    
+
     result = result - (item * count) + self.marginBar;
     result = (result / 2);
     return result;
@@ -176,18 +158,18 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 }
 
 - (void)_constructLabels {
-    
+
     NSInteger count = [self.dataSource numberOfBars];
     id items = [NSMutableArray arrayWithCapacity:count];
     for (NSInteger idx = 0; idx < count; idx++) {
-        
+
         CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
         item.textAlignment = NSTextAlignmentCenter;
         item.font = [UIFont boldSystemFontOfSize:13];
         item.textColor = [UIColor lightGrayColor];
         item.text = [self.dataSource titleForBarAtIndex:idx];
-        
+
         [items addObject:item];
     }
     self.labels = items;
@@ -200,28 +182,22 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 }
 
 - (void)_positionLabels {
-    
+
     __block NSInteger idx = 0;
     [self.bars mk_each:^(GKStackedBar *bar) {
-        
-    }];
-    [self.bars mk_each:^(NSArray *bar) {
-        GKStackedBar *firstStack = bar[0];
+
         CGFloat labelWidth = kDefaultLabelWidth;
         CGFloat labelHeight = kDefaultLabelHeight;
-        CGFloat startX = firstStack.x - ((labelWidth - self.barWidth) / 2);
+        CGFloat startX = bar.x - ((labelWidth - self.barWidth) / 2);
         CGFloat startY = (self.height - labelHeight);
-        
+
         UILabel *label = [self.labels objectAtIndex:idx];
         label.x = startX;
         label.y = startY;
-        
+
         [self addSubview:label];
-        
-        [bar mk_each:^(GKStackedBar *item) {
-            item.y -= labelHeight + 5;
-        }];
-        
+
+        bar.y -= labelHeight + 5;
         idx++;
     }];
 }
@@ -229,34 +205,36 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 - (void)_drawBars {
     __block NSInteger idx = 0;
     id source = self.dataSource;
-    [self.bars mk_each:^(NSArray *bar) {
-        __block NSInteger sidx = 0;
-        [bar mk_each:^(GKStackedBar *item) {
-            
-            if ([source respondsToSelector:@selector(animationDurationForBarAtIndex:)]) {
-                item.animationDuration = [source animationDurationForBarAtIndex:idx];
+    [self.bars mk_each:^(GKStackedBar *item) {
+
+        if ([source respondsToSelector:@selector(animationDurationForBarAtIndex:)]) {
+            item.animationDuration = [source animationDurationForBarAtIndex:idx];
+        }
+
+        if ([source respondsToSelector:@selector(colorForBarAtIndex:stack:)]) {
+            NSMutableArray *colors = [NSMutableArray array];
+            for (int i = 0; i < [self.dataSource numberOfStacks]; i++) {
+                [colors addObject:[source colorForBarAtIndex:idx stack:i]];
             }
-            
-            if ([source respondsToSelector:@selector(colorForBarAtIndex:stack:)]) {
-                item.foregroundColor = [source colorForBarAtIndex:idx stack:sidx];
-            }
-            
-            if ([source respondsToSelector:@selector(colorForBarBackgroundAtIndex:)]) {
-                item.backgroundColor = [source colorForBarBackgroundAtIndex:idx];
-            }
-            
-            item.percentage = [[source valueForBarAtIndex:idx stack:sidx] doubleValue];
-            sidx++;
-        }];
+            item.foregroundColors = colors;
+        }
+
+        if ([source respondsToSelector:@selector(colorForBarBackgroundAtIndex:)]) {
+            item.backgroundColor = [source colorForBarBackgroundAtIndex:idx];
+        }
+
+        NSMutableArray *percentages = [NSMutableArray array];
+        for (int i = 0; i < [self.dataSource numberOfStacks]; i++) {
+            [percentages addObject:[source valueForBarAtIndex:idx stack:i]];
+        }
+        item.percentages = percentages;
         idx++;
     }];
 }
 
 - (void)reset {
-    [self.bars mk_each:^(NSArray *bar) {
-        [bar mk_each:^(GKStackedBar *item) {
-            [item reset];
-        }];
+    [self.bars mk_each:^(GKStackedBar *item) {
+        [item reset];
     }];
 }
 

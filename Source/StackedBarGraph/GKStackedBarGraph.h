@@ -37,7 +37,7 @@
 
 @property (nonatomic, strong) NSArray *bars;
 @property (nonatomic, strong) NSArray *labels;
-@property (nonatomic, strong) UIColor *barColor;
+@property (nonatomic, strong) NSArray *barColors;
 
 @property (nonatomic, assign) CGFloat barHeight;
 @property (nonatomic, assign) CGFloat barWidth;

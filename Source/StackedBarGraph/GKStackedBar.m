@@ -69,7 +69,7 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
     self.animationDuration = kDefaultAnimationDuration;
     self.clipsToBounds = YES;
     self.cornerRadius = 2.0;
-    self.foregroundColor = [UIColor gk_turquoiseColor];
+    self.foregroundColors = [NSArray array];
     self.backgroundColor = [UIColor gk_silverColor];
     _percentages = [NSMutableArray array];
 }
@@ -81,7 +81,7 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
 
 - (void)setPercentages:(NSArray *)percentages animated:(BOOL)animated {
     self.animated = animated;
-    self.percentages = percentages;
+    self.percentages = [percentages mutableCopy];
     self.animated = YES;
 }
 
@@ -92,29 +92,37 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
 }
 
 - (void)setPercentages:(NSArray *)percentages {
-    [self.percentages enumerateObjectsUsingBlock:^(NSNumber *item, NSUInteger idx, BOOL *stop) {
+    if (_percentages.count < percentages.count) {
+        for (int i = 0; i < percentages.count; i++) {
+            [_percentages addObject:@0];
+        }
+    }
+
+    [percentages enumerateObjectsUsingBlock:^(NSNumber *item, NSUInteger idx, BOOL *stop) {
         CGFloat percentage = [item floatValue];
         if (percentage == [_percentages[idx] floatValue]) return;
         if (percentage > 100) percentage = 100;
         if (percentage < 0) percentage = 0;
         if (self.animationInProgress) return;
-        
+
         [self _progressBarTo:percentage atIndex:idx];
     }];
-    
-    _percentages = percentages;
+
+    _percentages = [percentages mutableCopy];
 }
 
 - (void)_progressBarTo:(CGFloat)value atIndex:(NSInteger)index {
-    
+
+    NSLog(@"progress at %lu with nums: %f", index, value);
+
     CGFloat converted = (value / 100);
     UIBezierPath *path = [self _bezierPathWith:converted atIndex:index];
-    
-    CAShapeLayer *layer = [self _layerWithPath:path];
+
+    CAShapeLayer *layer = [self _layerWithPath:path atIndex:index];
     if ([_percentages[index] floatValue] > value) layer.strokeColor = [self.backgroundColor CGColor];
-    
+
     [self.layer addSublayer:layer];
-    
+
     if (self.animated) {
         id animation = [self _animationWithKeyPath:@"strokeEnd"];
         [layer addAnimation:animation forKey:@"strokeEndAnimation"];
@@ -137,7 +145,7 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
     item.lineCap = kCALineCapButt;
     item.lineWidth = self.frame.size.width;
     item.path = path.CGPath;
-    item.strokeColor = [self.foregroundColor CGColor];
+    item.strokeColor = [self.foregroundColors[index] CGColor];
     item.strokeEnd = 1.0;
     return item;
 }
@@ -162,7 +170,7 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
 
 - (void)setForegroundColors:(NSArray *)foregroundColors {
     _foregroundColors = foregroundColors;
-    
+
     self.layer.sublayers = nil;
     for (int i = 0; i < self.percentages.count; i++) {
         CGFloat temp = [_percentages[i] floatValue];
