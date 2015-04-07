@@ -33,7 +33,8 @@
 		84F0E98E1902B30C00FA4810 /* ExampleListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0E98C1902B30C00FA4810 /* ExampleListVC.m */; };
 		84F0E98F1902B30C00FA4810 /* ExampleListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F0E98D1902B30C00FA4810 /* ExampleListVC.xib */; };
 		973F4746059343C9A462AA2D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E12B5B49644056930176BC /* libPods.a */; };
-		FC41ADB61AD4341900F7D9C0 /* GKStackedBarGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = FC41ADB51AD4341900F7D9C0 /* GKStackedBarGraph.m */; };
+		FC41ADBA1AD436D600F7D9C0 /* GKStackedBarGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = FC41ADB91AD436D600F7D9C0 /* GKStackedBarGraph.m */; };
+		FC41ADBD1AD436EE00F7D9C0 /* GKStackedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC41ADBC1AD436EE00F7D9C0 /* GKStackedBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,8 +90,10 @@
 		84F0E98D1902B30C00FA4810 /* ExampleListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleListVC.xib; sourceTree = "<group>"; };
 		873AC9F69410844871F60371 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8AEF73567DD4B30E5A877C5C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		FC41ADB41AD4341900F7D9C0 /* GKStackedBarGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKStackedBarGraph.h; sourceTree = "<group>"; };
-		FC41ADB51AD4341900F7D9C0 /* GKStackedBarGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKStackedBarGraph.m; sourceTree = "<group>"; };
+		FC41ADB81AD436D600F7D9C0 /* GKStackedBarGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKStackedBarGraph.h; path = StackedBarGraph/GKStackedBarGraph.h; sourceTree = "<group>"; };
+		FC41ADB91AD436D600F7D9C0 /* GKStackedBarGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKStackedBarGraph.m; path = StackedBarGraph/GKStackedBarGraph.m; sourceTree = "<group>"; };
+		FC41ADBB1AD436EE00F7D9C0 /* GKStackedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GKStackedBar.h; path = StackedBarGraph/GKStackedBar.h; sourceTree = "<group>"; };
+		FC41ADBC1AD436EE00F7D9C0 /* GKStackedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GKStackedBar.m; path = StackedBarGraph/GKStackedBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,11 +198,12 @@
 		84654C4218FE8EF300160F11 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				84654C4918FE907500160F11 /* BarGraph */,
 				84654C4618FE8F0600160F11 /* GraphKit.h */,
+				847259201904AB8F00819664 /* LineGraph */,
+				FC41ADB71AD436A800F7D9C0 /* StackedBarGraph */,
 				847259271905C1D300819664 /* UIColor+GraphKit.h */,
 				847259281905C1D300819664 /* UIColor+GraphKit.m */,
-				84654C4918FE907500160F11 /* BarGraph */,
-				847259201904AB8F00819664 /* LineGraph */,
 			);
 			name = Source;
 			path = ../../Source;
@@ -212,8 +216,6 @@
 				84654C4B18FE909A00160F11 /* GKBar.m */,
 				84654C5318FEDCDF00160F11 /* GKBarGraph.h */,
 				84654C5418FEDCDF00160F11 /* GKBarGraph.m */,
-				FC41ADB41AD4341900F7D9C0 /* GKStackedBarGraph.h */,
-				FC41ADB51AD4341900F7D9C0 /* GKStackedBarGraph.m */,
 			);
 			path = BarGraph;
 			sourceTree = "<group>";
@@ -255,6 +257,17 @@
 				873AC9F69410844871F60371 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FC41ADB71AD436A800F7D9C0 /* StackedBarGraph */ = {
+			isa = PBXGroup;
+			children = (
+				FC41ADBB1AD436EE00F7D9C0 /* GKStackedBar.h */,
+				FC41ADBC1AD436EE00F7D9C0 /* GKStackedBar.m */,
+				FC41ADB81AD436D600F7D9C0 /* GKStackedBarGraph.h */,
+				FC41ADB91AD436D600F7D9C0 /* GKStackedBarGraph.m */,
+			);
+			name = StackedBarGraph;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,10 +411,11 @@
 				847259291905C1D300819664 /* UIColor+GraphKit.m in Sources */,
 				84654C5918FF4C8300160F11 /* ExampleBarGraphVC.m in Sources */,
 				8472591E1904AA4F00819664 /* ExampleLineGraph.m in Sources */,
+				FC41ADBD1AD436EE00F7D9C0 /* GKStackedBar.m in Sources */,
 				84654C4C18FE909A00160F11 /* GKBar.m in Sources */,
 				84654C2018FE8EE300160F11 /* main.m in Sources */,
 				84F0E98E1902B30C00FA4810 /* ExampleListVC.m in Sources */,
-				FC41ADB61AD4341900F7D9C0 /* GKStackedBarGraph.m in Sources */,
+				FC41ADBA1AD436D600F7D9C0 /* GKStackedBarGraph.m in Sources */,
 				84654C5118FE934800160F11 /* ExampleBarVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

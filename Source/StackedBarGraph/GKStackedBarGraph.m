@@ -28,7 +28,7 @@
 #import <FrameAccessor/FrameAccessor.h>
 #import <MKFoundationKit/NSArray+MK.h>
 
-#import "GKBar.h"
+#import "GKStackedBar.h"
 
 static CGFloat kDefaultBarHeight = 140;
 static CGFloat kDefaultBarWidth = 22;
@@ -67,7 +67,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 - (void)setAnimated:(BOOL)animated {
     _animated = animated;
     [self.bars mk_each:^(NSArray *bar) {
-        [bar mk_each:^(GKBar *item) {
+        [bar mk_each:^(GKStackedBar *item) {
             item.animated = animated;
         }];
     }];
@@ -76,7 +76,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 - (void)setAnimationDuration:(CFTimeInterval)animationDuration {
     _animationDuration = animationDuration;
     [self.bars mk_each:^(NSArray *bar) {
-        [bar mk_each:^(GKBar *item) {
+        [bar mk_each:^(GKStackedBar *item) {
             item.animationDuration = animationDuration;
         }];
     }];
@@ -85,7 +85,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 - (void)setBarColor:(UIColor *)color {
     _barColor = color;
     [self.bars mk_each:^(NSArray *bar) {
-        [bar mk_each:^(GKBar *item) {
+        [bar mk_each:^(GKStackedBar *item) {
             item.foregroundColor = color;
         }];
     }];
@@ -122,7 +122,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
         
         id stacks = [NSMutableArray arrayWithCapacity:stackCount];
         for (NSInteger sIdx = 0; sIdx < stackCount; sIdx++) {
-            GKBar *item = [GKBar create];
+            GKStackedBar *item = [GKStackedBar create];
             if ([self barColor]) item.foregroundColor = [self barColor];
             [stacks addObject:item];
         }
@@ -133,7 +133,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 
 - (void)_removeBars {
     [self.bars mk_each:^(NSArray *bar) {
-        [bar mk_each:^(GKBar *item) {
+        [bar mk_each:^(GKStackedBar *item) {
             [item removeFromSuperview];
         }];
     }];
@@ -144,7 +144,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
     [self.bars mk_each:^(NSArray *bar) {
         __block CGFloat y = [self _barStartY];
         
-        [bar mk_each:^(GKBar *item) {
+        [bar mk_each:^(GKStackedBar *item) {
             item.frame = CGRectMake(x, y, _barWidth, _barHeight);
             [self addSubview:item];
             y += 10;
@@ -202,11 +202,11 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 - (void)_positionLabels {
     
     __block NSInteger idx = 0;
-    [self.bars mk_each:^(GKBar *bar) {
+    [self.bars mk_each:^(GKStackedBar *bar) {
         
     }];
     [self.bars mk_each:^(NSArray *bar) {
-        GKBar *firstStack = bar[0];
+        GKStackedBar *firstStack = bar[0];
         CGFloat labelWidth = kDefaultLabelWidth;
         CGFloat labelHeight = kDefaultLabelHeight;
         CGFloat startX = firstStack.x - ((labelWidth - self.barWidth) / 2);
@@ -218,7 +218,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
         
         [self addSubview:label];
         
-        [bar mk_each:^(GKBar *item) {
+        [bar mk_each:^(GKStackedBar *item) {
             item.y -= labelHeight + 5;
         }];
         
@@ -231,7 +231,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
     id source = self.dataSource;
     [self.bars mk_each:^(NSArray *bar) {
         __block NSInteger sidx = 0;
-        [bar mk_each:^(GKBar *item) {
+        [bar mk_each:^(GKStackedBar *item) {
             
             if ([source respondsToSelector:@selector(animationDurationForBarAtIndex:)]) {
                 item.animationDuration = [source animationDurationForBarAtIndex:idx];
@@ -254,7 +254,7 @@ static CGFloat kDefaultAnimationDuration = 2.0;
 
 - (void)reset {
     [self.bars mk_each:^(NSArray *bar) {
-        [bar mk_each:^(GKBar *item) {
+        [bar mk_each:^(GKStackedBar *item) {
             [item reset];
         }];
     }];
