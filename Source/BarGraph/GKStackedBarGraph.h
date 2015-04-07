@@ -1,5 +1,5 @@
 //
-//  GraphKit.h
+//  GKStackedBarGraph.h
 //  GraphKit
 //
 //  Copyright (c) 2014 Michal Konturek
@@ -24,11 +24,41 @@
 //
 
 
-#import "GKBar.h"
+#import <UIKit/UIKit.h>
 
-#import "GKBar.h"
-#import "GKBarGraph.h"
-#import "GKStackedBarGraph.h"
-#import "GKLineGraph.h"
+@protocol GKStackedBarGraphDataSource;
 
-#import "UIColor+GraphKit.h"
+@interface GKStackedBarGraph : UIView
+
+@property (nonatomic, assign) BOOL animated;
+@property (nonatomic, assign) CFTimeInterval animationDuration;
+
+@property (nonatomic, weak) IBOutlet id<GKStackedBarGraphDataSource> dataSource;
+
+@property (nonatomic, strong) NSArray *bars;
+@property (nonatomic, strong) NSArray *labels;
+@property (nonatomic, strong) UIColor *barColor;
+
+@property (nonatomic, assign) CGFloat barHeight;
+@property (nonatomic, assign) CGFloat barWidth;
+@property (nonatomic, assign) CGFloat marginBar;
+
+- (void)draw;
+- (void)reset;
+
+@end
+
+@protocol GKStackedBarGraphDataSource <NSObject>
+
+- (NSInteger)numberOfBars;
+- (NSInteger)numberOfStacks;
+- (NSNumber *)valueForBarAtIndex:(NSInteger)index stack:(NSInteger)stack;
+
+@optional
+- (UIColor *)colorForBarAtIndex:(NSInteger)index stack:(NSInteger)stack;
+- (UIColor *)colorForBarBackgroundAtIndex:(NSInteger)index;
+- (CFTimeInterval)animationDurationForBarAtIndex:(NSInteger)index;
+
+- (NSString *)titleForBarAtIndex:(NSInteger)index;
+
+@end
