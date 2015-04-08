@@ -69,7 +69,7 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
     self.animationDuration = kDefaultAnimationDuration;
     self.clipsToBounds = YES;
     self.cornerRadius = 2.0;
-    self.foregroundColors = [NSArray array];
+    self.foregroundColors = @[[UIColor gk_alizarinColor], [UIColor gk_emerlandColor], [UIColor gk_peterRiverColor]];
     self.backgroundColor = [UIColor gk_silverColor];
     _percentages = [NSMutableArray array];
 }
@@ -146,7 +146,7 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
     item.lineCap = kCALineCapButt;
     item.lineWidth = self.frame.size.width;
     item.path = path.CGPath;
-    item.strokeColor = [self.foregroundColors[index] CGColor];
+    item.strokeColor = [self.foregroundColors[index % (self.foregroundColors.count)] CGColor];
     item.strokeEnd = 1.0;
     return item;
 }
