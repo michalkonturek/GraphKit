@@ -98,6 +98,7 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
         }
     }
 
+    __block CGFloat sum = 0;
     [percentages enumerateObjectsUsingBlock:^(NSNumber *item, NSUInteger idx, BOOL *stop) {
         CGFloat percentage = [item floatValue];
         if (percentage == [_percentages[idx] floatValue]) return;
@@ -105,18 +106,17 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
         if (percentage < 0) percentage = 0;
         if (self.animationInProgress) return;
 
-        [self _progressBarTo:percentage atIndex:idx];
+        [self _progressBarFrom:sum value:percentage atIndex:idx];
+        sum += percentage;
     }];
 
     _percentages = [percentages mutableCopy];
 }
 
-- (void)_progressBarTo:(CGFloat)value atIndex:(NSInteger)index {
-
-    NSLog(@"progress at %lu with nums: %f", index, value);
-
+- (void)_progressBarFrom:(CGFloat)from value:(CGFloat)value atIndex:(NSInteger)index {
+    CGFloat fromConverted = (from / 100);
     CGFloat converted = (value / 100);
-    UIBezierPath *path = [self _bezierPathWith:converted atIndex:index];
+    UIBezierPath *path = [self _bezierPathWithStart:fromConverted value:converted atIndex:index];
 
     CAShapeLayer *layer = [self _layerWithPath:path atIndex:index];
     if ([_percentages[index] floatValue] > value) layer.strokeColor = [self.backgroundColor CGColor];
@@ -129,11 +129,12 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
     }
 }
 
-- (UIBezierPath *)_bezierPathWith:(CGFloat)value atIndex:(NSInteger)index {
+- (UIBezierPath *)_bezierPathWithStart:(CGFloat)start value:(CGFloat)value atIndex:(NSInteger)index {
     UIBezierPath *path = [UIBezierPath bezierPath];
     CGFloat startX = (self.frame.size.width / 2);
-    CGFloat startY = (self.frame.size.height * (1 - ([_percentages[index] floatValue] / 100)));
-    CGFloat endY = (self.frame.size.height * (1 - value));
+    CGFloat previousStackEndY = self.frame.size.height * start;
+    CGFloat startY = (self.frame.size.height * (1 - ([_percentages[index] floatValue] / 100)) - previousStackEndY);
+    CGFloat endY = (self.frame.size.height * (1 - value) - previousStackEndY);
     [path moveToPoint:CGPointMake(startX, startY)];
     [path addLineToPoint:CGPointMake(startX, endY)];
     return path;
