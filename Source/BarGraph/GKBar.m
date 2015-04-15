@@ -82,7 +82,6 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
 - (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated {
     self.animated = animated;
     self.percentage = percentage;
-    self.animated = YES;
 }
 
 - (void)setPercentage:(CGFloat)percentage {
