@@ -85,12 +85,6 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
     self.animated = YES;
 }
 
-- (void)setPercentage:(CGFloat)percentage atIndex:(NSInteger)index animated:(BOOL)animated {
-    self.animated = animated;
-    self.percentages[index] = @(percentage);
-    self.animated = YES;
-}
-
 - (void)setPercentages:(NSArray *)percentages {
     if (_percentages.count < percentages.count) {
         for (int i = 0; i < percentages.count; i++) {
@@ -173,11 +167,9 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
     _foregroundColors = foregroundColors;
 
     self.layer.sublayers = nil;
-    for (int i = 0; i < self.percentages.count; i++) {
-        CGFloat temp = [_percentages[i] floatValue];
-        [self setPercentage:0 atIndex:i animated:NO];
-        [self setPercentage:temp atIndex:i animated:NO];
-    }
+    NSMutableArray *temp = [_percentages copy];
+    [self setPercentages:[self zeroes] animated:NO];
+    [self setPercentages:temp animated:NO];
 }
 
 - (void)reset {
@@ -191,9 +183,15 @@ static CFTimeInterval kDefaultAnimationDuration = 1.0;
                      } completion:^(BOOL finished) {
                          self.layer.sublayers = nil;
                      }];
+    self.percentages = [self zeroes];
+}
+
+- (NSMutableArray *)zeroes {
+    NSMutableArray *zeros = [NSMutableArray array];
     for (int i = 0; i < self.percentages.count; i++) {
-        self.percentages[i] = @0;
+        [zeros addObject:@0];
     }
+    return zeros;
 }
 
 @end

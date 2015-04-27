@@ -39,7 +39,6 @@
 @property (nonatomic, strong) NSArray *foregroundColors;
 
 - (void)setPercentages:(NSArray *)percentages animated:(BOOL)animated;
-- (void)setPercentage:(CGFloat)percentage atIndex:(NSInteger)index animated:(BOOL)animated;
 
 - (void)reset;
 
