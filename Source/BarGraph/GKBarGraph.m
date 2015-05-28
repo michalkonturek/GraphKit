@@ -97,10 +97,14 @@ static CGFloat kDefaultAnimationDuration = 2.0;
     if ([self _hasLabels]) [self _removeLabels];
     
     [self _constructBars];
-    [self _constructLabels];
-    
     [self _positionBars];
-    [self _positionLabels];
+    
+    if([self.dataSource respondsToSelector:@selector(titleForBarAtIndex:)])
+    {
+        [self _constructLabels];
+        [self _positionLabels];
+    }
+    
 }
 
 - (BOOL)_hasBars {
