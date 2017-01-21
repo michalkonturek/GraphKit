@@ -10,6 +10,7 @@
 
 #import "ExampleBarVC.h"
 #import "ExampleBarGraphVC.h"
+#import "ExampleStackedBarGraphVC.h"
 #import "ExampleLineGraph.h"
 
 #import "UIColor+GraphKit.h"
@@ -26,7 +27,7 @@
     self.title = @"GraphKit";
     self.view.backgroundColor = [UIColor gk_cloudsColor];
     
-    self.data = @[@"Bar", @"Bar Graph", @"Line Graph"];
+    self.data = @[@"Bar", @"Bar Graph", @"Stacked Bar Graph", @"Line Graph"];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellID"];
     
@@ -53,6 +54,9 @@
             vc = [[ExampleBarGraphVC alloc] initWithNibName:@"ExampleBarGraphVC" bundle:nil];
             break;
         case 2:
+            vc = [[ExampleStackedBarGraphVC alloc] initWithNibName:@"ExampleStackedBarGraphVC" bundle:nil];
+            break;
+        case 3:
             vc = [[ExampleLineGraph alloc] initWithNibName:@"ExampleLineGraph" bundle:nil];
             break;
         default:

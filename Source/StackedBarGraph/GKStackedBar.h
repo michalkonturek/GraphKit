@@ -1,5 +1,5 @@
 //
-//  GraphKit.h
+//  GKStackedBar.h
 //  GraphKit
 //
 //  Copyright (c) 2014 Michal Konturek
@@ -23,13 +23,23 @@
 //  THE SOFTWARE.
 //
 
+#import <UIKit/UIKit.h>
 
-#import "GKBar.h"
+@interface GKStackedBar : UIView
 
-#import "GKBar.h"
-#import "GKBarGraph.h"
-#import "GKStackedBar.h"
-#import "GKStackedBarGraph.h"
-#import "GKLineGraph.h"
++ (instancetype)create;
++ (instancetype)createWithFrame:(CGRect)frame;
 
-#import "UIColor+GraphKit.h"
+@property (nonatomic, assign) BOOL animated;
+@property (nonatomic, assign) CFTimeInterval animationDuration;
+
+@property (nonatomic, strong) NSMutableArray *percentages;
+
+@property (nonatomic, assign) CGFloat cornerRadius;
+@property (nonatomic, strong) NSArray *foregroundColors;
+
+- (void)setPercentages:(NSArray *)percentages animated:(BOOL)animated;
+
+- (void)reset;
+
+@end
