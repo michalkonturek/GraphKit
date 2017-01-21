@@ -33,6 +33,10 @@
 //    self.graphView.barHeight = 140;
 //    self.graphView.marginBar = 25;
 //    self.graphView.animationDuration = 2.0;
+
+        //  Added Ability to customise the Font Color, Font Size or Font Name
+//    [self.graphView setCustomFontName:@"Gotham-Book"];
+//    [self.graphView setCustomFontColor:[UIColor redColor]];
     
     self.graphView.dataSource = self;
     

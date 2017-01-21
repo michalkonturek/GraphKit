@@ -39,12 +39,20 @@
 //                  @[@620, @650, @580, @620, @540, @400, @0]
                   ];
     
-    self.labels = @[@"2001", @"2002", @"2003", @"2004", @"2005", @"2006", @"2007"];
+    self.labels = @[@"2001", @"", @"", @"2004", @"", @"", @"2007"];
     
     self.graph.dataSource = self;
     self.graph.lineWidth = 3.0;
     
     self.graph.valueLabelCount = 6;
+    
+    //  Added Ability to customise the Font Color, Font Size or Font Name
+//    [self.graph setXAxisCustomFontName:@"Gotham-Book"];
+//    [self.graph setYAxisCustomFontName:@"Arial-ItalicMT"];
+//    [self.graph setXAxisCustomFontColor:[UIColor redColor]];
+//    [self.graph setYAxisCustomFontColor:[UIColor purpleColor]];
+//    [self.graph setXAxisCustomFontSize:6];
+//    [self.graph setYAxisCustomFontSize:10];
     
     [self.graph draw];
 }

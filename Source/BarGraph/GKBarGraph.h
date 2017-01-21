@@ -42,6 +42,33 @@
 @property (nonatomic, assign) CGFloat barWidth;
 @property (nonatomic, assign) CGFloat marginBar;
 
+/**
+ *  The Custom Font Name will be used if set otherwise the graph will default to the boldSystemFont
+ */
+@property (nonatomic, strong) NSString *customFontName;
+/**
+ *  The Custom Font Color will be used if set otherwise the graph will default to the lightGrayColor
+ */
+@property (nonatomic, strong) UIColor *customFontColor;
+/**
+ *  The Custom Font Size will be used if set otherwise the graph will default to the value 13
+ */
+@property (nonatomic, assign) CGFloat customFontSize;
+
+@property (nonatomic, strong) UIView *underlineBar;
+
+/**
+ *  The Custom Color of the Underline Bar Color
+ */
+@property (nonatomic, strong) UIColor *underlineBarColor;
+/**
+ *  Enables Hiding/Showing of an Underline beneath the Bar Graph
+ *  Default is NO
+ */
+@property (nonatomic, assign) BOOL showUnderlineBar;
+
+
+
 - (void)draw;
 - (void)reset;
 

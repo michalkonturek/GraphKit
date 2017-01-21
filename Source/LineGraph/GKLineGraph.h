@@ -43,6 +43,39 @@
 @property (nonatomic, assign) CGFloat *minValue;
 @property (nonatomic, assign) BOOL startFromZero;
 
+/**
+ *  xAxis
+ *  The Custom Font Name will be used if set otherwise the graph will default to the boldSystemFont
+ */
+@property (nonatomic, strong) NSString *xAxisCustomFontName;
+/**
+ *  xAxis
+ *  The Custom Font Color will be used if set otherwise the graph will default to the lightGrayColor
+ */
+@property (nonatomic, strong) UIColor *xAxisCustomFontColor;
+/**
+ *  xAxis
+ *  The Custom Font Size will be used if set otherwise the graph will default to the value 13
+ */
+@property (nonatomic, assign) CGFloat xAxisCustomFontSize;
+
+/**
+ *  yAxis
+ *  The Custom Font Name will be used if set otherwise the graph will default to the boldSystemFont
+ */
+@property (nonatomic, strong) NSString *yAxisCustomFontName;
+/**
+ *  yAxis
+ *  The Custom Font Color will be used if set otherwise the graph will default to the lightGrayColor
+ */
+@property (nonatomic, strong) UIColor *yAxisCustomFontColor;
+/**
+ *  yAxis
+ *  The Custom Font Size will be used if set otherwise the graph will default to the value 13
+ */
+@property (nonatomic, assign) CGFloat yAxisCustomFontSize;
+
+
 - (void)draw;
 - (void)reset;
 
