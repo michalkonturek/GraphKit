@@ -42,6 +42,7 @@ static CGFloat kAxisMargin = 50.0;
 
 @property (nonatomic, strong) NSArray *titleLabels;
 @property (nonatomic, strong) NSArray *valueLabels;
+@property (nonatomic, strong) NSNumberFormatter *numFormatter;
 
 @end
 
@@ -69,6 +70,7 @@ static CGFloat kAxisMargin = 50.0;
     self.lineWidth = kDefaultLineWidth;
     self.margin = kDefaultMargin;
     self.valueLabelCount = kDefaultValueLabelCount;
+    self.numFormatter=[[NSNumberFormatter alloc]init];
     self.clipsToBounds = YES;
 }
 
@@ -96,10 +98,12 @@ static CGFloat kAxisMargin = 50.0;
 - (void)_constructTitleLabels {
     
     NSInteger count = [[self.dataSource valuesForLineAtIndex:0] count];
+    // dynamic width
+    CGFloat adjustedWitdth = MAX((self.frame.size.width - (kAxisMargin + self.margin))/count, kDefaultLabelWidth);
     id items = [NSMutableArray arrayWithCapacity:count];
     for (NSInteger idx = 0; idx < count; idx++) {
         
-        CGRect frame = CGRectMake(0, 0, kDefaultLabelWidth, kDefaultLabelHeight);
+        CGRect frame = CGRectMake(0, 0, adjustedWitdth, kDefaultLabelHeight);
         UILabel *item = [[UILabel alloc] initWithFrame:frame];
         item.textAlignment = NSTextAlignmentCenter;
         item.font = [UIFont boldSystemFontOfSize:12];
@@ -124,12 +128,14 @@ static CGFloat kAxisMargin = 50.0;
     id values = [self.dataSource valuesForLineAtIndex:0];
     [values mk_each:^(id value) {
         
-        CGFloat labelWidth = kDefaultLabelWidth;
+        UILabel *label = [self.titleLabels objectAtIndex:idx];
+        
+        // dynamic width
+        CGFloat labelWidth = label.frame.size.width;
         CGFloat labelHeight = kDefaultLabelHeight;
         CGFloat startX = [self _pointXForIndex:idx] - (labelWidth / 2);
         CGFloat startY = (self.height - labelHeight);
         
-        UILabel *label = [self.titleLabels objectAtIndex:idx];
         label.x = startX;
         label.y = startY;
         
@@ -165,13 +171,33 @@ static CGFloat kAxisMargin = 50.0;
         CGFloat value = [self _minValue] + (idx * [self _stepValueLabelY]);
         item.centerY = [self _positionYForLineValue:value];
         
-        item.text = [@(ceil(value)) stringValue];
-//        item.text = [@(value) stringValue];
+        //item.text = [@(ceil(value)) stringValue];
+        //item.text = [@(value) stringValue];
+        // Fractions as labels on Y axis
+        item.text = [self formatFloat:value withOptimalDigits:2 maxDecimals:3];
         
         [items addObject:item];
         [self addSubview:item];
     }
     self.valueLabels = items;
+}
+
+- (NSString*)formatFloat:(Float32)number withOptimalDigits:(UInt8)optimalDigits maxDecimals:(UInt8)maxDecimals
+{
+    NSString* result;
+    UInt8 intDigits=(int)log10f(number)+1;
+    NSLog(@"Formatting %.5f with maxDig: %d maxDec: %d intLength: %d",number,optimalDigits,maxDecimals,intDigits);
+    
+    self.numFormatter.maximumFractionDigits=maxDecimals;
+    if(intDigits>=optimalDigits-maxDecimals) {
+        self.numFormatter.usesSignificantDigits=YES;
+        self.numFormatter.maximumSignificantDigits=(intDigits>optimalDigits)?intDigits:optimalDigits;
+    } else {
+        self.numFormatter.usesSignificantDigits=NO;
+    }
+    result = [self.numFormatter stringFromNumber:[NSNumber numberWithFloat:number]];
+    
+    return result;
 }
 
 - (CGFloat)_stepValueLabelY {
@@ -180,7 +206,10 @@ static CGFloat kAxisMargin = 50.0;
 
 - (CGFloat)_maxValue {
     id values = [self _allValues];
-    return [[values mk_max] floatValue];
+    // Check if not the same value as minimum
+    CGFloat min = [self _minValue];
+    CGFloat max = MAX(min, [[values mk_max] floatValue]);
+    return (max == min ? max+1.0 :max);
 }
 
 - (CGFloat)_minValue {
